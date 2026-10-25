@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://project-rhm.github.io/reference/builtins/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Builtin functions - Rhema</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link href="../../assets/pygments.css" rel="stylesheet" />
+        <link href="../../assets/rhema.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Builtin functions";
+        var mkdocs_page_input_path = "reference/builtins.md";
+        var mkdocs_page_url = "/reference/builtins/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]--> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Rhema
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Rhema</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../..#install">Install</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../..#where-to-go-next">Where to go next</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../..#the-name">The name</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../..#authors">Authors</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tutorial</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/">Overview</a>
+    <ul>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/first/">1. A first question</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/first/#productions">Productions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/first/#attributes">Attributes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/first/#the-prompt-and-the-answer">The prompt and the answer</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/first/#what-the-compiler-checks">What the compiler checks</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/budget/">2. Difficulty is a budget</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/budget/#productions-that-refer-to-themselves">Productions that refer to themselves</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/budget/#inherited-attributes">Inherited attributes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/budget/#spending">Spending</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/budget/#every-budget-must-be-spendable">Every budget must be spendable</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/budget/#requirements">Requirements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/budget/#brackets-come-from-precedence">Brackets come from precedence</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/budget/#choosing-a-difficulty">Choosing a difficulty</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/values/">3. Values and answers</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/values/#values-drawn-once-per-question">Values drawn once per question</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/values/#values-computed-once-per-question">Values computed once per question</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/values/#types-of-value">Types of value</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/values/#the-answer-is-computed-not-typed">The answer is computed, not typed</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/prompts/">4. Prompts, contexts, blanks</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/prompts/#what-a-prompt-may-contain">What a prompt may contain</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/prompts/#one-blank-or-several">One blank or several</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/prompts/#contexts">Contexts</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/questions/">5. Several questions in one file</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/questions/#named-questions">Named questions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/questions/#starting-where-you-need-to">Starting where you need to</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/questions/#mistakes-are-reported-with-the-blocks-name">Mistakes are reported with the block's name</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/import/">6. Building on the library</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/import/#import">import</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/import/#using-an-imported-symbol">Using an imported symbol</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/import/#arguments-at-the-boundary">Arguments at the boundary</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/import/#include-for-extending">include, for extending</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/sets/">7. A whole assignment</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/sets/#entries">Entries</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/sets/#parts-and-numbering">Parts and numbering</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/sets/#constraints">Constraints</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/sets/#the-same-paper-every-time">The same paper every time</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/webwork/">8. Into WeBWorK</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#compiling">Compiling</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#what-the-file-contains">What the file contains</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#one-paper-per-assignment">One paper per assignment</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#a-paper-for-each-student">A paper for each student</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#one-file-per-question">One file per question</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#uploading">Uploading</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#before-you-upload">Before you upload</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../language/">The language</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../language/#files">Files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../language/#lexical-structure">Lexical structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../language/#attributes">Attributes</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="../language/#inherited-attributes">Inherited attributes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="../language/#synthesized-attributes">Synthesized attributes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../language/#productions">Productions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="../language/#equations">Equations</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../language/#expressions">Expressions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../language/#question-level-values">Question-level values</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../language/#precedence-and-rendering">Precedence and rendering</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../language/#prompt-answer-context-width">Prompt, answer, context, width</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../language/#questions">Questions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../language/#include-and-import">include and import</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../language/#sets">Sets</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../language/#how-a-question-is-generated">How a question is generated</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../language/#what-the-checker-guarantees">What the checker guarantees</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../language/#grammar">Grammar</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../command/">The rhema command</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../command/#compiling">Compiling</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../command/#options">Options</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../command/#finding-imported-files">Finding imported files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../command/#messages-and-exit-status">Messages and exit status</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../command/#other-commands">Other commands</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Builtin functions</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#numbers-text-and-rendering">Numbers, text and rendering</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#generators">Generators</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#formulas">Formulas</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#polynomials">Polynomials</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#equations">Equations</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#propositions">Propositions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#matrices">Matrices</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sets">Sets</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#vectors">Vectors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#complex-numbers">Complex numbers</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../library/">The question library</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../library/#expressions-a-recursive-tree-spends-the-budget">Expressions: a recursive tree spends the budget</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../library/#fixed-forms-each-form-is-a-price">Fixed forms: each form is a price</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../library/#libraries-and-examples">Libraries and examples</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../library/#named-questions">Named questions</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../difficulty/">Difficulty budgets</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../difficulty/#what-a-budget-pays-for">What a budget pays for</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../difficulty/#choosing-a-budget">Choosing a budget</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../difficulty/#an-assignments-difficulty-is-a-mean">An assignment's difficulty is a mean</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../difficulty/#measuring-a-grammar">Measuring a grammar</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../difficulty/#giving-your-own-grammar-a-budget">Giving your own grammar a budget</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../changelog/">Changes</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../changelog/#unreleased">Unreleased</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../changelog/#011-2026-10-25">0.1.1 (2026-10-25)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../changelog/#010-2026-10-24">0.1.0 (2026-10-24)</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Rhema</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Reference</li>
+      <li class="breadcrumb-item active">Builtin functions</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="builtin-functions">Builtin functions<a class="headerlink" href="#builtin-functions" title="Permanent link">&para;</a></h1>
+<p>The functions an expression may call, grouped by the kind of value they work
+on. This page is generated from <code>rhema doc</code>, so it lists exactly what the
+compiler accepts; calling one with the wrong number of arguments is an
+error the checker reports. A function given the wrong kind of value stops
+generation with a message naming both.</p>
+<h2 id="numbers-text-and-rendering">Numbers, text and rendering<a class="headerlink" href="#numbers-text-and-rendering" title="Permanent link">&para;</a></h2>
+<p>Functions on numbers and text, and the two that write operators with the right brackets.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Arguments</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>1</td>
+<td>The text of a number or other value.</td>
+</tr>
+<tr>
+<td><code>paren</code></td>
+<td>1</td>
+<td>Its argument with brackets around it.</td>
+</tr>
+<tr>
+<td><code>infix</code></td>
+<td>3</td>
+<td><code>infix($1, "+", $3)</code>: the two children joined by the operator text, bracketed as the precedence table requires.</td>
+</tr>
+<tr>
+<td><code>prefix</code></td>
+<td>2</td>
+<td><code>prefix("\neg", $2)</code>: the operator text before the child, bracketed as the precedence table requires.</td>
+</tr>
+<tr>
+<td><code>cond</code></td>
+<td>3</td>
+<td><code>cond(c, a, b)</code>: <code>a</code> when <code>c</code> is true, <code>b</code> otherwise.</td>
+</tr>
+<tr>
+<td><code>abs</code></td>
+<td>1</td>
+<td>The absolute value of a number.</td>
+</tr>
+<tr>
+<td><code>min</code></td>
+<td>2</td>
+<td>The smaller of two numbers.</td>
+</tr>
+<tr>
+<td><code>max</code></td>
+<td>2</td>
+<td>The larger of two numbers.</td>
+</tr>
+<tr>
+<td><code>bit_and</code></td>
+<td>2</td>
+<td>Bitwise and of two whole numbers; with <code>bit_or</code>, a way to track which of several items a subtree has used.</td>
+</tr>
+<tr>
+<td><code>bit_or</code></td>
+<td>2</td>
+<td>Bitwise or of two whole numbers.</td>
+</tr>
+<tr>
+<td><code>bit_xor</code></td>
+<td>2</td>
+<td>Bitwise exclusive or of two whole numbers.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="generators">Generators<a class="headerlink" href="#generators" title="Permanent link">&para;</a></h2>
+<p>Leaves that draw a whole number. They appear on the right of a production, or after <code>random NAME =</code>; their arguments are whole numbers.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Arguments</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>integer</code></td>
+<td>1</td>
+<td><code>integer(n)</code>: a whole number with exactly <code>n</code> digits.</td>
+</tr>
+<tr>
+<td><code>nonzero_integer</code></td>
+<td>1</td>
+<td><code>nonzero_integer(n)</code>: as <code>integer</code>, never 0.</td>
+</tr>
+<tr>
+<td><code>integer_between</code></td>
+<td>2</td>
+<td><code>integer_between(a, b)</code>: a whole number from <code>a</code> to <code>b</code> inclusive.</td>
+</tr>
+<tr>
+<td><code>nonzero_integer_between</code></td>
+<td>2</td>
+<td><code>nonzero_integer_between(a, b)</code>: as <code>integer_between</code>, never 0.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="formulas">Formulas<a class="headerlink" href="#formulas" title="Permanent link">&para;</a></h2>
+<p>Symbolic expressions in named variables: constants, variables, the four operations and powers, <code>sin</code>, <code>cos</code>, <code>tan</code>, <code>exp</code>, <code>ln</code> and <code>sqrt</code>, with differentiation, substitution, a zero test and LaTeX. A formula answer is graded by WeBWorK as a formula.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Arguments</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>formula_constant</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>formula_variable</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>formula_add</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>formula_subtract</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>formula_multiply</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>formula_divide</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>formula_power</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>formula_negate</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>formula_sin</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>formula_cos</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>formula_tan</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>formula_exp</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>formula_ln</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>formula_sqrt</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>formula_substitute</code></td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td><code>differentiate</code></td>
+<td>2</td>
+<td><code>differentiate(f, "x")</code>: the derivative of formula <code>f</code> with respect to <code>x</code>.</td>
+</tr>
+<tr>
+<td><code>formula_latex</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>formula_is_zero</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>formula_to_polynomial</code></td>
+<td>2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="polynomials">Polynomials<a class="headerlink" href="#polynomials" title="Permanent link">&para;</a></h2>
+<p>Polynomials in one variable with exact coefficients: building from monomials, linear and quadratic factors, arithmetic, expansion, evaluation, coefficients and degree, factored forms for the PolynomialFactors context, and LaTeX.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Arguments</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>polynomial_constant</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_variable</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_monomial</code></td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_linear</code></td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_quadratic</code></td>
+<td>4</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_add</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_subtract</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_multiply</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_scale</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_power</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_derivative</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_evaluate</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_coefficient</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_degree</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_is_zero</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_formula</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_latex</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>polynomial_equation</code></td>
+<td>2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="equations">Equations<a class="headerlink" href="#equations" title="Permanent link">&para;</a></h2>
+<p>Equations between two formulas, solved exactly where possible. An equation is not itself an answer: <code>equation_solution_set</code> and <code>equation_unique_solution</code> give one.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Arguments</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>equation</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>equation_normal_form</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>equation_latex</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>equation_is_satisfied</code></td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td><code>equation_has_exact_solutions</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>equation_solution_count</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>equation_solution_set</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>equation_unique_solution</code></td>
+<td>2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="propositions">Propositions<a class="headerlink" href="#propositions" title="Permanent link">&para;</a></h2>
+<p>Propositional formulas over named variables, built from <code>bool_var</code> and the connectives, and decided by enumerating every assignment: evaluation under an assignment, equivalence, tautology and contradiction tests, model counting, rewriting without the conditional connectives, and shape inspection (top connective, counts of connectives and negations). A proposition answer is graded in the Boolean context.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Arguments</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bool_var</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_true</code></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_false</code></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_not</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_and</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_or</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_xor</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_imp</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_iff</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_latex</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_equivalent</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_evaluate</code></td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_sensitivity</code></td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_is_tautology</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_is_contradiction</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_is_tidy</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_is_atom</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_top</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_size</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_negations</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_depth</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_count</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_variable_count</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_model_count</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>bool_without_conditionals</code></td>
+<td>1</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="matrices">Matrices<a class="headerlink" href="#matrices" title="Permanent link">&para;</a></h2>
+<p>Matrices with exact rational entries: 2 by 2 and 3 by 3 construction, the identity, sum, difference, product, scalar multiple, transpose, determinant, inverse, entries, a matrix times a vector, and LaTeX (a whole matrix, or a row written as a linear equation). A matrix answer is graded in the Matrix context.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Arguments</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>matrix2</code></td>
+<td>4</td>
+<td></td>
+</tr>
+<tr>
+<td><code>matrix3</code></td>
+<td>9</td>
+<td></td>
+</tr>
+<tr>
+<td><code>matrix_identity</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>matrix_add</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>matrix_subtract</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>matrix_multiply</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>matrix_scale</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>matrix_transpose</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>matrix_determinant</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>matrix_inverse</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>matrix_is_invertible</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>matrix_entry</code></td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td><code>matrix_vector</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>matrix_latex</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>matrix_row_latex</code></td>
+<td>2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="sets">Sets<a class="headerlink" href="#sets" title="Permanent link">&para;</a></h2>
+<p>Finite sets and intervals of real numbers, with union, intersection and difference, and LaTeX. A set answer is graded in the Interval context.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Arguments</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>set_empty</code></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td><code>set_insert</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>set_interval</code></td>
+<td>4</td>
+<td></td>
+</tr>
+<tr>
+<td><code>set_union</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>set_intersection</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>set_difference</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>set_latex</code></td>
+<td>1</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="vectors">Vectors<a class="headerlink" href="#vectors" title="Permanent link">&para;</a></h2>
+<p>Vectors with exact entries: sums, multiples, dot and cross products, norms, unit vectors, parallel and direction tests, and the answer forms WeBWorK's Vector context needs.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Arguments</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vector_entry</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>vector2</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>vector3</code></td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td><code>vector4</code></td>
+<td>4</td>
+<td></td>
+</tr>
+<tr>
+<td><code>vector_add</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>vector_subtract</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>vector_scale</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>vector_dot</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>vector_cross</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>vector_latex</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>vector_is_zero</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>vector_norm_answer</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>vector_unit_answer</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>vector_parallel_answer</code></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>vector_same_direction_answer</code></td>
+<td>1</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="complex-numbers">Complex numbers<a class="headerlink" href="#complex-numbers" title="Permanent link">&para;</a></h2>
+<p>A complex number from its real and imaginary parts, and its LaTeX. Complex arithmetic is written with the ordinary operators on the parts.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Arguments</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>complex</code></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>complex_latex</code></td>
+<td>2</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>124 functions in all.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../command/" class="btn btn-neutral float-left" title="The rhema command"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../library/" class="btn btn-neutral float-right" title="The question library">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Jingming Zhang, Jiaming Lei, Xiaobo Huang, Jiesen Long, Zhiyuan Li. MIT licence.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/Project-RHM/Project-RHM" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../command/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../library/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

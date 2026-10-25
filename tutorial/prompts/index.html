@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://project-rhm.github.io/tutorial/prompts/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>4. Prompts, contexts, blanks - Rhema</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link href="../../assets/pygments.css" rel="stylesheet" />
+        <link href="../../assets/rhema.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "4. Prompts, contexts, blanks";
+        var mkdocs_page_input_path = "tutorial/prompts.md";
+        var mkdocs_page_url = "/tutorial/prompts/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]--> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Rhema
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Rhema</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../..#install">Install</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../..#where-to-go-next">Where to go next</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../..#the-name">The name</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../..#authors">Authors</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tutorial</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+    <ul>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../first/">1. A first question</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../first/#productions">Productions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../first/#attributes">Attributes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../first/#the-prompt-and-the-answer">The prompt and the answer</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../first/#what-the-compiler-checks">What the compiler checks</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../budget/">2. Difficulty is a budget</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../budget/#productions-that-refer-to-themselves">Productions that refer to themselves</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../budget/#inherited-attributes">Inherited attributes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../budget/#spending">Spending</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../budget/#every-budget-must-be-spendable">Every budget must be spendable</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../budget/#requirements">Requirements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../budget/#brackets-come-from-precedence">Brackets come from precedence</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../budget/#choosing-a-difficulty">Choosing a difficulty</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../values/">3. Values and answers</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../values/#values-drawn-once-per-question">Values drawn once per question</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../values/#values-computed-once-per-question">Values computed once per question</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../values/#types-of-value">Types of value</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../values/#the-answer-is-computed-not-typed">The answer is computed, not typed</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">4. Prompts, contexts, blanks</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-a-prompt-may-contain">What a prompt may contain</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#one-blank-or-several">One blank or several</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#contexts">Contexts</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../questions/">5. Several questions in one file</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../questions/#named-questions">Named questions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../questions/#starting-where-you-need-to">Starting where you need to</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../questions/#mistakes-are-reported-with-the-blocks-name">Mistakes are reported with the block's name</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import/">6. Building on the library</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../import/#import">import</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../import/#using-an-imported-symbol">Using an imported symbol</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../import/#arguments-at-the-boundary">Arguments at the boundary</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../import/#include-for-extending">include, for extending</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sets/">7. A whole assignment</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../sets/#entries">Entries</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../sets/#parts-and-numbering">Parts and numbering</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../sets/#constraints">Constraints</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../sets/#the-same-paper-every-time">The same paper every time</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../webwork/">8. Into WeBWorK</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../webwork/#compiling">Compiling</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../webwork/#what-the-file-contains">What the file contains</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../webwork/#one-paper-per-assignment">One paper per assignment</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../webwork/#a-paper-for-each-student">A paper for each student</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../webwork/#one-file-per-question">One file per question</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../webwork/#uploading">Uploading</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../webwork/#before-you-upload">Before you upload</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../reference/language/">The language</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#files">Files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#lexical-structure">Lexical structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#attributes">Attributes</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="../../reference/language/#inherited-attributes">Inherited attributes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="../../reference/language/#synthesized-attributes">Synthesized attributes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#productions">Productions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="../../reference/language/#equations">Equations</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#expressions">Expressions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#question-level-values">Question-level values</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#precedence-and-rendering">Precedence and rendering</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#prompt-answer-context-width">Prompt, answer, context, width</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#questions">Questions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#include-and-import">include and import</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#sets">Sets</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#how-a-question-is-generated">How a question is generated</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#what-the-checker-guarantees">What the checker guarantees</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#grammar">Grammar</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../reference/command/">The rhema command</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/command/#compiling">Compiling</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/command/#options">Options</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/command/#finding-imported-files">Finding imported files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/command/#messages-and-exit-status">Messages and exit status</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/command/#other-commands">Other commands</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../reference/builtins/">Builtin functions</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#numbers-text-and-rendering">Numbers, text and rendering</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#generators">Generators</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#formulas">Formulas</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#polynomials">Polynomials</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#equations">Equations</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#propositions">Propositions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#matrices">Matrices</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#sets">Sets</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#vectors">Vectors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#complex-numbers">Complex numbers</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../reference/library/">The question library</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/library/#expressions-a-recursive-tree-spends-the-budget">Expressions: a recursive tree spends the budget</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/library/#fixed-forms-each-form-is-a-price">Fixed forms: each form is a price</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/library/#libraries-and-examples">Libraries and examples</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/library/#named-questions">Named questions</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../reference/difficulty/">Difficulty budgets</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/difficulty/#what-a-budget-pays-for">What a budget pays for</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/difficulty/#choosing-a-budget">Choosing a budget</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/difficulty/#an-assignments-difficulty-is-a-mean">An assignment's difficulty is a mean</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/difficulty/#measuring-a-grammar">Measuring a grammar</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/difficulty/#giving-your-own-grammar-a-budget">Giving your own grammar a budget</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../changelog/">Changes</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../changelog/#unreleased">Unreleased</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../changelog/#011-2026-10-25">0.1.1 (2026-10-25)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../changelog/#010-2026-10-24">0.1.0 (2026-10-24)</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Rhema</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Tutorial</li>
+      <li class="breadcrumb-item active">4. Prompts, contexts, blanks</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/Project-RHM/Project-RHM/edit/main/docs/tutorial/prompts.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="prompts-contexts-blanks">Prompts, contexts, blanks<a class="headerlink" href="#prompts-contexts-blanks" title="Permanent link">&para;</a></h1>
+<p>A question can have several parts, each with its own answer blank. This one
+asks two things about one sequence.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># One sequence, two answer blanks.</span>
+
+<span class="k">random</span> <span class="n">first</span> <span class="o">=</span> <span class="nf">integer_between</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="k">random</span> <span class="n">step</span>  <span class="o">=</span> <span class="nf">nonzero_integer_between</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="k">random</span> <span class="n">n</span>     <span class="o">=</span> <span class="nf">integer_between</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="n">nth</span> <span class="o">=</span> <span class="n">first</span> <span class="o">+</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">step</span>
+<span class="k">let</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">first</span> <span class="o">+</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">step</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="k">synth</span> <span class="n">kind</span> <span class="k">on</span> <span class="nc">Q</span>
+
+<span class="k">start</span> <span class="nc">Q</span>
+
+<span class="nc">Q</span> <span class="o">-&gt;</span> <span class="s2">"arithmetic"</span> <span class="p">{</span> <span class="n">kind</span> <span class="o">=</span> <span class="s2">"arithmetic"</span> <span class="p">}</span>
+
+<span class="k">prompt</span> <span class="s2">"An arithmetic sequence has first term [`a_1 = </span><span class="si">{first}</span><span class="s2">`] and common</span>
+<span class="s2">difference [`d = </span><span class="si">{step}</span><span class="s2">`].</span>
+
+<span class="s2">(a) Find [`a_</span><span class="se">{{</span><span class="si">{n}</span><span class="se">}}</span><span class="s2">`]. </span><span class="si">{answer nth}</span>
+
+<span class="s2">(b) Find the sum of its first [`</span><span class="si">{n}</span><span class="s2">`] terms. </span><span class="si">{answer sum}</span><span class="s2">"</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$ rhema run prompts.rhm --count 1
+ 1. An arithmetic sequence has first term [`a_1 = -2`] and common
+difference [`d = 1`].
+
+(a) Find [`a_{12}`]. [___]
+
+(b) Find the sum of its first [`12`] terms. [___]
+    answers: 9; 42
+</code></pre></div>
+<p>Compiled, each <code>{answer ...}</code> becomes a WeBWorK answer blank graded on its
+own:</p>
+<div class="highlight"><pre><span></span><code>$ rhema prompts.rhm --count 1 -o -
+DOCUMENT();
+loadMacros("PGstandard.pl", "MathObjects.pl", "PGML.pl");
+Context("Numeric");
+
+BEGIN_PGML
+An arithmetic sequence has first term [`a_1 = -2`] and common
+difference [`d = 1`].
+
+(a) Find [`a_{12}`]. [_____]{9}
+
+(b) Find the sum of its first [`12`] terms. [_____]{42}
+END_PGML
+ENDDOCUMENT();
+</code></pre></div>
+<h2 id="what-a-prompt-may-contain">What a prompt may contain<a class="headerlink" href="#what-a-prompt-may-contain" title="Permanent link">&para;</a></h2>
+<p>A prompt is a string, and a string may run over several lines; the line
+breaks are kept. Inside it, braces mark the places Rhema fills in:</p>
+<table>
+<thead>
+<tr>
+<th>Written</th>
+<th>Becomes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{E.latex}</code></td>
+<td>an attribute of the start symbol</td>
+</tr>
+<tr>
+<td><code>{first}</code></td>
+<td>a random or a let</td>
+</tr>
+<tr>
+<td><code>{answer E.value}</code></td>
+<td>an answer blank graded against an attribute of the start symbol</td>
+</tr>
+<tr>
+<td><code>{answer sum}</code></td>
+<td>an answer blank graded against a random or a let</td>
+</tr>
+<tr>
+<td><code>{{</code> and <code>}}</code></td>
+<td>a literal <code>{</code> and <code>}</code></td>
+</tr>
+<tr>
+<td><code>{calc.given}</code></td>
+<td>a random or let of an imported module (chapter 6)</td>
+</tr>
+</tbody>
+</table>
+<p>Everything else is passed to WeBWorK as written. Prompts are PGML, so
+<code>[`...`]</code> is mathematics and a blank line starts a new paragraph.</p>
+<p>The doubled braces matter in LaTeX. <code>a_{12}</code> needs braces around <code>12</code>, and
+<code>n</code> must be filled in between them, so the prompt says <code>a_{{{n}}}</code>: a literal
+<code>{</code>, then the value of <code>n</code>, then a literal <code>}</code>.</p>
+<p>Inside a string only two escapes exist, <code>\"</code> and <code>\\</code>. Every other backslash
+is kept as it is, so LaTeX such as <code>\cdot</code>, <code>\to</code> and <code>\neg</code> can be written
+directly.</p>
+<h2 id="one-blank-or-several">One blank or several<a class="headerlink" href="#one-blank-or-several" title="Permanent link">&para;</a></h2>
+<p>A file with a single answer uses <code>answer</code>, as in the earlier chapters, and
+the blank goes after the prompt. A file that places its blanks with
+<code>{answer ...}</code> leaves <code>answer</code> out; writing both is an error, because it
+would not be clear where the blank goes.</p>
+<h2 id="contexts">Contexts<a class="headerlink" href="#contexts" title="Permanent link">&para;</a></h2>
+<p>WeBWorK grades an answer according to a <em>context</em>: <code>Numeric</code> for numbers and
+formulas, <code>Complex</code>, <code>Interval</code>, <code>Vector</code>, <code>Matrix</code>, <code>PolynomialFactors</code> for
+a polynomial that must be factored, <code>Boolean</code> for propositions. A file names
+the context its questions need:</p>
+<div class="highlight"><pre><span></span><code><span class="k">context</span> <span class="s2">"Interval"</span>
+</code></pre></div>
+<p>The default is <code>Numeric</code>. The compiled file selects the context, and loads
+the macro file a context needs (<code>contextPolynomialFactors.pl</code>,
+<code>contextBoolean.pl</code>) when it is one that WeBWorK does not load by default.</p>
+<p>When the forms of one question type need different contexts, such as a
+polynomial to expand (<code>Numeric</code>) and one to factor (<code>PolynomialFactors</code>),
+the start symbol can compute the context itself, as the library's
+<code>polynomial_forms.rhm</code> does:</p>
+<div class="highlight"><pre><span></span><code><span class="k">synth</span> <span class="n">pg_context</span> <span class="k">on</span> <span class="nc">Q</span>
+
+<span class="nc">Q</span> <span class="o">-&gt;</span> <span class="nc">E</span> <span class="s2">"expand"</span> <span class="p">{</span> <span class="n">pg_context</span> <span class="o">=</span> <span class="s2">"Numeric"</span>            <span class="p">...</span> <span class="p">}</span>
+<span class="nc">Q</span> <span class="o">-&gt;</span> <span class="nc">E</span> <span class="s2">"factor"</span> <span class="p">{</span> <span class="n">pg_context</span> <span class="o">=</span> <span class="s2">"PolynomialFactors"</span>  <span class="p">...</span> <span class="p">}</span>
+</code></pre></div>
+<p><code>pg_context</code> and <code>pg_width</code> (the width of the answer box) are reserved
+names: computed by the start symbol, they apply to each question
+separately, and the compiled document switches context between questions
+that need different ones. <code>width 30</code> at the top level sets one width for
+every blank.</p>
+<p><strong>Next:</strong> chapter 5 asks the parts of this question separately, from the
+same file.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../values/" class="btn btn-neutral float-left" title="3. Values and answers"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../questions/" class="btn btn-neutral float-right" title="5. Several questions in one file">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Jingming Zhang, Jiaming Lei, Xiaobo Huang, Jiesen Long, Zhiyuan Li. MIT licence.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/Project-RHM/Project-RHM" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../values/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../questions/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

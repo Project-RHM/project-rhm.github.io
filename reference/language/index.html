@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://project-rhm.github.io/reference/language/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>The language - Rhema</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link href="../../assets/pygments.css" rel="stylesheet" />
+        <link href="../../assets/rhema.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "The language";
+        var mkdocs_page_input_path = "reference/language.md";
+        var mkdocs_page_url = "/reference/language/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]--> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Rhema
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Rhema</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../..#install">Install</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../..#where-to-go-next">Where to go next</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../..#the-name">The name</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../..#authors">Authors</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tutorial</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/">Overview</a>
+    <ul>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/first/">1. A first question</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/first/#productions">Productions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/first/#attributes">Attributes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/first/#the-prompt-and-the-answer">The prompt and the answer</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/first/#what-the-compiler-checks">What the compiler checks</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/budget/">2. Difficulty is a budget</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/budget/#productions-that-refer-to-themselves">Productions that refer to themselves</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/budget/#inherited-attributes">Inherited attributes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/budget/#spending">Spending</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/budget/#every-budget-must-be-spendable">Every budget must be spendable</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/budget/#requirements">Requirements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/budget/#brackets-come-from-precedence">Brackets come from precedence</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/budget/#choosing-a-difficulty">Choosing a difficulty</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/values/">3. Values and answers</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/values/#values-drawn-once-per-question">Values drawn once per question</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/values/#values-computed-once-per-question">Values computed once per question</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/values/#types-of-value">Types of value</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/values/#the-answer-is-computed-not-typed">The answer is computed, not typed</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/prompts/">4. Prompts, contexts, blanks</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/prompts/#what-a-prompt-may-contain">What a prompt may contain</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/prompts/#one-blank-or-several">One blank or several</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/prompts/#contexts">Contexts</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/questions/">5. Several questions in one file</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/questions/#named-questions">Named questions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/questions/#starting-where-you-need-to">Starting where you need to</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/questions/#mistakes-are-reported-with-the-blocks-name">Mistakes are reported with the block's name</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/import/">6. Building on the library</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/import/#import">import</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/import/#using-an-imported-symbol">Using an imported symbol</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/import/#arguments-at-the-boundary">Arguments at the boundary</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/import/#include-for-extending">include, for extending</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/sets/">7. A whole assignment</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/sets/#entries">Entries</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/sets/#parts-and-numbering">Parts and numbering</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/sets/#constraints">Constraints</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/sets/#the-same-paper-every-time">The same paper every time</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/webwork/">8. Into WeBWorK</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#compiling">Compiling</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#what-the-file-contains">What the file contains</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#one-paper-per-assignment">One paper per assignment</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#a-paper-for-each-student">A paper for each student</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#one-file-per-question">One file per question</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#uploading">Uploading</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#before-you-upload">Before you upload</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">The language</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#files">Files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#lexical-structure">Lexical structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#attributes">Attributes</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#inherited-attributes">Inherited attributes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#synthesized-attributes">Synthesized attributes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#productions">Productions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#equations">Equations</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#expressions">Expressions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#question-level-values">Question-level values</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#precedence-and-rendering">Precedence and rendering</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#prompt-answer-context-width">Prompt, answer, context, width</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#questions">Questions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#include-and-import">include and import</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sets">Sets</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-a-question-is-generated">How a question is generated</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-the-checker-guarantees">What the checker guarantees</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#grammar">Grammar</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../command/">The rhema command</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../command/#compiling">Compiling</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../command/#options">Options</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../command/#finding-imported-files">Finding imported files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../command/#messages-and-exit-status">Messages and exit status</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../command/#other-commands">Other commands</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../builtins/">Builtin functions</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../builtins/#numbers-text-and-rendering">Numbers, text and rendering</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../builtins/#generators">Generators</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../builtins/#formulas">Formulas</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../builtins/#polynomials">Polynomials</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../builtins/#equations">Equations</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../builtins/#propositions">Propositions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../builtins/#matrices">Matrices</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../builtins/#sets">Sets</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../builtins/#vectors">Vectors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../builtins/#complex-numbers">Complex numbers</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../library/">The question library</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../library/#expressions-a-recursive-tree-spends-the-budget">Expressions: a recursive tree spends the budget</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../library/#fixed-forms-each-form-is-a-price">Fixed forms: each form is a price</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../library/#libraries-and-examples">Libraries and examples</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../library/#named-questions">Named questions</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../difficulty/">Difficulty budgets</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../difficulty/#what-a-budget-pays-for">What a budget pays for</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../difficulty/#choosing-a-budget">Choosing a budget</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../difficulty/#an-assignments-difficulty-is-a-mean">An assignment's difficulty is a mean</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../difficulty/#measuring-a-grammar">Measuring a grammar</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../difficulty/#giving-your-own-grammar-a-budget">Giving your own grammar a budget</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../changelog/">Changes</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../changelog/#unreleased">Unreleased</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../changelog/#011-2026-10-25">0.1.1 (2026-10-25)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../changelog/#010-2026-10-24">0.1.0 (2026-10-24)</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Rhema</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Reference</li>
+      <li class="breadcrumb-item active">The language</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/Project-RHM/Project-RHM/edit/main/docs/reference/language.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="the-language">The language<a class="headerlink" href="#the-language" title="Permanent link">&para;</a></h1>
+<p>This page describes Rhema as the compiler implements it, construct by
+construct. The <a href="../../tutorial/">tutorial</a> introduces the same material
+in order of use; the <a href="#grammar">grammar</a> at the end summarises the syntax.</p>
+<h2 id="files">Files<a class="headerlink" href="#files" title="Permanent link">&para;</a></h2>
+<p>A Rhema file is a sequence of <em>declarations</em>, in any order, encoded as UTF-8
+and named with the extension <code>.rhm</code>. A file does one or more of three
+things:</p>
+<ul>
+<li>declares <strong>questions</strong>: a start symbol, a prompt and an answer, at the top
+  level (the question <code>main</code>) or in <code>question</code> blocks;</li>
+<li>declares <strong>sets</strong>: whole assignments built from questions;</li>
+<li>provides <strong>productions and attributes</strong> for other files to <code>include</code> or
+  <code>import</code>.</li>
+</ul>
+<p>A file with neither questions nor sets is a <em>library</em>: it can be checked,
+included and imported, but not run. <code>polynomial_core.rhm</code> and
+<code>matrix_core.rhm</code> in the standard library are libraries.</p>
+<h2 id="lexical-structure">Lexical structure<a class="headerlink" href="#lexical-structure" title="Permanent link">&para;</a></h2>
+<p><strong>Comments</strong> run from <code>#</code> to the end of the line.</p>
+<p><strong>Identifiers</strong> are a letter or underscore followed by letters, digits and
+underscores. By convention nonterminals start with a capital letter
+(<code>E</code>, <code>Q</code>) and attributes, randoms and lets do not; the language does not
+require it.</p>
+<p><strong>Integers</strong> are decimal digits. A minus sign is an operator, except where a
+declaration takes a signed integer: the value in <code>attribute</code>, starting
+values in <code>question</code> blocks, and the draws of a <code>set</code>.</p>
+<p><strong>Strings</strong> are written in double quotes and may span lines; the line breaks
+are part of the string. The only escapes are <code>\"</code> (a quote) and <code>\\</code> (a
+backslash). Any other backslash is kept, so LaTeX is written directly:
+<code>"\cdot"</code> and <code>"\\cdot"</code> are the same string.</p>
+<p><strong>Keywords</strong> are reserved:</p>
+<div class="highlight"><pre><span></span><code>answer  as  attribute  boolean  context  copy  import  include  left
+let  nonassoc  on  precedence  prompt  question  random  require  right
+set  split  start  synth  weight  when  width  and  or  not
+</code></pre></div>
+<p>Inside a <code>set</code> block, the words <code>part</code>, <code>of</code>, <code>any</code>, <code>in</code>, <code>spread</code>, <code>low</code>,
+<code>allowed</code>, <code>distinct</code>, <code>balanced</code> and <code>ordered</code> have a meaning, but they are
+not reserved and may be used as names elsewhere.</p>
+<h2 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h2>
+<h3 id="inherited-attributes">Inherited attributes<a class="headerlink" href="#inherited-attributes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">attribute</span> <span class="nc">NAME</span> <span class="o">=</span> <span class="nc">INTEGER</span> <span class="err">[</span><span class="k">copy</span> <span class="err">|</span> <span class="k">split</span><span class="err">]</span>
+</code></pre></div>
+<p>declares an attribute whose value travels <em>down</em> the tree. <code>INTEGER</code> is its
+value at the root of a question, and must not be negative. The distribution
+says how a node passes it to its children:</p>
+<dl>
+<dt><code>copy</code> (the default)</dt>
+<dd>every child that is a symbol of the grammar receives the node's value;</dd>
+<dt><code>split</code></dt>
+<dd>the node's value is divided between those children, every division into
+non-negative whole numbers being equally likely.</dd>
+</dl>
+<p>Leaves (generators and quoted words) receive nothing. A child that is a
+module symbol (<code>alias.F</code>) counts as a symbol of the grammar.</p>
+<p>The starting value can be changed from outside, with <code>--set NAME=VALUE</code> on
+the command line, an <code>INTEGER</code> in a <code>question</code> block, or a draw in a <code>set</code>.</p>
+<h3 id="synthesized-attributes">Synthesized attributes<a class="headerlink" href="#synthesized-attributes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">synth</span> <span class="nc">NAME</span>
+<span class="k">synth</span> <span class="nc">NAME</span> <span class="k">on</span> <span class="nc">SYMBOL</span>
+</code></pre></div>
+<p>declares an attribute whose value travels <em>up</em> the tree, computed at a node
+from its children. <code>on SYMBOL</code> restricts it to one nonterminal; without it,
+every nonterminal must compute it. The same name may be declared on several
+symbols, but not both with and without <code>on</code>.</p>
+<p>Every production for a symbol must compute every synthesized attribute that
+symbol carries. A generator leaf carries one attribute, <code>value</code>, the number
+it drew; a quoted word carries <code>value</code>, its text.</p>
+<p>Two names are reserved for the start symbol: <code>pg_context</code>, the WeBWorK
+context of each question, and <code>pg_width</code>, the width of its answer blanks.
+When the start symbol computes them, they override the file's <code>context</code> and
+<code>width</code> for that question.</p>
+<h2 id="productions">Productions<a class="headerlink" href="#productions" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nc">LHS</span> <span class="o">-&gt;</span> <span class="nc">SYMBOL</span> <span class="p">...</span> <span class="err">[</span><span class="k">when</span> <span class="nc">EXPR</span><span class="err">]</span> <span class="err">[</span><span class="k">weight</span> <span class="nc">INTEGER</span><span class="err">]</span> <span class="p">{</span> <span class="nc">EQUATION</span> <span class="p">...</span> <span class="p">}</span>
+</code></pre></div>
+<p>A production says that the nonterminal <code>LHS</code> may be made of the symbols on
+the right. The braces are required, even when empty.</p>
+<p>Each symbol on the right is one of:</p>
+<table>
+<thead>
+<tr>
+<th>Written</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>E</code></td>
+<td>a nonterminal, if the file has productions for it; otherwise a terminal that stands for its name</td>
+</tr>
+<tr>
+<td><code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>%</code> <code>^</code></td>
+<td>a terminal that stands for the operator</td>
+</tr>
+<tr>
+<td><code>"text"</code></td>
+<td>a terminal that stands for the text</td>
+</tr>
+<tr>
+<td><code>integer_between(1, 9)</code></td>
+<td>a generator: a leaf that draws a number (see <a href="../builtins/">builtins</a>)</td>
+</tr>
+<tr>
+<td><code>calc.F</code> or <code>calc.F(cost = cost - 1)</code></td>
+<td>a nonterminal of an imported module, with starting values for its inherited attributes</td>
+</tr>
+</tbody>
+</table>
+<p><code>$1</code>, <code>$2</code>, ... refer to these symbols, counting from 1.</p>
+<p><code>when EXPR</code> is the production's <em>guard</em>. The production may be chosen only
+when it is true. It is evaluated before the children exist, so it may use
+inherited attributes and question-level values, but not <code>$n</code>.</p>
+<p><code>weight INTEGER</code> (a positive integer, 1 by default) is the production's
+relative chance of being chosen among those whose guards hold.</p>
+<h3 id="equations">Equations<a class="headerlink" href="#equations" title="Permanent link">&para;</a></h3>
+<p>The body holds equations and requirements, separated by line breaks or
+commas:</p>
+<dl>
+<dt><code>NAME = EXPR</code>, where <code>NAME</code> is inherited</dt>
+<dd>An <em>update</em>, applied before the children are built: the value is added
+to the attribute. It must not make the budget negative, and a positive
+constant is refused, because an update spends a budget. <code>cost = -2</code>
+spends 2.</dd>
+<dt><code>NAME = EXPR</code>, where <code>NAME</code> is synthesized</dt>
+<dd>Computes the attribute, after the children are built. An equation may use
+an attribute computed earlier in the same body by its bare name.</dd>
+<dt><code>require EXPR</code></dt>
+<dd>A condition checked after the children are built and the equations
+above it are computed. When it is false, the node is built again.</dd>
+</dl>
+<p>Updates are applied in the order written; equations and requirements are
+evaluated in the order written.</p>
+<h2 id="expressions">Expressions<a class="headerlink" href="#expressions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>12</code>, <code>"text"</code></td>
+<td>a number, a string</td>
+</tr>
+<tr>
+<td><code>NAME</code></td>
+<td>an inherited attribute of the node, a random or let, or an attribute computed earlier in the same production</td>
+</tr>
+<tr>
+<td><code>$2.NAME</code></td>
+<td>an attribute of the second child</td>
+</tr>
+<tr>
+<td><code>$2</code></td>
+<td>the second child itself; only as an argument of <code>infix</code> and <code>prefix</code></td>
+</tr>
+<tr>
+<td><code>S.NAME</code></td>
+<td>an attribute of the start symbol <code>S</code>; only in <code>prompt</code> and <code>answer</code></td>
+</tr>
+<tr>
+<td><code>alias.NAME</code></td>
+<td>a random or let of an imported module</td>
+</tr>
+<tr>
+<td><code>f(e, ...)</code></td>
+<td>a builtin function</td>
+</tr>
+<tr>
+<td><code>-e</code>, <code>not e</code></td>
+<td>negation</td>
+</tr>
+<tr>
+<td><code>e + e</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>^</code></td>
+<td>arithmetic on numbers</td>
+</tr>
+<tr>
+<td><code>e ++ e</code></td>
+<td>joining text</td>
+</tr>
+<tr>
+<td><code>e = e</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code></td>
+<td>comparison</td>
+</tr>
+<tr>
+<td><code>e and e</code>, <code>e or e</code></td>
+<td>logic</td>
+</tr>
+</tbody>
+</table>
+<p>Numbers are exact rationals: <code>1 / 3</code> is one third, not 0.333. Comparisons
+of text compare the strings; <code>=</code> and <code>!=</code> on truth values are the
+biconditional and exclusive or.</p>
+<p>Operators bind, from loosest to tightest: <code>or</code>; <code>and</code>; <code>not</code>; the
+comparisons (which do not chain); <code>++</code> (right-associative); <code>+ -</code>;
+<code>* / %</code>; <code>^</code> (right-associative); unary <code>-</code>. Brackets group.</p>
+<p>Every value has a type: number, text, truth, formula, polynomial,
+equation, Boolean formula, matrix, set, vector or complex number. Types are
+checked when a value is used; a function given the wrong type stops
+generation with a message naming both.</p>
+<h2 id="question-level-values">Question-level values<a class="headerlink" href="#question-level-values" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">random</span> <span class="nc">NAME</span> <span class="o">=</span> <span class="ow">boolean</span>
+<span class="k">random</span> <span class="nc">NAME</span> <span class="o">=</span> <span class="nc">GENERATOR</span><span class="p">(</span><span class="nc">INTEGER</span><span class="p">,</span> <span class="p">...)</span>
+<span class="k">let</span> <span class="nc">NAME</span> <span class="o">=</span> <span class="nc">EXPR</span>
+</code></pre></div>
+<p>A <code>random</code> is drawn once per question, before the tree is built, and has the
+same value wherever it is used. Its arguments must be integer literals.</p>
+<p>A <code>let</code> is computed once per question, after the randoms, from randoms and
+earlier lets. It may call any builtin function but may not refer to the
+tree.</p>
+<h2 id="precedence-and-rendering">Precedence and rendering<a class="headerlink" href="#precedence-and-rendering" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">precedence</span> <span class="nc">LEVEL</span> <span class="k">left</span><span class="err">|</span><span class="k">right</span><span class="err">|</span><span class="k">nonassoc</span> <span class="nc">OPERATOR</span> <span class="p">...</span>
+</code></pre></div>
+<p>gives operators a binding strength (higher binds tighter) and an
+associativity. A production that has an operator among its symbols takes
+that operator's level. The builtins <code>infix($1, "+", $3)</code> and
+<code>prefix("\neg", $2)</code> write their operands, adding brackets exactly where the
+levels and associativity require them. The operator's text need not be the
+symbol: <code>E -&gt; E * E</code> may be written with <code>"\cdot"</code>.</p>
+<h2 id="prompt-answer-context-width">Prompt, answer, context, width<a class="headerlink" href="#prompt-answer-context-width" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">prompt</span> <span class="nc">STRING</span>
+<span class="k">answer</span> <span class="nc">EXPR</span>
+<span class="k">context</span> <span class="nc">STRING</span>
+<span class="k">width</span> <span class="nc">INTEGER</span>
+</code></pre></div>
+<p>The prompt is PGML with these replacements:</p>
+<table>
+<thead>
+<tr>
+<th>Written</th>
+<th>Becomes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{S.NAME}</code></td>
+<td>an attribute of the start symbol <code>S</code></td>
+</tr>
+<tr>
+<td><code>{NAME}</code></td>
+<td>a random or let</td>
+</tr>
+<tr>
+<td><code>{alias.NAME}</code></td>
+<td>a random or let of an imported module</td>
+</tr>
+<tr>
+<td><code>{answer S.NAME}</code>, <code>{answer NAME}</code></td>
+<td>an answer blank graded against that value</td>
+</tr>
+<tr>
+<td><code>{{</code>, <code>}}</code></td>
+<td>literal braces</td>
+</tr>
+</tbody>
+</table>
+<p><code>answer EXPR</code> adds one blank after the prompt; it may use <code>S.NAME</code> and module
+values. A question has either <code>answer</code> or <code>{answer ...}</code> blanks, not both.
+<code>context</code> names the WeBWorK context (default <code>Numeric</code>); <code>width</code> sets the
+width of every blank.</p>
+<h2 id="questions">Questions<a class="headerlink" href="#questions" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">question</span> <span class="nc">NAME</span> <span class="p">{</span>
+  <span class="k">start</span> <span class="nc">SYMBOL</span>
+  <span class="k">prompt</span> <span class="nc">STRING</span>
+  <span class="err">[</span><span class="k">answer</span> <span class="nc">EXPR</span><span class="err">]</span>
+  <span class="err">[</span><span class="k">context</span> <span class="nc">STRING</span><span class="err">]</span>
+  <span class="err">[</span><span class="k">width</span> <span class="nc">INTEGER</span><span class="err">]</span>
+  <span class="err">[</span><span class="nc">ATTRIBUTE</span> <span class="o">=</span> <span class="nc">INTEGER</span><span class="err">]</span> <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>declares a named question over the file's productions. The top-level
+<code>start</code>, <code>prompt</code>, <code>answer</code>, <code>context</code> and <code>width</code> form the question <code>main</code>.
+A block without <code>context</code> or <code>width</code> takes the file's. <code>ATTRIBUTE = INTEGER</code>
+starts an inherited attribute at that value for this question. A file of
+blocks only has no <code>main</code>; its first block is its default question.
+<code>main</code> cannot be used as a block's name.</p>
+<h2 id="include-and-import">include and import<a class="headerlink" href="#include-and-import" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">include</span> <span class="s2">"FILE.rhm"</span>
+<span class="k">import</span> <span class="s2">"FILE.rhm"</span> <span class="k">as</span> <span class="nc">ALIAS</span>
+</code></pre></div>
+<p><code>include</code> merges the other file's declarations into this one before
+checking. Productions, attributes, randoms, lets and precedences add up;
+identical declarations in both files are kept once. Of the declarations a
+file makes once (<code>start</code>, <code>prompt</code>, <code>answer</code>, <code>context</code>, <code>width</code>), the
+including file's own win. Among inherited attributes, the including file's
+declaration wins, then the first included one.</p>
+<p><code>import</code> loads the other file as a separate module, checked on its own. Its
+nonterminals, randoms, lets and questions are reached as <code>ALIAS.NAME</code>; its
+synthesized attributes are read through <code>$n</code> as usual; its precedences and
+productions are not visible. A module is loaded once per run however many
+files import it, and its randoms are drawn once per question. A module's own
+imports are private to it. A module subtree is atomic to the importer's
+<code>infix</code>: no brackets are added around it.</p>
+<p>Both look for the file beside the file that names it, then in <code>-I</code>
+directories, <code>RHEMA_PATH</code> and the installed library. A file that includes or
+imports itself, directly or through others, is refused.</p>
+<h2 id="sets">Sets<a class="headerlink" href="#sets" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">set</span> <span class="nc">NAME</span> <span class="p">{</span>
+  <span class="kp">part</span> <span class="s2">"HEADING"</span>
+  <span class="nc">COUNT</span> <span class="kp">of</span> <span class="nc">QUESTION</span><span class="p">(</span><span class="nc">DRAW</span><span class="p">,</span> <span class="p">...)</span>
+  <span class="nc">COUNT</span> <span class="kp">of</span> <span class="kp">any</span><span class="p">(</span><span class="nc">QUESTION</span><span class="p">(</span><span class="nc">DRAW</span><span class="p">,</span> <span class="p">...),</span> <span class="p">...)</span>
+  <span class="kp">distinct</span>
+  <span class="kp">balanced</span>
+  <span class="kp">ordered</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>QUESTION</code> is <code>main</code>, a question of this file, or <code>ALIAS.NAME</code>. Each <code>DRAW</code>
+starts one inherited attribute of that question:</p>
+<table>
+<thead>
+<tr>
+<th>Draw</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cost = 6</code></td>
+<td>every question starts at 6</td>
+</tr>
+<tr>
+<td><code>cost in {8, 10, 12}</code></td>
+<td>values taken in turn, each once before any repeats</td>
+</tr>
+<tr>
+<td><code>cost ~ 6 [spread 2] [low 2] [allowed {4, 6}]</code></td>
+<td>drawn around the mean and adjusted so the entry's mean is exactly 6 (or as close as <code>allowed</code> permits); <code>spread</code> defaults to 2, <code>low</code> to 0</td>
+</tr>
+</tbody>
+</table>
+<p><code>part</code> lines group the entries that follow under one number. <code>distinct</code>
+refuses a question of the same type and tree shape as an earlier one;
+<code>balanced</code> refuses a third equal coded answer in a row; <code>ordered</code> sorts each
+part by total budget.</p>
+<h2 id="how-a-question-is-generated">How a question is generated<a class="headerlink" href="#how-a-question-is-generated" title="Permanent link">&para;</a></h2>
+<ol>
+<li>The paper's <em>variant</em> is derived from the assignment's name, and from the
+   student's when one is given; it fixes every random choice below.</li>
+<li>The randoms of the file and of every module it imports are drawn; then
+   the lets are computed in order.</li>
+<li>From the start symbol, with the inherited attributes at their starting
+   values, each node is built:<ul>
+<li>the productions for the symbol whose guards hold, and whose updates
+  leave every budget non-negative, are the candidates; if there are none,
+  generation stops with <code>no rule for 'E' fits {...}</code>;</li>
+<li>one candidate is chosen in proportion to its weight;</li>
+<li>its updates are applied and the inherited attributes distributed to
+  the children, which are built in turn;</li>
+<li>its equations and requirements are evaluated in order. A failed
+  requirement builds the node again, with fresh choices, up to 40 times;
+  after that the failure passes to the node above, which tries again in
+  the same way. A question that still fails is started afresh, up to 200
+  times, before generation gives up and names the requirement that
+  failed most often.</li>
+</ul>
+</li>
+<li>The prompt, blanks and context are read from the finished tree.</li>
+</ol>
+<p>When a failure could not have gone differently, because no random choice was
+involved, it is reported at once instead of retried.</p>
+<h2 id="what-the-checker-guarantees">What the checker guarantees<a class="headerlink" href="#what-the-checker-guarantees" title="Permanent link">&para;</a></h2>
+<p><code>rhema check</code> accepts a file only if:</p>
+<ul>
+<li>it parses, and every name it uses is declared: symbols, attributes,
+  randoms, lets, builtins, aliases, questions, modules' names;</li>
+<li>every production computes every synthesized attribute its symbol
+  carries, and an update is never a positive constant;</li>
+<li>guards and updates use only what exists before the children are built;
+  equations and requirements use children only within range and only
+  attributes those children carry;</li>
+<li>every builtin and generator is called with the right number of arguments,
+  and random draws have literal arguments;</li>
+<li>every nonterminal can finish (some production for it uses only symbols
+  that can finish), and every cycle of productions spends an inherited
+  attribute, so no derivation can go round for ever without spending;</li>
+<li>prompts, answers, questions and sets refer to things that exist, with the
+  right kinds of blank;</li>
+<li>no file includes or imports itself.</li>
+</ul>
+<p>What the checker cannot know is left to generation, and reported clearly
+when it happens: a budget no production can spend, a requirement that
+cannot be met, a value of the wrong type for a function.</p>
+<h2 id="grammar">Grammar<a class="headerlink" href="#grammar" title="Permanent link">&para;</a></h2>
+<p>The syntax in EBNF. <code>{ X }</code> means zero or more, <code>[ X ]</code> optional, <code>|</code>
+alternatives; quoted text is literal, capitalised names are tokens.</p>
+<div class="highlight"><pre><span></span><code>file          = { declaration } ;
+
+declaration   = "attribute" IDENT "=" sint [ "copy" | "split" ]
+              | "random" IDENT "=" ( "boolean" | IDENT "(" [ exprs ] ")" )
+              | "let" IDENT "=" expr
+              | "synth" IDENT [ "on" IDENT ]
+              | "start" IDENT
+              | "context" STRING
+              | "precedence" INT ( "left" | "right" | "nonassoc" ) operator { operator }
+              | "prompt" STRING
+              | "answer" expr
+              | "width" INT
+              | "include" STRING
+              | "import" STRING "as" IDENT
+              | "question" IDENT "{" { qitem } "}"
+              | "set" IDENT "{" { sitem } "}"
+              | production ;
+
+production    = IDENT "-&gt;" symbol { symbol } [ "when" expr ] [ "weight" INT ]
+                "{" { equation [ "," ] } "}" ;
+symbol        = IDENT | IDENT "(" [ exprs ] ")"
+              | IDENT "." IDENT [ "(" [ IDENT "=" expr { "," IDENT "=" expr } ] ")" ]
+              | STRING | "+" | "-" | "*" | "/" | "%" | "^" ;
+equation      = IDENT "=" expr | "require" expr ;
+
+qitem         = "start" IDENT | "context" STRING | "prompt" STRING
+              | "answer" expr | "width" INT | IDENT "=" sint ;
+
+sitem         = "part" [ STRING ] | "distinct" | "balanced" | "ordered"
+              | INT "of" choice ;
+choice        = squestion | "any" "(" squestion { "," squestion } ")" ;
+squestion     = [ IDENT "." ] IDENT [ "(" [ draw { "," draw } ] ")" ] ;
+draw          = IDENT "=" sint
+              | IDENT "in" "{" sint { "," sint } "}"
+              | IDENT "~" sint { "spread" sint | "low" sint | "allowed" "{" sint { "," sint } "}" } ;
+
+expr          = INT | STRING | IDENT | IDENT "." IDENT | "$" INT | "$" INT "." IDENT
+              | IDENT "(" [ exprs ] ")" | "(" expr ")"
+              | "-" expr | "not" expr | expr binop expr ;
+exprs         = expr { "," expr } ;
+binop         = "or" | "and" | "=" | "!=" | "&lt;" | "&lt;=" | "&gt;" | "&gt;="
+              | "++" | "+" | "-" | "*" | "/" | "%" | "^" ;
+operator      = "+" | "-" | "*" | "/" | "%" | "^" | STRING ;
+sint          = [ "-" ] INT ;
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../tutorial/webwork/" class="btn btn-neutral float-left" title="8. Into WeBWorK"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../command/" class="btn btn-neutral float-right" title="The rhema command">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Jingming Zhang, Jiaming Lei, Xiaobo Huang, Jiesen Long, Zhiyuan Li. MIT licence.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/Project-RHM/Project-RHM" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../../tutorial/webwork/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../command/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
