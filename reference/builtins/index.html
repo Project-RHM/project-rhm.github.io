@@ -227,6 +227,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#generators">Generators</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#whole-numbers">Whole numbers</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#formulas">Formulas</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#polynomials">Polynomials</a>
@@ -388,6 +390,11 @@ generation with a message naming both.</p>
 <td>2</td>
 <td>Bitwise exclusive or of two whole numbers.</td>
 </tr>
+<tr>
+<td><code>number_latex</code></td>
+<td>1</td>
+<td>A number in LaTeX: a whole number as it is, a fraction as <code>\frac{p}{q}</code> with its sign in front.</td>
+</tr>
 </tbody>
 </table>
 <h2 id="generators">Generators<a class="headerlink" href="#generators" title="Permanent link">&para;</a></h2>
@@ -420,6 +427,54 @@ generation with a message naming both.</p>
 <td><code>nonzero_integer_between</code></td>
 <td>2</td>
 <td><code>nonzero_integer_between(a, b)</code>: as <code>integer_between</code>, never 0.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="whole-numbers">Whole numbers<a class="headerlink" href="#whole-numbers" title="Permanent link">&para;</a></h2>
+<p>Counting and number theory on whole numbers: factorials, binomial coefficients and permutations, greatest common divisors and least common multiples, powers and inverses modulo n. A result too large for a 63-bit integer, or an inverse that does not exist, stops generation with a message.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Arguments</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>factorial</code></td>
+<td>1</td>
+<td><code>factorial(n)</code>: n!, for n from 0 to 20.</td>
+</tr>
+<tr>
+<td><code>choose</code></td>
+<td>2</td>
+<td><code>choose(n, k)</code>: the number of ways to choose k of n; 0 when k is out of range.</td>
+</tr>
+<tr>
+<td><code>permutations</code></td>
+<td>2</td>
+<td><code>permutations(n, k)</code>: the number of ordered choices of k of n.</td>
+</tr>
+<tr>
+<td><code>gcd</code></td>
+<td>2</td>
+<td>The greatest common divisor of two whole numbers.</td>
+</tr>
+<tr>
+<td><code>lcm</code></td>
+<td>2</td>
+<td>The least common multiple of two whole numbers.</td>
+</tr>
+<tr>
+<td><code>pow_mod</code></td>
+<td>3</td>
+<td><code>pow_mod(a, k, n)</code>: the remainder of a^k on division by n, for k &gt;= 0 and n &gt; 0.</td>
+</tr>
+<tr>
+<td><code>mod_inverse</code></td>
+<td>2</td>
+<td><code>mod_inverse(a, n)</code>: the x in 0..n-1 with a x = 1 (mod n); an error unless a and n are coprime.</td>
 </tr>
 </tbody>
 </table>
@@ -914,7 +969,7 @@ generation with a message naming both.</p>
 </tbody>
 </table>
 <h2 id="sets">Sets<a class="headerlink" href="#sets" title="Permanent link">&para;</a></h2>
-<p>Finite sets and intervals of real numbers, with union, intersection and difference, and LaTeX. A set answer is graded in the Interval context.</p>
+<p>Finite sets, intervals and rays of real numbers, with union, intersection and difference, and LaTeX. A set answer is graded in the Interval context.</p>
 <table>
 <thead>
 <tr>
@@ -938,6 +993,16 @@ generation with a message naming both.</p>
 <td><code>set_interval</code></td>
 <td>4</td>
 <td></td>
+</tr>
+<tr>
+<td><code>set_above</code></td>
+<td>2</td>
+<td><code>set_above(a, closed)</code>: the numbers above a, <code>(a, \infty)</code>, or from a, <code>[a, \infty)</code>, when <code>closed</code> is true.</td>
+</tr>
+<tr>
+<td><code>set_below</code></td>
+<td>2</td>
+<td><code>set_below(a, closed)</code>: the numbers below a, <code>(-\infty, a)</code>, or up to a, <code>(-\infty, a]</code>.</td>
 </tr>
 <tr>
 <td><code>set_union</code></td>
@@ -1072,7 +1137,7 @@ generation with a message naming both.</p>
 </tr>
 </tbody>
 </table>
-<p>124 functions in all.</p>
+<p>134 functions in all.</p>
               
             </div>
           </div><footer>

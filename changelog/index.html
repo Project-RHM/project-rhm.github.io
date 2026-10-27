@@ -227,6 +227,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/builtins/#generators">Generators</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="../reference/builtins/#whole-numbers">Whole numbers</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/builtins/#formulas">Formulas</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/builtins/#polynomials">Polynomials</a>
@@ -323,6 +325,23 @@ public interface. A breaking change raises the major version; a deprecation
 is announced one version before the removal.</p>
 <h2 id="unreleased">Unreleased<a class="headerlink" href="#unreleased" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong>Six new question types</strong>, all built answer first: <code>counting.rhm</code>
+  (arrangements, selections and probabilities, with named questions
+  <code>counting</code> and <code>probability</code>), <code>number_theory.rhm</code>, <code>series.rhm</code>,
+  <code>limits.rhm</code>, <code>eigen.rhm</code> and <code>inequality.rhm</code>. Each has a test that
+  checks its answers independently.</li>
+<li><strong>Builtins</strong>: <code>factorial</code>, <code>choose</code>, <code>permutations</code>, <code>gcd</code>, <code>lcm</code>,
+  <code>pow_mod</code> and <code>mod_inverse</code> on whole numbers (<code>rhema_integers.ml</code>, with
+  overflow checks); <code>number_latex</code>, a number in LaTeX with fractions as
+  <code>\frac</code>; and the rays <code>set_above</code> and <code>set_below</code>, rendered <code>(a, \infty)</code>
+  and <code>(-infinity, a]</code>. A union of sets is written <code>A U B</code> in PG without
+  brackets around its parts.</li>
+<li>A leaf (a generator, a literal or a terminal) may be read as <code>$n.value</code>
+  without a <code>synth value</code> declaration; anything else on a leaf is refused
+  with a hint to write <code>str($n.value)</code>.</li>
+<li><strong>Fixed</strong>: a polynomial with a negative leading term was printed as a
+  difference, <code>9 - (5 \cdot x^{2} + 4 \cdot x)</code>; it is now
+  <code>-5 \cdot x^{2} + 4 \cdot x + 9</code>.</li>
 <li><strong>Documentation site</strong> (<code>docs/</code>, <code>mkdocs.yml</code>): a home page, an
   eight-chapter tutorial, the language reference with its grammar in EBNF,
   the command, the builtin functions (generated from <code>rhema doc</code>), the
