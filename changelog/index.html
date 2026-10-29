@@ -325,6 +325,11 @@ public interface. A breaking change raises the major version; a deprecation
 is announced one version before the removal.</p>
 <h2 id="unreleased">Unreleased<a class="headerlink" href="#unreleased" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong>VS Code extension</strong> in <code>editors/vscode</code>: highlighting, problems from
+  <code>rhema check</code> as you type, Run and Compile commands, folding and snippets
+  for <code>.rhm</code> files. Its tests check the grammar against the compiler's
+  keywords and every <code>.rhm</code> file in the repository (CI job <code>editor</code>), and
+  drive the extension in VS Code against a real <code>rhema</code>.</li>
 <li><strong>Six new question types</strong>, all built answer first: <code>counting.rhm</code>
   (arrangements, selections and probabilities, with named questions
   <code>counting</code> and <code>probability</code>), <code>number_theory.rhm</code>, <code>series.rhm</code>,
