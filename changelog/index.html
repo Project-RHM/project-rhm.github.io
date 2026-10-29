@@ -329,7 +329,13 @@ is announced one version before the removal.</p>
   <code>rhema check</code> as you type, Run and Compile commands, folding and snippets
   for <code>.rhm</code> files. Its tests check the grammar against the compiler's
   keywords and every <code>.rhm</code> file in the repository (CI job <code>editor</code>), and
-  drive the extension in VS Code against a real <code>rhema</code>.</li>
+  drive the extension in VS Code against a real <code>rhema</code>. Published on the
+  Visual Studio Marketplace as <code>rhema.rhema-language</code> (0.1.0, preview).</li>
+<li><strong>Fixed</strong>: a problem with a name, a child reference or a call was reported
+  at the start of the equation or declaration holding it, so
+  <code>value = foo</code> gave the column of <code>value</code> for "unknown name 'foo'". Every
+  such message now points at the name itself. The parser records where each
+  one is written (<code>At</code> in <code>rhema_ast.ml</code>); generation is unchanged.</li>
 <li><strong>Six new question types</strong>, all built answer first: <code>counting.rhm</code>
   (arrangements, selections and probabilities, with named questions
   <code>counting</code> and <code>probability</code>), <code>number_theory.rhm</code>, <code>series.rhm</code>,
