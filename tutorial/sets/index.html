@@ -331,8 +331,7 @@ file, and <code>rhema</code> turns it into one paper.</p>
 
 <span class="k">set</span> <span class="n">week3</span> <span class="p">{</span>
   <span class="kp">part</span> <span class="s2">"Sequences"</span>
-    <span class="mi">1</span> <span class="kp">of</span> <span class="n">seq</span><span class="p">.</span><span class="n">nth</span>
-    <span class="mi">1</span> <span class="kp">of</span> <span class="n">seq</span><span class="p">.</span><span class="n">sum</span>
+    <span class="mi">1</span> <span class="kp">of</span> <span class="n">seq</span><span class="p">.</span><span class="n">main</span>
   <span class="kp">part</span> <span class="s2">"Differentiation"</span>
     <span class="mi">3</span> <span class="kp">of</span> <span class="n">calc</span><span class="p">.</span><span class="nf">derivative</span><span class="p">(</span><span class="n">cost</span> <span class="o">~</span> <span class="mi">6</span> <span class="kp">spread</span> <span class="mi">2</span> <span class="kp">low</span> <span class="mi">2</span><span class="p">)</span>
     <span class="mi">1</span> <span class="kp">of</span> <span class="n">calc</span><span class="p">.</span><span class="nf">integral</span><span class="p">(</span><span class="n">cost</span> <span class="kp">in</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">})</span>
@@ -343,26 +342,27 @@ file, and <code>rhema</code> turns it into one paper.</p>
   <span class="kp">ordered</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>The file has no question of its own. It imports the sequence questions of
+<p>The file has no question of its own. It imports the sequence question of
 chapter 5 and two library grammars, and declares a set:</p>
 <div class="highlight"><pre><span></span><code>$ rhema run assignment.rhm --run week3
-week3: 9 questions in 3 parts
+week3: 8 questions in 3 parts
 
 1. Sequences
-  1(a)  [seq.nth]
+
+1  [seq.main; ]
 An arithmetic sequence has first term [`a_1 = 0`] and common
-difference [`d = 5`]. Find [`a_{14}`]. [___]
-    answer: 65
-  1(b)  [seq.sum]
-An arithmetic sequence has first term [`a_1 = -5`] and common
-difference [`d = -5`]. Find the sum of its first [`14`] terms. [___]
-    answer: -525
+difference [`d = 5`].
+
+(a) Find [`a_{14}`]. [___]
+
+(b) Find the sum of its first [`14`] terms. [___]
+    answers: 65; 455
 
 2. Differentiation
   2(a)  [calc.derivative; cost 5]
 Differentiate the function with respect to x:
-[`f(x) = x^{5} - \sqrt{6 \cdot x} + x`].
-    answer: Formula(5*x^4-6/(2*sqrt(6*x))+1)
+[`f(x) = \tan\left(\ln\left(x\right) + x\right)`].
+    answer: Formula((1/x+1)/cos(ln(x)+x)^2)
   ...
 
 budget means:
@@ -406,7 +406,10 @@ question on its own: <code>1</code>, <code>2</code>, <code>3</code>.</p>
 <dt><code>distinct</code></dt>
 <dd>No two questions have the same shape: the same productions, in the same
 places, with only the numbers different. <code>3 + 4</code> and <code>7 + 2</code> are one
-shape. Questions of different types are never repeats of each other.</dd>
+shape. Questions of different types are never repeats of each other,
+with one exception in the 0.1.1 release: two named questions on the same
+rule, such as <code>seq.nth</code> and <code>seq.sum</code>, count as repeats there. The
+repository has the fix.</dd>
 <dt><code>balanced</code></dt>
 <dd>No three questions in a row with the same coded answer, for questions
 answered with true/false or a small code such as 0, 1, 2.</dd>
