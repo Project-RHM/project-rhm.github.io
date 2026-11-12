@@ -349,9 +349,12 @@ make <code>x + 2x \cdot \sin x</code> cost at least 4.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code>counting.rhm</code>, <code>number_theory.rhm</code>, <code>series.rhm</code>, <code>limits.rhm</code>,
-<code>eigen.rhm</code> and <code>inequality.rhm</code> are in the repository, not in the 0.1.1
-package. To use them before the next release, build <code>rhema</code> from a
-clone of the repository.</p>
+<code>eigen.rhm</code>, <code>inequality.rhm</code>, <code>definite_integral.rhm</code>,
+<code>derivative_applications.rhm</code>, <code>exponential_log.rhm</code>,
+<code>analytic_geometry.rhm</code>, <code>differential_equation.rhm</code> and
+<code>statistics.rhm</code> are in the repository, not in the 0.1.1 package. To use
+them before the next release, build <code>rhema</code> from a clone of the
+repository.</p>
 </div>
 <h2 id="expressions-a-recursive-tree-spends-the-budget">Expressions: a recursive tree spends the budget<a class="headerlink" href="#expressions-a-recursive-tree-spends-the-budget" title="Permanent link">&para;</a></h2>
 <table>
@@ -573,6 +576,42 @@ clone of the repository.</p>
 <td>1 linear; 2 quadratic, the absolute value of <code>x - a</code>; 3 the absolute value of <code>px - q</code>, rational</td>
 <td>2</td>
 <td>Interval</td>
+</tr>
+<tr>
+<td><code>definite_integral.rhm</code></td>
+<td>1 <code>k x^n</code> from 0 to q, a quadratic between two bounds; 2 a product of two linear factors to expand first, the area between a parabola and the x-axis; 3 the area between a parabola and a line, <code>k x (a x^2 + c)^n</code> by substitution</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>derivative_applications.rhm</code></td>
+<td>1 the slope of a tangent to a cubic, where a parabola has a horizontal tangent; 2 the tangent line to a parabola, the critical points of a cubic; 3 the absolute maximum or minimum of a cubic on a closed interval, the interval on which it decreases or increases</td>
+<td>2</td>
+<td>Numeric / Interval</td>
+</tr>
+<tr>
+<td><code>exponential_log.rhm</code></td>
+<td>1 the logarithm of a power of its base, <code>b^(x + c) = b^k</code>; 2 two bases that are powers of one number, <code>log_b(p x + q) = k</code>; 3 a sum of two logarithms with one root rejected, a quadratic in <code>b^x</code></td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>analytic_geometry.rhm</code></td>
+<td>1 the distance between two points, their midpoint, the slope through them; 2 the line through two points, the perpendicular to a line through a point; 3 the centre or the radius of a circle given expanded, the intersection of two lines</td>
+<td>2</td>
+<td>Numeric / Point</td>
+</tr>
+<tr>
+<td><code>differential_equation.rhm</code></td>
+<td>initial value problems: 1 <code>y' = 2a x + b</code>, <code>y' = k y</code>; 2 <code>y' + a y = b</code>, <code>y' = 2k x y</code>; 3 <code>y'' + p y' + q y = 0</code> with two real roots or one repeated</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>statistics.rhm</code></td>
+<td>1 the mean, median or range of a data set; 2 the variance of a data set, a value missing from a known mean, the expectation of a random variable; 3 the variance of a random variable, at least two successes in n trials</td>
+<td>2</td>
+<td>Numeric</td>
 </tr>
 </tbody>
 </table>

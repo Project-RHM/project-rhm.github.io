@@ -354,6 +354,16 @@ is announced one version before the removal.</p>
   <code>value = foo</code> gave the column of <code>value</code> for "unknown name 'foo'". Every
   such message now points at the name itself. The parser records where each
   one is written (<code>At</code> in <code>rhema_ast.ml</code>); generation is unchanged.</li>
+<li><strong>Six more question types</strong>, fixed forms at prices 1 to 3 and built
+  answer first: <code>definite_integral.rhm</code> (integrals of polynomials and the
+  areas they measure), <code>derivative_applications.rhm</code> (tangent lines,
+  critical points, extreme values, intervals of increase),
+  <code>exponential_log.rhm</code>, <code>analytic_geometry.rhm</code> (lines and circles; a
+  point is answered as <code>(3, -2)</code> in WeBWorK's Point context),
+  <code>differential_equation.rhm</code> (initial value problems, answered by a
+  formula) and <code>statistics.rhm</code>. They use the existing builtins only, and
+  each has a test that checks its answers independently. The teacher
+  workspace lists them.</li>
 <li><strong>Six new question types</strong>, all built answer first: <code>counting.rhm</code>
   (arrangements, selections and probabilities, with named questions
   <code>counting</code> and <code>probability</code>), <code>number_theory.rhm</code>, <code>series.rhm</code>,
