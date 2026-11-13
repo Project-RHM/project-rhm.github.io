@@ -206,6 +206,12 @@
     <li class="toctree-l2"><a class="reference internal" href="../reference/language/#precedence-and-rendering">Precedence and rendering</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/language/#prompt-answer-context-width">Prompt, answer, context, width</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="../reference/language/#blanks-in-text">Blanks in text</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="../reference/language/#answers-that-carry-their-context">Answers that carry their context</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/language/#questions">Questions</a>
     </li>
@@ -245,6 +251,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/builtins/#formulas">Formulas</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="../reference/builtins/#answers">Answers</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/builtins/#polynomials">Polynomials</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/builtins/#equations">Equations</a>
@@ -256,6 +264,8 @@
     <li class="toctree-l2"><a class="reference internal" href="../reference/builtins/#sets">Sets</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/builtins/#vectors">Vectors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../reference/builtins/#points">Points</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/builtins/#complex-numbers">Complex numbers</a>
     </li>
@@ -339,6 +349,76 @@ public interface. A breaking change raises the major version; a deprecation
 is announced one version before the removal.</p>
 <h2 id="unreleased">Unreleased<a class="headerlink" href="#unreleased" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong>Seven more question types</strong>, fixed forms at prices 1 to 3:
+  <code>partial_fractions.rhm</code> (the constants, one blank each),
+  <code>recurrence.rhm</code> (terms, characteristic roots and closed forms, up to
+  four blanks), <code>taylor.rhm</code>, <code>row_reduction.rhm</code> (rank, reduced row
+  echelon form, a vector of a null space), <code>base_conversion.rhm</code>,
+  <code>trigonometry.rhm</code> (exact values and equations, answered as <code>plain</code>
+  values) and <code>partial_derivatives.rhm</code> (answers in <code>x</code> and <code>y</code>). Each has
+  a test that checks its answers independently, and the teacher workspace
+  lists them.</li>
+<li><strong><code>pg_variables</code></strong>: a grammar names the variables of its formula answers,
+  as a <code>let</code> of the file or as an attribute of the start symbol, so an
+  answer that holds only one of them is entered in a blank that knows all.</li>
+<li><strong>Builtins</strong>: <code>base_digits(n, b)</code>, a whole number written in base 2 to 16,
+  and <code>base_number(n, b)</code>, the number with those digits in decimal, for
+  answers in binary and octal.</li>
+<li><strong>Fixed</strong>: a whole-number answer of 1000 or more accepted its neighbours.
+  WeBWorK compares numbers with a relative tolerance of one part in a
+  thousand, so 5041 passed for 5040. Such an answer is now written
+  <code>Real(n)-&gt;cmp(tolType=&gt;"absolute",tolerance=&gt;0.5)</code>; smaller whole numbers
+  stay bare numbers. This changes the PG written by <code>arithmetic.rhm</code>,
+  <code>counting.rhm</code>, <code>sequence.rhm</code> and <code>series.rhm</code> for their large answers,
+  and by any grammar of your own with such answers.</li>
+<li><strong>Fixed</strong>: WeBWorK could not read a proposition answer that holds a
+  variable other than <code>p</code> and <code>q</code>, the two its Boolean context knows
+  ("Variable 'r' is not defined in this context"); most rewriting questions
+  of <code>logic_forms.rhm</code> were affected. A proposition answer is now written
+  with a copy of the Boolean context that declares its variables and those
+  named by <code>pg_variables</code>, so a grammar need not set <code>context "Boolean"</code>
+  for it. <code>tools/validate_webwork_renderer.py</code> now compiles ten questions
+  for each case and has WeBWorK build their answer evaluators, which is
+  where such a fault shows.</li>
+<li><strong><code>exactly(N)</code></strong>: a whole number graded that way whatever its size;
+  <code>base_conversion.rhm</code> uses it for its binary and octal answers.</li>
+<li><strong>Blanks in text</strong>: <code>blank(VALUE)</code> and <code>blank_wide(VALUE, COLUMNS)</code> make an
+  answer blank that is joined to a production's text with <code>++</code>, so forms
+  with different numbers of blanks can share a grammar and one blank can
+  have a width of its own. A file that calls <code>blank</code> needs no <code>answer</code>
+  line; an <code>answer</code> line together with blanks in the text is refused.
+  <code>analytic_geometry.rhm</code> now asks for the centre and the radius of a
+  circle in two blanks.</li>
+<li><strong>Formulas in any variables</strong>: a formula answer with variables other than
+  <code>x</code> is written with a context that declares them, so partial derivatives
+  can be asked; before, such a problem did not compile in WeBWorK.
+  <code>formula_value</code> gives the exact number a formula without variables
+  comes to.</li>
+<li><strong>π and exact values</strong>: <code>formula_pi()</code>, and <code>exact_sin</code>, <code>exact_cos</code>,
+  <code>exact_tan</code> at multiples of π/6 and π/4.</li>
+<li><strong><code>plain(VALUE)</code></strong>: an answer graded with the trigonometric, hyperbolic,
+  logarithm and exponential functions switched off, so a question cannot be
+  typed back as its own answer. <code>exponential_log.rhm</code> uses it for the value
+  of a logarithm, where <code>log(625)/log(5)</code> used to be accepted.</li>
+<li><strong>Fixed</strong>: a fraction in a formula is bracketed as a divisor and under a
+  power, <code>x/(2/3)</code> and <code>(2/3)^2</code>; they were written <code>x/2/3</code> and <code>2/3^2</code>,
+  which WeBWorK reads as other numbers. No library grammar was affected.</li>
+<li><strong>Language</strong>: <code>true</code> and <code>false</code> are the two truth values (both are now
+  reserved words; a grammar that used either as a name must rename it).</li>
+<li><strong>Language</strong>: a local name in a production, <code>let NAME = EXPR</code> inside the
+  braces. It is computed after the children are built, is visible to the
+  lines below it, and is not carried by the node, so it needs no <code>synth</code>.
+  A name that would hide an attribute, a random or a file-level <code>let</code> is
+  refused.</li>
+<li><strong>Points</strong>: <code>point2(x, y)</code>, <code>point3(x, y, z)</code> and <code>point_latex</code>. A point
+  answer is entered as <code>(3, -2)</code> and graded as a point in any context; the
+  grammar does not set one. <code>analytic_geometry.rhm</code> uses it in place of a
+  text answer in the Point context.</li>
+<li><strong>Matrices of any shape</strong>: <code>matrix_row</code>, <code>matrix_column</code>, <code>matrix_stack</code>,
+  <code>matrix_augment</code>, <code>matrix_rows</code>, <code>matrix_columns</code>, and <code>matrix_rref</code> and
+  <code>matrix_rank</code> by exact Gauss-Jordan elimination.</li>
+<li>The six grammars of the batch below are rewritten with these; they ask
+  the same questions.</li>
 <li><strong>Documentation</strong>: a tutorial page, <em>Installing with opam</em>, that goes from
   a machine without opam to a working <code>rhema</code>: installing opam, <code>opam init</code>,
   <code>opam install rhema</code>, updating, removing, and what to do when a step
@@ -359,7 +439,7 @@ is announced one version before the removal.</p>
   areas they measure), <code>derivative_applications.rhm</code> (tangent lines,
   critical points, extreme values, intervals of increase),
   <code>exponential_log.rhm</code>, <code>analytic_geometry.rhm</code> (lines and circles; a
-  point is answered as <code>(3, -2)</code> in WeBWorK's Point context),
+  point is answered as <code>(3, -2)</code>),
   <code>differential_equation.rhm</code> (initial value problems, answered by a
   formula) and <code>statistics.rhm</code>. They use the existing builtins only, and
   each has a test that checks its answers independently. The teacher

@@ -206,6 +206,12 @@
     <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#precedence-and-rendering">Precedence and rendering</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#prompt-answer-context-width">Prompt, answer, context, width</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="../../reference/language/#blanks-in-text">Blanks in text</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="../../reference/language/#answers-that-carry-their-context">Answers that carry their context</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#questions">Questions</a>
     </li>
@@ -245,6 +251,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#formulas">Formulas</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#answers">Answers</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#polynomials">Polynomials</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#equations">Equations</a>
@@ -256,6 +264,8 @@
     <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#sets">Sets</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#vectors">Vectors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#points">Points</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#complex-numbers">Complex numbers</a>
     </li>
@@ -434,6 +444,20 @@ directly.</p>
 the blank goes after the prompt. A file that places its blanks with
 <code>{answer ...}</code> leaves <code>answer</code> out; writing both is an error, because it
 would not be clear where the blank goes.</p>
+<p>When the forms of one grammar need different numbers of blanks, the prompt
+cannot place them: it is the same for every form. A production then puts
+its blanks into its own text with <code>blank(...)</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nc">Q</span> <span class="o">-&gt;</span> <span class="s2">"circle"</span> <span class="p">...</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="s2">"Find the centre and the radius. Centre: "</span> <span class="o">++</span> <span class="nf">blank</span><span class="p">(</span><span class="nf">point2</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+         <span class="o">++</span> <span class="s2">" Radius: "</span> <span class="o">++</span> <span class="nf">blank</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">prompt</span> <span class="s2">"</span><span class="si">{Q.text}</span><span class="s2">"</span>
+</code></pre></div>
+<p><code>blank_wide(value, columns)</code> is a blank with a width of its own. The
+library's <code>analytic_geometry.rhm</code> is written this way: most of its forms
+have one blank and the circle has two, so the file has no <code>answer</code> line.</p>
 <h2 id="contexts">Contexts<a class="headerlink" href="#contexts" title="Permanent link">&para;</a></h2>
 <p>WeBWorK grades an answer according to a <em>context</em>: <code>Numeric</code> for numbers and
 formulas, <code>Complex</code>, <code>Interval</code>, <code>Vector</code>, <code>Matrix</code>, <code>PolynomialFactors</code> for

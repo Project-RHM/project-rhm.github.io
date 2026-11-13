@@ -206,6 +206,12 @@
     <li class="toctree-l2"><a class="reference internal" href="../language/#precedence-and-rendering">Precedence and rendering</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../language/#prompt-answer-context-width">Prompt, answer, context, width</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="../language/#blanks-in-text">Blanks in text</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="../language/#answers-that-carry-their-context">Answers that carry their context</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../language/#questions">Questions</a>
     </li>
@@ -245,6 +251,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../builtins/#formulas">Formulas</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="../builtins/#answers">Answers</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="../builtins/#polynomials">Polynomials</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../builtins/#equations">Equations</a>
@@ -256,6 +264,8 @@
     <li class="toctree-l2"><a class="reference internal" href="../builtins/#sets">Sets</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../builtins/#vectors">Vectors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../builtins/#points">Points</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../builtins/#complex-numbers">Complex numbers</a>
     </li>
@@ -351,10 +361,12 @@ make <code>x + 2x \cdot \sin x</code> cost at least 4.</p>
 <p><code>counting.rhm</code>, <code>number_theory.rhm</code>, <code>series.rhm</code>, <code>limits.rhm</code>,
 <code>eigen.rhm</code>, <code>inequality.rhm</code>, <code>definite_integral.rhm</code>,
 <code>derivative_applications.rhm</code>, <code>exponential_log.rhm</code>,
-<code>analytic_geometry.rhm</code>, <code>differential_equation.rhm</code> and
-<code>statistics.rhm</code> are in the repository, not in the 0.1.1 package. To use
-them before the next release, build <code>rhema</code> from a clone of the
-repository.</p>
+<code>analytic_geometry.rhm</code>, <code>differential_equation.rhm</code>,
+<code>statistics.rhm</code>, <code>partial_fractions.rhm</code>, <code>recurrence.rhm</code>,
+<code>taylor.rhm</code>, <code>row_reduction.rhm</code>, <code>base_conversion.rhm</code>,
+<code>trigonometry.rhm</code> and <code>partial_derivatives.rhm</code> are in the repository,
+not in the 0.1.1 package. To use them before the next release, build
+<code>rhema</code> from a clone of the repository.</p>
 </div>
 <h2 id="expressions-a-recursive-tree-spends-the-budget">Expressions: a recursive tree spends the budget<a class="headerlink" href="#expressions-a-recursive-tree-spends-the-budget" title="Permanent link">&para;</a></h2>
 <table>
@@ -597,9 +609,9 @@ repository.</p>
 </tr>
 <tr>
 <td><code>analytic_geometry.rhm</code></td>
-<td>1 the distance between two points, their midpoint, the slope through them; 2 the line through two points, the perpendicular to a line through a point; 3 the centre or the radius of a circle given expanded, the intersection of two lines</td>
+<td>1 the distance between two points, their midpoint, the slope through them; 2 the line through two points, the perpendicular to a line through a point; 3 the centre and the radius of a circle given expanded (two blanks), the intersection of two lines</td>
 <td>2</td>
-<td>Numeric / Point</td>
+<td>Numeric (a point answer carries the Point context)</td>
 </tr>
 <tr>
 <td><code>differential_equation.rhm</code></td>
@@ -612,6 +624,48 @@ repository.</p>
 <td>1 the mean, median or range of a data set; 2 the variance of a data set, a value missing from a known mean, the expectation of a random variable; 3 the variance of a random variable, at least two successes in n trials</td>
 <td>2</td>
 <td>Numeric</td>
+</tr>
+<tr>
+<td><code>partial_fractions.rhm</code></td>
+<td>the constants of a decomposition, one blank each: 1 two different factors; 2 a factor <code>p x + q</code>, a numerator of the denominator's degree with the quotient given; 3 three factors, a repeated factor</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>recurrence.rhm</code></td>
+<td>1 a term of a first-order or a second-order recurrence; 2 <code>A</code> and <code>B</code> in the solution <code>A r^n + B</code>, the roots of a characteristic equation; 3 <code>r</code>, <code>s</code>, <code>A</code>, <code>B</code> in <code>A r^n + B s^n</code>, and <code>r</code>, <code>A</code>, <code>B</code> in <code>(A + B n) r^n</code></td>
+<td>2</td>
+<td>Numeric / Interval</td>
+</tr>
+<tr>
+<td><code>taylor.rhm</code></td>
+<td>the Taylor polynomial at 0: 1 <code>e^(kx)</code>, <code>1/(1 - kx)</code>; 2 <code>sin(kx)</code>, <code>cos(kx)</code>, <code>ln(1 + kx)</code>; 3 <code>(a + bx) e^(kx)</code>, <code>e^(k x^2)</code></td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>row_reduction.rhm</code></td>
+<td>1 the rank of a 3 by 3 matrix; 2 the reduced row echelon form of a 2 by 3 matrix; 3 the reduced form of a 3 by 4 matrix, a vector of a null space</td>
+<td>2</td>
+<td>Numeric / Matrix / Vector</td>
+</tr>
+<tr>
+<td><code>base_conversion.rhm</code></td>
+<td>1 binary to decimal and back; 2 hexadecimal to decimal, decimal to octal, binary to octal; 3 a sum in binary, hexadecimal to binary</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>trigonometry.rhm</code></td>
+<td>1 degrees and radians, an exact value in the first quadrant; 2 an exact value in any quadrant, the other functions from one and the quadrant; 3 the two solutions of <code>sin x = v</code>, <code>cos x = v</code> or <code>tan x = v</code> on one turn, with argument <code>x</code> or <code>2x</code></td>
+<td>2</td>
+<td>Numeric (plain answers)</td>
+</tr>
+<tr>
+<td><code>partial_derivatives.rhm</code></td>
+<td>1 a first partial derivative; 2 both, the mixed second derivative, the gradient at a point; 3 a tangent plane, the critical point of a quadratic</td>
+<td>2</td>
+<td>Numeric (answers in <code>x</code> and <code>y</code>)</td>
 </tr>
 </tbody>
 </table>

@@ -206,6 +206,12 @@
     <li class="toctree-l2"><a class="reference internal" href="../language/#precedence-and-rendering">Precedence and rendering</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../language/#prompt-answer-context-width">Prompt, answer, context, width</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="../language/#blanks-in-text">Blanks in text</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="../language/#answers-that-carry-their-context">Answers that carry their context</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../language/#questions">Questions</a>
     </li>
@@ -245,6 +251,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#formulas">Formulas</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#answers">Answers</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#polynomials">Polynomials</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#equations">Equations</a>
@@ -256,6 +264,8 @@
     <li class="toctree-l2"><a class="reference internal" href="#sets">Sets</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#vectors">Vectors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#points">Points</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#complex-numbers">Complex numbers</a>
     </li>
@@ -340,8 +350,12 @@ error the checker reports. A function given the wrong kind of value stops
 generation with a message naming both.</p>
 <p>The site is built from the repository, which is ahead of the 0.1.1 release:
 <code>choose</code>, <code>factorial</code>, <code>gcd</code>, <code>lcm</code>, <code>mod_inverse</code>, <code>number_latex</code>,
-<code>permutations</code>, <code>pow_mod</code>, <code>set_above</code> and <code>set_below</code> are not in that
-package.</p>
+<code>permutations</code>, <code>pow_mod</code>, <code>set_above</code>, <code>set_below</code>, the <code>point</code> functions,
+<code>matrix_row</code>, <code>matrix_column</code>, <code>matrix_stack</code>, <code>matrix_augment</code>,
+<code>matrix_rows</code>, <code>matrix_columns</code>, <code>matrix_rank</code>, <code>matrix_rref</code>, <code>blank</code>,
+<code>blank_wide</code>, <code>plain</code>, <code>exactly</code>, <code>formula_pi</code>, <code>formula_value</code>, the <code>exact_</code>
+functions, <code>base_digits</code> and <code>base_number</code> are not in that package;
+neither are <code>true</code>, <code>false</code>, <code>let</code> inside a production and <code>pg_variables</code>.</p>
 <h2 id="numbers-text-and-rendering">Numbers, text and rendering<a class="headerlink" href="#numbers-text-and-rendering" title="Permanent link">&para;</a></h2>
 <p>Functions on numbers and text, and the two that write operators with the right brackets.</p>
 <table>
@@ -460,6 +474,16 @@ package.</p>
 </thead>
 <tbody>
 <tr>
+<td><code>base_digits</code></td>
+<td>2</td>
+<td><code>base_digits(n, b)</code>: the whole number <code>n</code> written in base <code>b</code> (2 to 16) as text, with the digits 0-9 and A-F.</td>
+</tr>
+<tr>
+<td><code>base_number</code></td>
+<td>2</td>
+<td><code>base_number(n, b)</code>: the number whose decimal digits are the digits of <code>n</code> in base <code>b</code> (2 to 10), so that eleven in binary is an answer typed as <code>1011</code>.</td>
+</tr>
+<tr>
 <td><code>factorial</code></td>
 <td>1</td>
 <td><code>factorial(n)</code>: n!, for n from 0 to 20.</td>
@@ -497,7 +521,7 @@ package.</p>
 </tbody>
 </table>
 <h2 id="formulas">Formulas<a class="headerlink" href="#formulas" title="Permanent link">&para;</a></h2>
-<p>Symbolic expressions in named variables: constants, variables, the four operations and powers, <code>sin</code>, <code>cos</code>, <code>tan</code>, <code>exp</code>, <code>ln</code> and <code>sqrt</code>, with differentiation, substitution, a zero test and LaTeX. A formula answer is graded by WeBWorK as a formula.</p>
+<p>Symbolic expressions in named variables: constants, the constant pi, variables, the four operations and powers, <code>sin</code>, <code>cos</code>, <code>tan</code>, <code>exp</code>, <code>ln</code> and <code>sqrt</code>, with differentiation, substitution, a zero test and LaTeX, and the exact values of sine, cosine and tangent at multiples of pi/6 and pi/4. A formula answer is graded by WeBWorK as a formula; one in variables other than <code>x</code> is written with a context that declares them.</p>
 <table>
 <thead>
 <tr>
@@ -598,9 +622,67 @@ package.</p>
 <td></td>
 </tr>
 <tr>
+<td><code>formula_pi</code></td>
+<td>0</td>
+<td>The constant pi, kept as a symbol: <code>formula_multiply(formula_constant(5 / 6), formula_pi())</code> is written <code>\frac{5\pi}{6}</code> and graded as <code>5pi/6</code>.</td>
+</tr>
+<tr>
+<td><code>formula_value</code></td>
+<td>1</td>
+<td>The number a formula without variables comes to, exactly; an error when it holds a variable, pi or a value of a function that is not rational.</td>
+</tr>
+<tr>
+<td><code>exact_sin</code></td>
+<td>2</td>
+<td><code>exact_sin(p, q)</code>: the value of sin(p pi / q) as a formula, such as <code>sqrt(3)/2</code>, for multiples of pi/6 and pi/4; an error for other angles.</td>
+</tr>
+<tr>
+<td><code>exact_cos</code></td>
+<td>2</td>
+<td><code>exact_cos(p, q)</code>: the value of cos(p pi / q), as <code>exact_sin</code>.</td>
+</tr>
+<tr>
+<td><code>exact_tan</code></td>
+<td>2</td>
+<td><code>exact_tan(p, q)</code>: the value of tan(p pi / q), as <code>exact_sin</code>; an error where the tangent is not defined.</td>
+</tr>
+<tr>
 <td><code>formula_to_polynomial</code></td>
 <td>2</td>
 <td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="answers">Answers<a class="headerlink" href="#answers" title="Permanent link">&para;</a></h2>
+<p>Functions that say how something is asked for, not what it is: an answer blank as part of a production's text, and an answer that must be worked out.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Arguments</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>blank</code></td>
+<td>1</td>
+<td><code>blank(v)</code>: an answer blank graded against <code>v</code>, to be joined to a production's text with <code>++</code>.</td>
+</tr>
+<tr>
+<td><code>blank_wide</code></td>
+<td>2</td>
+<td><code>blank_wide(v, columns)</code>: as <code>blank</code>, with a width of its own, from 1 to 200.</td>
+</tr>
+<tr>
+<td><code>plain</code></td>
+<td>1</td>
+<td><code>plain(v)</code>: the number or formula <code>v</code> as an answer that must be worked out: graded with the trigonometric, hyperbolic, logarithm and exponential functions switched off; <code>sqrt</code> and <code>abs</code> stay.</td>
+</tr>
+<tr>
+<td><code>exactly</code></td>
+<td>1</td>
+<td><code>exactly(n)</code>: the whole number <code>n</code> as an answer graded without WeBWorK's relative tolerance, so that no other whole number is accepted. A whole-number answer of 1000 or more is graded this way without being asked.</td>
 </tr>
 </tbody>
 </table>
@@ -899,7 +981,7 @@ package.</p>
 </tbody>
 </table>
 <h2 id="matrices">Matrices<a class="headerlink" href="#matrices" title="Permanent link">&para;</a></h2>
-<p>Matrices with exact rational entries: 2 by 2 and 3 by 3 construction, the identity, sum, difference, product, scalar multiple, transpose, determinant, inverse, entries, a matrix times a vector, and LaTeX (a whole matrix, or a row written as a linear equation). A matrix answer is graded in the Matrix context.</p>
+<p>Matrices with exact rational entries: 2 by 2 and 3 by 3 construction, the identity, sum, difference, product, scalar multiple, transpose, determinant, inverse, entries, a matrix times a vector, and LaTeX (a whole matrix, or a row written as a linear equation). A matrix of any shape is built from vectors as rows or columns, put one above or beside another; such a matrix has a reduced row echelon form and a rank. A matrix answer is graded in the Matrix context.</p>
 <table>
 <thead>
 <tr>
@@ -983,6 +1065,46 @@ package.</p>
 <td><code>matrix_row_latex</code></td>
 <td>2</td>
 <td></td>
+</tr>
+<tr>
+<td><code>matrix_row</code></td>
+<td>1</td>
+<td><code>matrix_row(v)</code>: the vector <code>v</code> as a matrix of one row.</td>
+</tr>
+<tr>
+<td><code>matrix_column</code></td>
+<td>1</td>
+<td><code>matrix_column(v)</code>: the vector <code>v</code> as a matrix of one column.</td>
+</tr>
+<tr>
+<td><code>matrix_stack</code></td>
+<td>2</td>
+<td><code>matrix_stack(A, B)</code>: <code>A</code> above <code>B</code>; they must have the same number of columns.</td>
+</tr>
+<tr>
+<td><code>matrix_augment</code></td>
+<td>2</td>
+<td><code>matrix_augment(A, B)</code>: <code>A</code> with <code>B</code> to its right, the augmented matrix <code>[A | B]</code>; they must have the same number of rows.</td>
+</tr>
+<tr>
+<td><code>matrix_rows</code></td>
+<td>1</td>
+<td>The number of rows of a matrix.</td>
+</tr>
+<tr>
+<td><code>matrix_columns</code></td>
+<td>1</td>
+<td>The number of columns of a matrix.</td>
+</tr>
+<tr>
+<td><code>matrix_rank</code></td>
+<td>1</td>
+<td>The rank of a matrix of any shape: the number of pivots of its reduced row echelon form.</td>
+</tr>
+<tr>
+<td><code>matrix_rref</code></td>
+<td>1</td>
+<td>The reduced row echelon form of a matrix of any shape, with exact entries.</td>
 </tr>
 </tbody>
 </table>
@@ -1132,6 +1254,34 @@ package.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="points">Points<a class="headerlink" href="#points" title="Permanent link">&para;</a></h2>
+<p>A point of the plane or of space with exact coordinates, and its LaTeX. A point answer is entered as <code>(3, -2)</code> and is graded as a point whatever context the question is in: the answer carries WeBWorK's Point context with it.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Arguments</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>point2</code></td>
+<td>2</td>
+<td><code>point2(x, y)</code>: a point of the plane.</td>
+</tr>
+<tr>
+<td><code>point3</code></td>
+<td>3</td>
+<td><code>point3(x, y, z)</code>: a point of space.</td>
+</tr>
+<tr>
+<td><code>point_latex</code></td>
+<td>1</td>
+<td>A point in LaTeX, <code>\left(3, -\frac{1}{2}\right)</code>.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="complex-numbers">Complex numbers<a class="headerlink" href="#complex-numbers" title="Permanent link">&para;</a></h2>
 <p>A complex number from its real and imaginary parts, and its LaTeX. Complex arithmetic is written with the ordinary operators on the parts.</p>
 <table>
@@ -1155,7 +1305,7 @@ package.</p>
 </tr>
 </tbody>
 </table>
-<p>134 functions in all.</p>
+<p>156 functions in all.</p>
               
             </div>
           </div><footer>

@@ -206,6 +206,12 @@
     <li class="toctree-l2"><a class="reference internal" href="#precedence-and-rendering">Precedence and rendering</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#prompt-answer-context-width">Prompt, answer, context, width</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#blanks-in-text">Blanks in text</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#answers-that-carry-their-context">Answers that carry their context</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#questions">Questions</a>
     </li>
@@ -245,6 +251,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../builtins/#formulas">Formulas</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="../builtins/#answers">Answers</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="../builtins/#polynomials">Polynomials</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../builtins/#equations">Equations</a>
@@ -256,6 +264,8 @@
     <li class="toctree-l2"><a class="reference internal" href="../builtins/#sets">Sets</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../builtins/#vectors">Vectors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../builtins/#points">Points</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../builtins/#complex-numbers">Complex numbers</a>
     </li>
@@ -367,8 +377,10 @@ backslash). Any other backslash is kept, so LaTeX is written directly:
 <p><strong>Keywords</strong> are reserved:</p>
 <div class="highlight"><pre><span></span><code>answer  as  attribute  boolean  context  copy  import  include  left
 let  nonassoc  on  precedence  prompt  question  random  require  right
-set  split  start  synth  weight  when  width  and  or  not
+set  split  start  synth  weight  when  width  and  or  not  true  false
 </code></pre></div>
+<p>A reserved word cannot be used as a name, also not for a local name in a
+production: <code>let width = ...</code> is a syntax error.</p>
 <p>Inside a <code>set</code> block, the words <code>part</code>, <code>of</code>, <code>any</code>, <code>in</code>, <code>spread</code>, <code>low</code>,
 <code>allowed</code>, <code>distinct</code>, <code>balanced</code> and <code>ordered</code> have a meaning, but they are
 not reserved and may be used as names elsewhere.</p>
@@ -401,10 +413,19 @@ symbols, but not both with and without <code>on</code>.</p>
 <p>Every production for a symbol must compute every synthesized attribute that
 symbol carries. A generator leaf carries one attribute, <code>value</code>, the number
 it drew; a quoted word carries <code>value</code>, its text.</p>
-<p>Two names are reserved for the start symbol: <code>pg_context</code>, the WeBWorK
-context of each question, and <code>pg_width</code>, the width of its answer blanks.
-When the start symbol computes them, they override the file's <code>context</code> and
-<code>width</code> for that question.</p>
+<p>Three names are reserved for the start symbol: <code>pg_context</code>, the WeBWorK
+context of each question, <code>pg_width</code>, the width of its answer blanks, and
+<code>pg_variables</code>, the variables of its formula and proposition answers. When
+the start symbol
+computes the first two, they override the file's <code>context</code> and <code>width</code> for
+that question.</p>
+<p><code>pg_variables</code> is text naming variables, such as <code>"x y"</code>. A formula answer
+is written with a context that declares the variables it holds; with
+<code>pg_variables</code> every formula answer of the question is declared in all the
+named ones, so a derivative that comes to <code>6y</code> is entered in a blank that
+knows <code>x</code> too. A proposition answer is declared in them in the same way, as
+propositional variables. It may also be a <code>let</code> of the file, for all its
+questions.</p>
 <h2 id="productions">Productions<a class="headerlink" href="#productions" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="nc">LHS</span> <span class="o">-&gt;</span> <span class="nc">SYMBOL</span> <span class="p">...</span> <span class="err">[</span><span class="k">when</span> <span class="nc">EXPR</span><span class="err">]</span> <span class="err">[</span><span class="k">weight</span> <span class="nc">INTEGER</span><span class="err">]</span> <span class="p">{</span> <span class="nc">EQUATION</span> <span class="p">...</span> <span class="p">}</span>
 </code></pre></div>
@@ -462,9 +483,23 @@ an attribute computed earlier in the same body by its bare name.</dd>
 <dt><code>require EXPR</code></dt>
 <dd>A condition checked after the children are built and the equations
 above it are computed. When it is false, the node is built again.</dd>
+<dt><code>let NAME = EXPR</code></dt>
+<dd>A <em>local name</em>: a value computed after the children are built, for the
+lines below it in the same body. The node does not carry it, so it needs
+no <code>synth</code> declaration and no other production sees it. The name must be
+new: an attribute, a random, a file-level let or an earlier local name
+of the same production is refused. Guards, updates and generator
+arguments are evaluated before the children exist and cannot use it.</dd>
 </dl>
-<p>Updates are applied in the order written; equations and requirements are
-evaluated in the order written.</p>
+<p>Updates are applied in the order written; equations, local names and
+requirements are evaluated in the order written.</p>
+<div class="highlight"><pre><span></span><code><span class="nc">B</span> <span class="o">-&gt;</span> <span class="nf">integer_between</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="nf">integer_between</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">let</span> <span class="n">upper</span> <span class="o">=</span> <span class="vm">$1</span><span class="p">.</span><span class="n">value</span> <span class="o">+</span> <span class="vm">$2</span><span class="p">.</span><span class="n">value</span>
+  <span class="k">require</span> <span class="n">upper</span> <span class="o">!=</span> <span class="mi">0</span>
+  <span class="n">latex</span> <span class="o">=</span> <span class="s2">"\int_</span><span class="si">{" ++ str($1.value) ++ "}</span><span class="s2">^</span><span class="si">{" ++ str(upper) ++ "}</span><span class="s2">"</span>
+  <span class="n">value</span> <span class="o">=</span> <span class="n">upper</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="expressions">Expressions<a class="headerlink" href="#expressions" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -479,8 +514,12 @@ evaluated in the order written.</p>
 <td>a number, a string</td>
 </tr>
 <tr>
+<td><code>true</code>, <code>false</code></td>
+<td>the two truth values</td>
+</tr>
+<tr>
 <td><code>NAME</code></td>
-<td>an inherited attribute of the node, a random or let, or an attribute computed earlier in the same production</td>
+<td>an inherited attribute of the node, a random or let, or an attribute or local name computed earlier in the same production</td>
 </tr>
 <tr>
 <td><code>$2.NAME</code></td>
@@ -512,7 +551,7 @@ evaluated in the order written.</p>
 </tr>
 <tr>
 <td><code>e ++ e</code></td>
-<td>joining text</td>
+<td>joining text, or text and answer blanks</td>
 </tr>
 <tr>
 <td><code>e = e</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code></td>
@@ -531,7 +570,8 @@ biconditional and exclusive or.</p>
 comparisons (which do not chain); <code>++</code> (right-associative); <code>+ -</code>;
 <code>* / %</code>; <code>^</code> (right-associative); unary <code>-</code>. Brackets group.</p>
 <p>Every value has a type: number, text, truth, formula, polynomial,
-equation, Boolean formula, matrix, set, vector or complex number. Types are
+equation, Boolean formula, matrix, set, vector, point, complex number, or
+text with answer blanks. Types are
 checked when a value is used; a function given the wrong type stops
 generation with a message naming both.</p>
 <h2 id="question-level-values">Question-level values<a class="headerlink" href="#question-level-values" title="Permanent link">&para;</a></h2>
@@ -594,6 +634,50 @@ symbol: <code>E -&gt; E * E</code> may be written with <code>"\cdot"</code>.</p>
 values. A question has either <code>answer</code> or <code>{answer ...}</code> blanks, not both.
 <code>context</code> names the WeBWorK context (default <code>Numeric</code>); <code>width</code> sets the
 width of every blank.</p>
+<h3 id="blanks-in-text">Blanks in text<a class="headerlink" href="#blanks-in-text" title="Permanent link">&para;</a></h3>
+<p>A blank may also be part of the text a production builds:</p>
+<div class="highlight"><pre><span></span><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"Centre: "</span> <span class="o">++</span> <span class="nf">blank</span><span class="p">(</span><span class="nf">point2</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span> <span class="o">++</span> <span class="s2">" Radius: "</span> <span class="o">++</span> <span class="nf">blank_wide</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</code></pre></div>
+<p><code>blank(VALUE)</code> is an answer blank graded against <code>VALUE</code>, and
+<code>blank_wide(VALUE, COLUMNS)</code> the same with a width of its own. Joined to
+text with <code>++</code> it makes <em>text with blanks</em>; when <code>{S.NAME}</code> or <code>{NAME}</code> in
+the prompt holds such a value, its text and blanks go into the question in
+the order written. Each production then says where its own blanks are, so
+forms with different numbers of blanks can share a grammar.</p>
+<ul>
+<li>A file whose rules or lets call <code>blank</code> needs no <code>answer</code> line. A question
+  made with no blank at all is refused when it is generated.</li>
+<li>A question with an <code>answer</code> line and blanks in its text is refused: its
+  blanks come from one place.</li>
+<li>Text with blanks can only be joined with <code>++</code> and shown through the
+  prompt; <code>str</code>, a comparison or a <code>*_latex</code> function refuses it.</li>
+<li>A blank cannot be inside mathematics, between <code>[`</code> and <code>`]</code>.</li>
+</ul>
+<h3 id="answers-that-carry-their-context">Answers that carry their context<a class="headerlink" href="#answers-that-carry-their-context" title="Permanent link">&para;</a></h3>
+<p>Some answers are written to WeBWorK with a context of their own, so the
+question may be in any context and the grammar sets none:</p>
+<ul>
+<li>a point (<code>point2</code>, <code>point3</code>);</li>
+<li>a formula in variables other than <code>x</code>: the context declares the variables
+  of every formula answer of the question and those named by
+  <code>pg_variables</code>, so its blanks accept the same names;</li>
+<li>a proposition (<code>bool_*</code>): the context is a copy of WeBWorK's Boolean
+  context, which knows <code>p</code> and <code>q</code> alone, that declares the variables of
+  every proposition answer of the question and those named by
+  <code>pg_variables</code>. The compiled file loads <code>contextBoolean.pl</code> for it;</li>
+<li><code>plain(VALUE)</code>, a number or formula that must be worked out: the
+  trigonometric, hyperbolic, logarithm and exponential functions are
+  switched off (<code>sqrt</code> and <code>abs</code> stay), so <code>sin(pi/3)</code> is not accepted as
+  the value of sin(π/3).</li>
+</ul>
+<p>WeBWorK compares numbers with a relative tolerance of one part in a
+thousand. Up to 1000 that still tells a whole number from its neighbours;
+above it, it does not: for the answer 5040 it accepts 5041, and for 10100
+it accepts 10110. A whole-number answer of 1000 or more (or -1000 or less)
+is therefore written with an absolute tolerance of half a unit, so that no
+other whole number passes; smaller ones are written as bare numbers.
+<code>exactly(N)</code> asks for the exact comparison whatever the size of <code>N</code>;
+<code>base_conversion.rhm</code> uses it where the digits are the answer.</p>
 <h2 id="questions">Questions<a class="headerlink" href="#questions" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="k">question</span> <span class="nc">NAME</span> <span class="p">{</span>
   <span class="k">start</span> <span class="nc">SYMBOL</span>
@@ -742,7 +826,7 @@ production    = IDENT "-&gt;" symbol { symbol } [ "when" expr ] [ "weight" INT ]
 symbol        = IDENT | IDENT "(" [ exprs ] ")"
               | IDENT "." IDENT [ "(" [ IDENT "=" expr { "," IDENT "=" expr } ] ")" ]
               | STRING | "+" | "-" | "*" | "/" | "%" | "^" ;
-equation      = IDENT "=" expr | "require" expr ;
+equation      = IDENT "=" expr | "require" expr | "let" IDENT "=" expr ;
 
 qitem         = "start" IDENT | "context" STRING | "prompt" STRING
               | "answer" expr | "width" INT | IDENT "=" sint ;
@@ -755,7 +839,8 @@ draw          = IDENT "=" sint
               | IDENT "in" "{" sint { "," sint } "}"
               | IDENT "~" sint { "spread" sint | "low" sint | "allowed" "{" sint { "," sint } "}" } ;
 
-expr          = INT | STRING | IDENT | IDENT "." IDENT | "$" INT | "$" INT "." IDENT
+expr          = INT | STRING | "true" | "false"
+              | IDENT | IDENT "." IDENT | "$" INT | "$" INT "." IDENT
               | IDENT "(" [ exprs ] ")" | "(" expr ")"
               | "-" expr | "not" expr | expr binop expr ;
 exprs         = expr { "," expr } ;
