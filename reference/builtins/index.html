@@ -354,7 +354,8 @@ generation with a message naming both.</p>
 <code>matrix_row</code>, <code>matrix_column</code>, <code>matrix_stack</code>, <code>matrix_augment</code>,
 <code>matrix_rows</code>, <code>matrix_columns</code>, <code>matrix_rank</code>, <code>matrix_rref</code>, <code>blank</code>,
 <code>blank_wide</code>, <code>plain</code>, <code>exactly</code>, <code>formula_pi</code>, <code>formula_value</code>, the <code>exact_</code>
-functions, <code>base_digits</code> and <code>base_number</code> are not in that package;
+functions, <code>base_digits</code>, <code>base_number</code> and <code>polynomial_truncate</code> are not in
+that package;
 neither are <code>true</code>, <code>false</code>, <code>let</code> inside a production and <code>pg_variables</code>.</p>
 <h2 id="numbers-text-and-rendering">Numbers, text and rendering<a class="headerlink" href="#numbers-text-and-rendering" title="Permanent link">&para;</a></h2>
 <p>Functions on numbers and text, and the two that write operators with the right brackets.</p>
@@ -766,6 +767,11 @@ neither are <code>true</code>, <code>false</code>, <code>let</code> inside a pro
 <td><code>polynomial_degree</code></td>
 <td>1</td>
 <td></td>
+</tr>
+<tr>
+<td><code>polynomial_truncate</code></td>
+<td>2</td>
+<td><code>polynomial_truncate(p, n)</code>: the terms of <code>p</code> of degree at most <code>n</code>, which is what is left of a series written out to a higher degree.</td>
 </tr>
 <tr>
 <td><code>polynomial_is_zero</code></td>
@@ -1305,7 +1311,7 @@ neither are <code>true</code>, <code>false</code>, <code>let</code> inside a pro
 </tr>
 </tbody>
 </table>
-<p>156 functions in all.</p>
+<p>157 functions in all.</p>
               
             </div>
           </div><footer>
