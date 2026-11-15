@@ -353,7 +353,8 @@ generation with a message naming both.</p>
 <code>choose</code>, <code>factorial</code>, <code>gcd</code>, <code>lcm</code>, <code>mod_inverse</code>, <code>number_latex</code>,
 <code>permutations</code>, <code>pow_mod</code>, <code>set_above</code>, <code>set_below</code>, the <code>point</code> functions,
 <code>matrix_row</code>, <code>matrix_column</code>, <code>matrix_stack</code>, <code>matrix_augment</code>,
-<code>matrix_rows</code>, <code>matrix_columns</code>, <code>matrix_rank</code>, <code>matrix_rref</code>, <code>blank</code>,
+<code>matrix_rows</code>, <code>matrix_columns</code>, <code>matrix_rank</code>, <code>matrix_rref</code>,
+<code>matrix_null_space</code>, <code>blank</code>,
 <code>blank_wide</code>, <code>plain</code>, <code>exactly</code>, <code>formula_pi</code>, <code>formula_value</code>, the <code>exact_</code>
 functions, <code>base_digits</code>, <code>base_number</code> and <code>polynomial_truncate</code> are not in
 that package;
@@ -1113,6 +1114,11 @@ neither are <code>true</code>, <code>false</code>, <code>let</code> inside a pro
 <td>1</td>
 <td>The reduced row echelon form of a matrix of any shape, with exact entries.</td>
 </tr>
+<tr>
+<td><code>matrix_null_space</code></td>
+<td>1</td>
+<td><code>matrix_null_space(A)</code>: the basis of the null space read off the reduced form, as the columns of a matrix: for each free variable in turn, the solution of <code>A x = 0</code> in which it is 1 and the other free variables are 0. An error when no variable is free.</td>
+</tr>
 </tbody>
 </table>
 <h2 id="sets">Sets<a class="headerlink" href="#sets" title="Permanent link">&para;</a></h2>
@@ -1312,7 +1318,7 @@ neither are <code>true</code>, <code>false</code>, <code>let</code> inside a pro
 </tr>
 </tbody>
 </table>
-<p>157 functions in all.</p>
+<p>158 functions in all.</p>
               
             </div>
           </div><footer>
