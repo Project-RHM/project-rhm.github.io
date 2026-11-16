@@ -171,6 +171,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#one-file-per-question">One file per question</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-same-paper-for-print">The same paper for print</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#uploading">Uploading</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#before-you-upload">Before you upload</a>
@@ -231,6 +233,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../reference/command/">The rhema command</a>
     <ul>
     <li class="toctree-l2"><a class="reference internal" href="../../reference/command/#compiling">Compiling</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/command/#a-paper-latex-and-pdf">A paper: LaTeX and PDF</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../../reference/command/#options">Options</a>
     </li>
@@ -399,6 +403,18 @@ class is the default for a reason.</p>
 </code></pre></div>
 <p>writes <code>week3.pg</code> and also <code>week3/question01.pg</code>, <code>question02.pg</code> and so on,
 for courses that prefer one problem per file.</p>
+<h2 id="the-same-paper-for-print">The same paper for print<a class="headerlink" href="#the-same-paper-for-print" title="Permanent link">&para;</a></h2>
+<p>The same assignment can be written as a paper instead, for a quiz in class
+or to read away from a screen:</p>
+<div class="highlight"><pre><span></span><code>$ rhema assignment.rhm --run week3 -o week3.pdf
+$ rhema assignment.rhm --run week3 -o week3-key.pdf --answers
+$ rhema assignment.rhm --run week3 -o week3.tex
+</code></pre></div>
+<p>A <code>.pdf</code> is the paper itself, with a rule to write on in place of each
+answer blank; <code>--answers</code> adds a key on a last page; a <code>.tex</code> is the LaTeX
+source, to edit before printing. It holds the questions of <code>week3.pg</code>, the
+same ones: a paper is named by its assignment, not by its format. A PDF
+needs a TeX engine installed; see <a href="../../reference/command/">the command</a>.</p>
 <h2 id="uploading">Uploading<a class="headerlink" href="#uploading" title="Permanent link">&para;</a></h2>
 <p>In the WeBWorK course:</p>
 <ol>

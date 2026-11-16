@@ -171,6 +171,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../tutorial/webwork/#one-file-per-question">One file per question</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="../tutorial/webwork/#the-same-paper-for-print">The same paper for print</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="../tutorial/webwork/#uploading">Uploading</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../tutorial/webwork/#before-you-upload">Before you upload</a>
@@ -231,6 +233,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../reference/command/">The rhema command</a>
     <ul>
     <li class="toctree-l2"><a class="reference internal" href="../reference/command/#compiling">Compiling</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../reference/command/#a-paper-latex-and-pdf">A paper: LaTeX and PDF</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/command/#options">Options</a>
     </li>
@@ -350,6 +354,15 @@ public interface. A breaking change raises the major version; a deprecation
 is announced one version before the removal.</p>
 <h2 id="unreleased">Unreleased<a class="headerlink" href="#unreleased" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong>A paper to print: LaTeX and PDF output.</strong> <code>rhema FILE -o OUT.tex</code> writes
+  the same questions as a LaTeX document, and <code>-o OUT.pdf</code> compiles it with
+  a TeX engine found on the machine (<code>pdflatex</code>, <code>xelatex</code>, <code>lualatex</code>,
+  <code>tectonic</code>, or the one <code>RHEMA_LATEX</code> names). <code>--answers</code> adds an answer
+  key on a last page and <code>--title</code> sets the title. A set keeps its labels
+  and headings, a blank becomes a rule to write on, and a formula too wide
+  for the line is scaled down to it. The same assignment and student give
+  the same questions as the <code>.pg</code> file. An output with any other extension
+  is WeBWorK PG, as before.</li>
 <li><strong>Seven question types scale with the budget.</strong> <code>partial_fractions.rhm</code>,
   <code>taylor.rhm</code>, <code>inequality.rhm</code>, <code>partial_derivatives.rhm</code>,
   <code>row_reduction.rhm</code>, <code>base_conversion.rhm</code> and <code>definite_integral.rhm</code>

@@ -171,6 +171,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#one-file-per-question">One file per question</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#the-same-paper-for-print">The same paper for print</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#uploading">Uploading</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../../tutorial/webwork/#before-you-upload">Before you upload</a>
@@ -231,6 +233,8 @@
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">The rhema command</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#compiling">Compiling</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#a-paper-latex-and-pdf">A paper: LaTeX and PDF</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#options">Options</a>
     </li>
@@ -346,6 +350,7 @@
               
                 <h1 id="the-rhema-command">The rhema command<a class="headerlink" href="#the-rhema-command" title="Permanent link">&para;</a></h1>
 <div class="highlight"><pre><span></span><code>rhema FILE.rhm [-o OUT.pg] [options]    compile FILE to WeBWorK PG
+rhema FILE.rhm -o OUT.tex | OUT.pdf     the same questions as a paper
 rhema check FILE...                     check only
 rhema run FILE [options]                show the questions and answers
 rhema list FILE                         the questions and sets FILE declares
@@ -363,6 +368,46 @@ $ rhema homework_set.rhm --run quick --pg-dir out/
 </code></pre></div>
 <p><code>--pg-dir DIR</code>, with <code>--run</code>, also writes one file per question, named
 <code>question01.pg</code>, <code>question02.pg</code> and so on.</p>
+<h2 id="a-paper-latex-and-pdf">A paper: LaTeX and PDF<a class="headerlink" href="#a-paper-latex-and-pdf" title="Permanent link">&para;</a></h2>
+<p>The extension of the output says what is written. <code>-o OUT.tex</code> writes the
+same questions as a LaTeX document, and <code>-o OUT.pdf</code> compiles that document
+to a PDF:</p>
+<div class="highlight"><pre><span></span><code>$ rhema homework_set.rhm --run homework -o homework.tex
+$ rhema homework_set.rhm --run homework -o homework.pdf --answers
+$ rhema calculus.rhm --count 10 --set cost=6 -o quiz.pdf --title "Quiz 2"
+</code></pre></div>
+<p>The paper has a title, the questions numbered as the set numbers them
+(<code>1(a).</code>, <code>2.</code>), the headings of its parts, and a rule to write on where
+each answer blank stands. The same assignment and the same <code>--student</code> give
+the same questions in all three formats.</p>
+<dl>
+<dt><code>--answers</code></dt>
+<dd>An answer key on a last page: one entry for each question, one answer
+for each blank.</dd>
+<dt><code>--title TEXT</code></dt>
+<dd>The paper's title. The default is the set's name, the assignment's with
+<code>--assignment</code>, or the file's name.</dd>
+</dl>
+<p>A <code>.pdf</code> needs a TeX engine on the machine. <code>rhema</code> uses the first of
+<code>pdflatex</code>, <code>xelatex</code>, <code>lualatex</code> and <code>tectonic</code> that it finds, or the one
+the environment variable <code>RHEMA_LATEX</code> names. When there is none, or the
+engine fails, it says so, writes no PDF and leaves the LaTeX beside where
+the PDF would be. The document needs only <code>amsmath</code>, <code>amssymb</code>, <code>graphicx</code>
+and <code>geometry</code>.</p>
+<p>The LaTeX is meant to be edited. Every question is set through four
+commands defined at the top of the file (<code>\rhemaquestion</code>, <code>\rhemablank</code>,
+<code>\rhemaheading</code>, <code>\rhemamath</code>), so another layout is a change to those
+lines. <code>\rhemamath</code> keeps a formula whole and scales it down when it is
+wider than the line, so that a long derivative or a wide matrix stays on
+the page.</p>
+<p>In the text of a question, <code>[`...`]</code> and <code>[``...``]</code> are
+mathematics, two spaces at the end of a line are a line break, and every
+other character is printed as it is. Other PGML markup, such as <code>*bold*</code>,
+is not interpreted.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>LaTeX and PDF output is in the repository, not in the 0.1.1 package.</p>
+</div>
 <h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
 <dl>
 <dt><code>--question NAME</code></dt>
