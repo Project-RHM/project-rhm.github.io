@@ -306,7 +306,7 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Changes</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#unreleased">Unreleased</a>
+    <li class="toctree-l2"><a class="reference internal" href="#020-2026-11-16">0.2.0 (2026-11-16)</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#011-2026-10-25">0.1.1 (2026-10-25)</a>
     </li>
@@ -352,9 +352,26 @@
 functions' names and arguments, and the <code>rhema</code> command's options are the
 public interface. A breaking change raises the major version; a deprecation
 is announced one version before the removal.</p>
-<h2 id="unreleased">Unreleased<a class="headerlink" href="#unreleased" title="Permanent link">&para;</a></h2>
+<h2 id="020-2026-11-16">0.2.0 (2026-11-16)<a class="headerlink" href="#020-2026-11-16" title="Permanent link">&para;</a></h2>
+<p>The library grows from 27 grammar files to 46, seven of the new question
+types scale with the budget, and a paper can be written as LaTeX or PDF as
+well as WeBWorK PG.</p>
+<p>Coming from 0.1.1:</p>
 <ul>
-<li><strong>A paper to print: LaTeX and PDF output.</strong> <code>rhema FILE -o OUT.tex</code> writes
+<li><code>true</code> and <code>false</code> are now reserved words. A grammar that used either as a
+  name must rename it; nothing else in the language or the command changed
+  meaning.</li>
+<li>
+<p>The 27 grammar files of 0.1.1 ask the same questions for the same seed
+  (compared on 30 questions of each question type and on the library's
+  set). Four of them write some answers differently in PG, so that WeBWorK
+  grades them correctly: <code>arithmetic.rhm</code> and <code>sequence.rhm</code> (whole numbers
+  and fractions of 1000 or more), <code>set.rhm</code> (unions without brackets around
+  their parts) and <code>logic_forms.rhm</code> (propositions with their own context).
+  The entries below give the reasons.</p>
+</li>
+<li>
+<p><strong>A paper to print: LaTeX and PDF output.</strong> <code>rhema FILE -o OUT.tex</code> writes
   the same questions as a LaTeX document, and <code>-o OUT.pdf</code> compiles it with
   a TeX engine found on the machine (<code>pdflatex</code>, <code>xelatex</code>, <code>lualatex</code>,
   <code>tectonic</code>, or the one <code>RHEMA_LATEX</code> names). <code>--answers</code> adds an answer
@@ -362,7 +379,8 @@ is announced one version before the removal.</p>
   and headings, a blank becomes a rule to write on, and a formula too wide
   for the line is scaled down to it. The same assignment and student give
   the same questions as the <code>.pg</code> file. An output with any other extension
-  is WeBWorK PG, as before.</li>
+  is WeBWorK PG, as before.</p>
+</li>
 <li><strong>Seven question types scale with the budget.</strong> <code>partial_fractions.rhm</code>,
   <code>taylor.rhm</code>, <code>inequality.rhm</code>, <code>partial_derivatives.rhm</code>,
   <code>row_reduction.rhm</code>, <code>base_conversion.rhm</code> and <code>definite_integral.rhm</code>
@@ -470,7 +488,7 @@ is announced one version before the removal.</p>
   for <code>.rhm</code> files. Its tests check the grammar against the compiler's
   keywords and every <code>.rhm</code> file in the repository (CI job <code>editor</code>), and
   drive the extension in VS Code against a real <code>rhema</code>. Published on the
-  Visual Studio Marketplace as <code>rhema.rhema-language</code> (0.1.1, preview).</li>
+  Visual Studio Marketplace as <code>rhema.rhema-language</code> (a preview).</li>
 <li><strong>Fixed</strong>: a problem with a name, a child reference or a call was reported
   at the start of the equation or declaration holding it, so
   <code>value = foo</code> gave the column of <code>value</code> for "unknown name 'foo'". Every

@@ -306,7 +306,7 @@
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../../changelog/">Changes</a>
     <ul>
-    <li class="toctree-l2"><a class="reference internal" href="../../changelog/#unreleased">Unreleased</a>
+    <li class="toctree-l2"><a class="reference internal" href="../../changelog/#020-2026-11-16">0.2.0 (2026-11-16)</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../../changelog/#011-2026-10-25">0.1.1 (2026-10-25)</a>
     </li>
@@ -435,10 +435,9 @@ question on its own: <code>1</code>, <code>2</code>, <code>3</code>.</p>
 <dt><code>distinct</code></dt>
 <dd>No two questions have the same shape: the same productions, in the same
 places, with only the numbers different. <code>3 + 4</code> and <code>7 + 2</code> are one
-shape. Questions of different types are never repeats of each other,
-with one exception in the 0.1.1 release: two named questions on the same
-rule, such as <code>seq.nth</code> and <code>seq.sum</code>, count as repeats there. The
-repository has the fix.</dd>
+shape. Questions of different types are never repeats of each other.
+(In 0.1.1 two named questions on the same rule, such as <code>seq.nth</code> and
+<code>seq.sum</code>, counted as repeats; 0.2.0 has the fix.)</dd>
 <dt><code>balanced</code></dt>
 <dd>No three questions in a row with the same coded answer, for questions
 answered with true/false or a small code such as 0, 1, 2.</dd>
