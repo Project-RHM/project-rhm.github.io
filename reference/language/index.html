@@ -179,6 +179,22 @@
     </li>
     </ul>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/mistakes/">9. Mistakes students make</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/mistakes/#declaring-a-mistake">Declaring a mistake</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/mistakes/#where-the-mistake-is-made">Where the mistake is made</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/mistakes/#what-the-engine-does-with-it">What the engine does with it</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/mistakes/#what-a-line-may-say">What a line may say</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/mistakes/#in-the-library">In the library</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../tutorial/mistakes/#limits">Limits</a>
+    </li>
+    </ul>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Reference</span></p>
               <ul class="current">
@@ -205,6 +221,8 @@
     <li class="toctree-l2"><a class="reference internal" href="#expressions">Expressions</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#question-level-values">Question-level values</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mistakes">Mistakes</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#precedence-and-rendering">Precedence and rendering</a>
     </li>
@@ -282,6 +300,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../library/#fixed-forms-each-form-is-a-price">Fixed forms: each form is a price</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="../library/#mistakes">Mistakes</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="../library/#libraries-and-examples">Libraries and examples</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../library/#named-questions">Named questions</a>
@@ -306,6 +326,8 @@
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../../changelog/">Changes</a>
     <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../changelog/#unreleased">Unreleased</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="../../changelog/#020-2026-11-16">0.2.0 (2026-11-16)</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../../changelog/#011-2026-10-25">0.1.1 (2026-10-25)</a>
@@ -381,8 +403,9 @@ backslash). Any other backslash is kept, so LaTeX is written directly:
 <code>"\cdot"</code> and <code>"\\cdot"</code> are the same string.</p>
 <p><strong>Keywords</strong> are reserved:</p>
 <div class="highlight"><pre><span></span><code>answer  as  attribute  boolean  context  copy  import  include  left
-let  nonassoc  on  precedence  prompt  question  random  require  right
-set  split  start  synth  weight  when  width  and  or  not  true  false
+let  mistake  nonassoc  on  precedence  prompt  question  random  require
+right  set  split  start  synth  weight  when  width  and  or  not  true
+false
 </code></pre></div>
 <p>A reserved word cannot be used as a name, also not for a local name in a
 production: <code>let width = ...</code> is a syntax error.</p>
@@ -495,6 +518,10 @@ no <code>synth</code> declaration and no other production sees it. The name must
 new: an attribute, a random, a file-level let or an earlier local name
 of the same production is refused. Guards, updates and generator
 arguments are evaluated before the children exist and cannot use it.</dd>
+<dt><code>mistake NAME ATTRIBUTE = EXPR</code></dt>
+<dd>A <em>mistake line</em>: what a student who makes the <a href="#mistakes">mistake</a>
+<code>NAME</code> computes for <code>ATTRIBUTE</code> here. It is skipped when the question is
+generated.</dd>
 </dl>
 <p>Updates are applied in the order written; equations, local names and
 requirements are evaluated in the order written.</p>
@@ -589,6 +616,57 @@ same value wherever it is used. Its arguments must be integer literals.</p>
 <p>A <code>let</code> is computed once per question, after the randoms, from randoms and
 earlier lets. It may call any builtin function but may not refer to the
 tree.</p>
+<h2 id="mistakes">Mistakes<a class="headerlink" href="#mistakes" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">mistake</span> <span class="nc">NAME</span> <span class="nc">STRING</span>
+</code></pre></div>
+<p>declares a mistake students make. <code>STRING</code> says what the student does and
+must not be empty. Mistake names are a namespace of their own: a mistake
+may have the name of an attribute.</p>
+<p>A production says where the mistake is made, with a mistake line in its
+body:</p>
+<div class="highlight"><pre><span></span><code><span class="nc">F</span> <span class="o">-&gt;</span> <span class="s2">"sin"</span> <span class="nc">F</span> <span class="k">when</span> <span class="n">cost</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="p">{</span>
+  <span class="n">cost</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
+  <span class="n">f</span> <span class="o">=</span> <span class="nf">formula_sin</span><span class="p">(</span><span class="vm">$2</span><span class="p">.</span><span class="n">f</span><span class="p">)</span>
+  <span class="n">d</span> <span class="o">=</span> <span class="nf">formula_multiply</span><span class="p">(</span><span class="nf">formula_cos</span><span class="p">(</span><span class="vm">$2</span><span class="p">.</span><span class="n">f</span><span class="p">),</span> <span class="vm">$2</span><span class="p">.</span><span class="n">d</span><span class="p">)</span>
+  <span class="k">mistake</span> <span class="n">no_chain</span> <span class="n">d</span> <span class="o">=</span> <span class="nf">formula_cos</span><span class="p">(</span><span class="vm">$2</span><span class="p">.</span><span class="n">f</span><span class="p">)</span>
+  <span class="n">latex</span> <span class="o">=</span> <span class="nf">formula_latex</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The name after the mistake's must be a synthesized attribute or a local
+name that the production has computed above the line. The expression may
+use everything an equation at that place may use, the right value of its
+own name included. A production has at most one line for the same mistake
+and name. Every declared mistake must have a line in some production.</p>
+<p>A mistake line takes no part in generation. After a question is built, each
+mistake that some production of its tree has a line for is tried:</p>
+<ol>
+<li>The tree is evaluated again from the leaves up. Each node keeps its
+   production and its children; its equations and local names are computed
+   in order, and a line for the mistake gives its name the new value, for
+   the lines below it and for the node. Requirements are not checked.
+   Subtrees of imported modules are left as they are.</li>
+<li>A value is <em>mistaken</em> when a line for the mistake gave it a value other
+   than the one it had, or when the expression that computed it read a
+   mistaken value. A line that gives the same value changes nothing.</li>
+<li>The answers are read again. If none was read from a mistaken value, the
+   mistake does not concern this question. If one was and some answer is
+   now different, the mistake is reported with the answers it leads to. If
+   one was and every answer is the same, wrong working would be marked
+   right: the question is discarded and generated afresh, as after a
+   failed requirement.</li>
+</ol>
+<p>Two answers are the same when a marker would take one for the other:
+formulas are compared as functions, at fixed points, and other values by
+their own equality. A mistake that ends in an arithmetic failure, such as
+a division by zero, is reported as leading to no answer, and the question
+is kept. A mistake line that cannot be evaluated for another reason, such
+as a value of the wrong type, stops generation with a message naming the
+mistake.</p>
+<p><code>rhema run</code> lists, under each answer, <code>mistake NAME: ANSWERS</code> for every
+mistake reported. The PG and LaTeX output of a question does not depend on
+the file's mistakes.</p>
+<p>An <code>include</code>d file's mistakes and lines become the including file's. An
+<code>import</code>ed module's are its own: they apply to the module's questions.</p>
 <h2 id="precedence-and-rendering">Precedence and rendering<a class="headerlink" href="#precedence-and-rendering" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="k">precedence</span> <span class="nc">LEVEL</span> <span class="k">left</span><span class="err">|</span><span class="k">right</span><span class="err">|</span><span class="k">nonassoc</span> <span class="nc">OPERATOR</span> <span class="p">...</span>
 </code></pre></div>
@@ -786,6 +864,9 @@ part by total budget.</p>
 </ul>
 </li>
 <li>The prompt, blanks and context are read from the finished tree.</li>
+<li>Each <a href="#mistakes">mistake</a> with a line in the tree is tried. A question
+   in which one changes the working and leaves every answer right is
+   started afresh, within the same 200 attempts.</li>
 </ol>
 <p>When a failure could not have gone differently, because no random choice was
 involved, it is reported at once instead of retried.</p>
@@ -806,11 +887,15 @@ involved, it is reported at once instead of retried.</p>
   attribute, so no derivation can go round for ever without spending;</li>
 <li>prompts, answers, questions and sets refer to things that exist, with the
   right kinds of blank;</li>
+<li>every mistake is declared once, with a description, and is made in some
+  production; every mistake line names a declared mistake and a value its
+  production has already computed;</li>
 <li>no file includes or imports itself.</li>
 </ul>
 <p>What the checker cannot know is left to generation, and reported clearly
 when it happens: a budget no production can spend, a requirement that
-cannot be met, a value of the wrong type for a function.</p>
+cannot be met, a value of the wrong type for a function, a mistake that
+always changes the working and never an answer.</p>
 <h2 id="grammar">Grammar<a class="headerlink" href="#grammar" title="Permanent link">&para;</a></h2>
 <p>The syntax in EBNF. <code>{ X }</code> means zero or more, <code>[ X ]</code> optional, <code>|</code>
 alternatives; quoted text is literal, capitalised names are tokens.</p>
@@ -819,6 +904,7 @@ alternatives; quoted text is literal, capitalised names are tokens.</p>
 declaration   = "attribute" IDENT "=" sint [ "copy" | "split" ]
               | "random" IDENT "=" ( "boolean" | IDENT "(" [ exprs ] ")" )
               | "let" IDENT "=" expr
+              | "mistake" IDENT STRING
               | "synth" IDENT [ "on" IDENT ]
               | "start" IDENT
               | "context" STRING
@@ -837,7 +923,8 @@ production    = IDENT "-&gt;" symbol { symbol } [ "when" expr ] [ "weight" INT ]
 symbol        = IDENT | IDENT "(" [ exprs ] ")"
               | IDENT "." IDENT [ "(" [ IDENT "=" expr { "," IDENT "=" expr } ] ")" ]
               | STRING | "+" | "-" | "*" | "/" | "%" | "^" ;
-equation      = IDENT "=" expr | "require" expr | "let" IDENT "=" expr ;
+equation      = IDENT "=" expr | "require" expr | "let" IDENT "=" expr
+              | "mistake" IDENT IDENT "=" expr ;
 
 qitem         = "start" IDENT | "context" STRING | "prompt" STRING
               | "answer" expr | "width" INT | IDENT "=" sint ;
@@ -864,7 +951,7 @@ sint          = [ "-" ] INT ;
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../tutorial/webwork/" class="btn btn-neutral float-left" title="8. Into WeBWorK"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../tutorial/mistakes/" class="btn btn-neutral float-left" title="9. Mistakes students make"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../command/" class="btn btn-neutral float-right" title="The rhema command">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -893,7 +980,7 @@ sint          = [ "-" ] INT ;
         </span>
     
     
-      <span><a href="../../tutorial/webwork/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../tutorial/mistakes/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../command/" style="color: #fcfcfc">Next &raquo;</a></span>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://project-rhm.github.io/tutorial/mistakes/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>9. Mistakes students make - Rhema</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link href="../../assets/pygments.css" rel="stylesheet" />
+        <link href="../../assets/rhema.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "9. Mistakes students make";
+        var mkdocs_page_input_path = "tutorial/mistakes.md";
+        var mkdocs_page_url = "/tutorial/mistakes/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]--> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../..">
+          <img src="../../assets/logo.svg" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Rhema</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../..#install">Install</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../..#where-to-go-next">Where to go next</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../..#the-name">The name</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../..#authors">Authors</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Tutorial</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Overview</a>
+    <ul>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install/">Installing with opam</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../install/#1-install-opam">1. Install opam</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../install/#2-set-opam-up">2. Set opam up</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../install/#3-install-rhema">3. Install rhema</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../install/#updating-and-removing">Updating and removing</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../install/#if-something-goes-wrong">If something goes wrong</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../first/">1. A first question</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../first/#productions">Productions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../first/#attributes">Attributes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../first/#the-prompt-and-the-answer">The prompt and the answer</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../first/#what-the-compiler-checks">What the compiler checks</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../budget/">2. Difficulty is a budget</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../budget/#productions-that-refer-to-themselves">Productions that refer to themselves</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../budget/#inherited-attributes">Inherited attributes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../budget/#spending">Spending</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../budget/#every-budget-must-be-spendable">Every budget must be spendable</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../budget/#requirements">Requirements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../budget/#brackets-come-from-precedence">Brackets come from precedence</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../budget/#choosing-a-difficulty">Choosing a difficulty</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../values/">3. Values and answers</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../values/#values-drawn-once-per-question">Values drawn once per question</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../values/#values-computed-once-per-question">Values computed once per question</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../values/#types-of-value">Types of value</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../values/#the-answer-is-computed-not-typed">The answer is computed, not typed</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../prompts/">4. Prompts, contexts, blanks</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../prompts/#what-a-prompt-may-contain">What a prompt may contain</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../prompts/#one-blank-or-several">One blank or several</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../prompts/#contexts">Contexts</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../questions/">5. Several questions in one file</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../questions/#named-questions">Named questions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../questions/#starting-where-you-need-to">Starting where you need to</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../questions/#mistakes-are-reported-with-the-blocks-name">Mistakes are reported with the block's name</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import/">6. Building on the library</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../import/#import">import</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../import/#using-an-imported-symbol">Using an imported symbol</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../import/#arguments-at-the-boundary">Arguments at the boundary</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../import/#include-for-extending">include, for extending</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../sets/">7. A whole assignment</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../sets/#entries">Entries</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../sets/#parts-and-numbering">Parts and numbering</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../sets/#constraints">Constraints</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../sets/#the-same-paper-every-time">The same paper every time</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../webwork/">8. Into WeBWorK</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../webwork/#compiling">Compiling</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../webwork/#what-the-file-contains">What the file contains</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../webwork/#one-paper-per-assignment">One paper per assignment</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../webwork/#a-paper-for-each-student">A paper for each student</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../webwork/#one-file-per-question">One file per question</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../webwork/#the-same-paper-for-print">The same paper for print</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../webwork/#uploading">Uploading</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../webwork/#before-you-upload">Before you upload</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">9. Mistakes students make</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#declaring-a-mistake">Declaring a mistake</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#where-the-mistake-is-made">Where the mistake is made</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-the-engine-does-with-it">What the engine does with it</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-a-line-may-say">What a line may say</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#in-the-library">In the library</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#limits">Limits</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../reference/language/">The language</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#files">Files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#lexical-structure">Lexical structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#attributes">Attributes</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="../../reference/language/#inherited-attributes">Inherited attributes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="../../reference/language/#synthesized-attributes">Synthesized attributes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#productions">Productions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="../../reference/language/#equations">Equations</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#expressions">Expressions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#question-level-values">Question-level values</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#mistakes">Mistakes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#precedence-and-rendering">Precedence and rendering</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#prompt-answer-context-width">Prompt, answer, context, width</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="../../reference/language/#blanks-in-text">Blanks in text</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="../../reference/language/#answers-that-carry-their-context">Answers that carry their context</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#questions">Questions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#include-and-import">include and import</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#sets">Sets</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#how-a-question-is-generated">How a question is generated</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#what-the-checker-guarantees">What the checker guarantees</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#grammar">Grammar</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../reference/command/">The rhema command</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/command/#compiling">Compiling</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/command/#a-paper-latex-and-pdf">A paper: LaTeX and PDF</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/command/#options">Options</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/command/#finding-imported-files">Finding imported files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/command/#messages-and-exit-status">Messages and exit status</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/command/#other-commands">Other commands</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../reference/builtins/">Builtin functions</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#numbers-text-and-rendering">Numbers, text and rendering</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#generators">Generators</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#whole-numbers">Whole numbers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#formulas">Formulas</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#answers">Answers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#polynomials">Polynomials</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#equations">Equations</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#propositions">Propositions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#matrices">Matrices</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#sets">Sets</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#vectors">Vectors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#points">Points</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/builtins/#complex-numbers">Complex numbers</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../reference/library/">The question library</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/library/#expressions-a-recursive-tree-spends-the-budget">Expressions: a recursive tree spends the budget</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/library/#fixed-forms-each-form-is-a-price">Fixed forms: each form is a price</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/library/#mistakes">Mistakes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/library/#libraries-and-examples">Libraries and examples</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/library/#named-questions">Named questions</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../reference/difficulty/">Difficulty budgets</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/difficulty/#what-a-budget-pays-for">What a budget pays for</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/difficulty/#choosing-a-budget">Choosing a budget</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/difficulty/#an-assignments-difficulty-is-a-mean">An assignment's difficulty is a mean</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/difficulty/#measuring-a-grammar">Measuring a grammar</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/difficulty/#giving-your-own-grammar-a-budget">Giving your own grammar a budget</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../changelog/">Changes</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../changelog/#unreleased">Unreleased</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../changelog/#020-2026-11-16">0.2.0 (2026-11-16)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../changelog/#011-2026-10-25">0.1.1 (2026-10-25)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../changelog/#010-2026-10-24">0.1.0 (2026-10-24)</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../authors/">Authors</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../../authors/#licence">Licence</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Rhema</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Tutorial</li>
+      <li class="breadcrumb-item active">9. Mistakes students make</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/Project-RHM/Project-RHM/edit/main/docs/tutorial/mistakes.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="mistakes-students-make">Mistakes students make<a class="headerlink" href="#mistakes-students-make" title="Permanent link">&para;</a></h1>
+<p>A right answer does not always come from right working. A student who
+believes that a product is differentiated factor by factor gets
+<code>x \cdot 0</code> right, and one who subtracts the smaller number from the larger
+gets <code>7 - 3</code> right. A grammar can say what a mistake is. <code>rhema</code> then shows
+what each mistake leads to, and never asks a question in which a mistake
+changes the working and the answer still comes out right.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Derivatives worked out rule by rule, and two mistakes students make.</span>
+
+<span class="k">attribute</span> <span class="n">cost</span> <span class="o">=</span> <span class="mi">5</span> <span class="k">split</span>
+
+<span class="k">mistake</span> <span class="n">factor_by_factor</span> <span class="s2">"differentiates a product factor by factor"</span>
+<span class="k">mistake</span> <span class="n">no_chain</span> <span class="s2">"leaves out the derivative of the inside"</span>
+
+<span class="k">synth</span> <span class="n">f</span> <span class="k">on</span> <span class="nc">F</span>        <span class="c1"># the function</span>
+<span class="k">synth</span> <span class="n">d</span> <span class="k">on</span> <span class="nc">F</span>        <span class="c1"># its derivative</span>
+<span class="k">synth</span> <span class="n">latex</span> <span class="k">on</span> <span class="nc">F</span>
+<span class="k">synth</span> <span class="n">f</span> <span class="k">on</span> <span class="nc">T</span>
+<span class="k">synth</span> <span class="n">d</span> <span class="k">on</span> <span class="nc">T</span>
+<span class="k">synth</span> <span class="n">latex</span> <span class="k">on</span> <span class="nc">T</span>
+
+<span class="k">start</span> <span class="nc">F</span>
+
+<span class="nc">F</span> <span class="o">-&gt;</span> <span class="nc">F</span> <span class="s2">"+"</span> <span class="nc">F</span> <span class="k">when</span> <span class="n">cost</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="k">weight</span> <span class="mi">2</span> <span class="p">{</span>
+  <span class="n">cost</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+  <span class="k">require</span> <span class="vm">$1</span><span class="p">.</span><span class="n">latex</span> <span class="o">!=</span> <span class="vm">$3</span><span class="p">.</span><span class="n">latex</span>
+  <span class="n">f</span> <span class="o">=</span> <span class="nf">formula_add</span><span class="p">(</span><span class="vm">$1</span><span class="p">.</span><span class="n">f</span><span class="p">,</span> <span class="vm">$3</span><span class="p">.</span><span class="n">f</span><span class="p">)</span>
+  <span class="n">d</span> <span class="o">=</span> <span class="nf">formula_add</span><span class="p">(</span><span class="vm">$1</span><span class="p">.</span><span class="n">d</span><span class="p">,</span> <span class="vm">$3</span><span class="p">.</span><span class="n">d</span><span class="p">)</span>
+  <span class="n">latex</span> <span class="o">=</span> <span class="nf">formula_latex</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nc">F</span> <span class="o">-&gt;</span> <span class="nc">F</span> <span class="s2">"\cdot"</span> <span class="nc">F</span> <span class="k">when</span> <span class="n">cost</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="k">weight</span> <span class="mi">2</span> <span class="p">{</span>
+  <span class="n">cost</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
+  <span class="k">require</span> <span class="vm">$1</span><span class="p">.</span><span class="n">latex</span> <span class="o">!=</span> <span class="vm">$3</span><span class="p">.</span><span class="n">latex</span>
+  <span class="n">f</span> <span class="o">=</span> <span class="nf">formula_multiply</span><span class="p">(</span><span class="vm">$1</span><span class="p">.</span><span class="n">f</span><span class="p">,</span> <span class="vm">$3</span><span class="p">.</span><span class="n">f</span><span class="p">)</span>
+  <span class="n">d</span> <span class="o">=</span> <span class="nf">formula_add</span><span class="p">(</span><span class="nf">formula_multiply</span><span class="p">(</span><span class="vm">$1</span><span class="p">.</span><span class="n">d</span><span class="p">,</span> <span class="vm">$3</span><span class="p">.</span><span class="n">f</span><span class="p">),</span> <span class="nf">formula_multiply</span><span class="p">(</span><span class="vm">$1</span><span class="p">.</span><span class="n">f</span><span class="p">,</span> <span class="vm">$3</span><span class="p">.</span><span class="n">d</span><span class="p">))</span>
+  <span class="k">mistake</span> <span class="n">factor_by_factor</span> <span class="n">d</span> <span class="o">=</span> <span class="nf">formula_multiply</span><span class="p">(</span><span class="vm">$1</span><span class="p">.</span><span class="n">d</span><span class="p">,</span> <span class="vm">$3</span><span class="p">.</span><span class="n">d</span><span class="p">)</span>
+  <span class="n">latex</span> <span class="o">=</span> <span class="nf">formula_latex</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nc">F</span> <span class="o">-&gt;</span> <span class="s2">"sin"</span> <span class="nc">F</span> <span class="k">when</span> <span class="n">cost</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="p">{</span>
+  <span class="n">cost</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
+  <span class="n">f</span> <span class="o">=</span> <span class="nf">formula_sin</span><span class="p">(</span><span class="vm">$2</span><span class="p">.</span><span class="n">f</span><span class="p">)</span>
+  <span class="n">d</span> <span class="o">=</span> <span class="nf">formula_multiply</span><span class="p">(</span><span class="nf">formula_cos</span><span class="p">(</span><span class="vm">$2</span><span class="p">.</span><span class="n">f</span><span class="p">),</span> <span class="vm">$2</span><span class="p">.</span><span class="n">d</span><span class="p">)</span>
+  <span class="k">mistake</span> <span class="n">no_chain</span> <span class="n">d</span> <span class="o">=</span> <span class="nf">formula_cos</span><span class="p">(</span><span class="vm">$2</span><span class="p">.</span><span class="n">f</span><span class="p">)</span>
+  <span class="n">latex</span> <span class="o">=</span> <span class="nf">formula_latex</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nc">F</span> <span class="o">-&gt;</span> <span class="nc">T</span> <span class="k">when</span> <span class="n">cost</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
+  <span class="n">f</span> <span class="o">=</span> <span class="vm">$1</span><span class="p">.</span><span class="n">f</span>
+  <span class="n">d</span> <span class="o">=</span> <span class="vm">$1</span><span class="p">.</span><span class="n">d</span>
+  <span class="n">latex</span> <span class="o">=</span> <span class="vm">$1</span><span class="p">.</span><span class="n">latex</span>
+<span class="p">}</span>
+
+<span class="nc">T</span> <span class="o">-&gt;</span> <span class="s2">"x"</span> <span class="k">when</span> <span class="n">cost</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">{</span>
+  <span class="n">f</span> <span class="o">=</span> <span class="nf">formula_variable</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
+  <span class="n">d</span> <span class="o">=</span> <span class="nf">formula_constant</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">latex</span> <span class="o">=</span> <span class="nf">formula_latex</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nc">T</span> <span class="o">-&gt;</span> <span class="nf">integer_between</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="s2">"x"</span> <span class="k">when</span> <span class="n">cost</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">{</span>
+  <span class="n">cost</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+  <span class="n">f</span> <span class="o">=</span> <span class="nf">formula_multiply</span><span class="p">(</span><span class="nf">formula_constant</span><span class="p">(</span><span class="vm">$1</span><span class="p">.</span><span class="n">value</span><span class="p">),</span> <span class="nf">formula_variable</span><span class="p">(</span><span class="s2">"x"</span><span class="p">))</span>
+  <span class="n">d</span> <span class="o">=</span> <span class="nf">formula_constant</span><span class="p">(</span><span class="vm">$1</span><span class="p">.</span><span class="n">value</span><span class="p">)</span>
+  <span class="n">latex</span> <span class="o">=</span> <span class="nf">formula_latex</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">prompt</span> <span class="s2">"Differentiate [`</span><span class="si">{F.latex}</span><span class="s2">`] with respect to [`x`]."</span>
+<span class="k">answer</span> <span class="nc">F</span><span class="p">.</span><span class="n">d</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$ rhema run mistakes.rhm --set cost=6 --count 4
+ 1. Differentiate [`\sin\left(x \cdot 5 \cdot x\right)`] with respect to [`x`].
+    answer: Formula(cos(x*5*x)*(5*x+x*5))
+    mistake factor_by_factor: Formula(cos(x*5*x)*5)
+    mistake no_chain: Formula(cos(x*5*x))
+ 2. Differentiate [`6 \cdot x \cdot x + 6 \cdot x`] with respect to [`x`].
+    answer: Formula(6*x+6*x+6)
+    mistake factor_by_factor: Formula(12)
+ 3. Differentiate [`4 \cdot x \cdot \sin\left(x\right)`] with respect to [`x`].
+    answer: Formula(4*sin(x)+4*x*cos(x))
+    mistake factor_by_factor: Formula(4*cos(x))
+ 4. Differentiate [`2 \cdot x + 3 \cdot x + x + 4 \cdot x`] with respect to [`x`].
+    answer: Formula(10)
+</code></pre></div>
+<p>Under each answer is what each mistake leads to. Question 3 holds a sine
+and lists no <code>no_chain</code>: the inside of <code>sin(x)</code> is <code>x</code>, its derivative is 1,
+and leaving it out changes nothing. Question 4 has no product and no sine,
+so there is no mistake to make.</p>
+<h2 id="declaring-a-mistake">Declaring a mistake<a class="headerlink" href="#declaring-a-mistake" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">mistake</span> <span class="n">no_chain</span> <span class="s2">"leaves out the derivative of the inside"</span>
+</code></pre></div>
+<p>names a mistake and says, in a few words, what the student does. The text
+is for people: it is kept with the mistake and is what a report or a hint
+would show.</p>
+<h2 id="where-the-mistake-is-made">Where the mistake is made<a class="headerlink" href="#where-the-mistake-is-made" title="Permanent link">&para;</a></h2>
+<p>A mistake is made at a step of the working, and a step is a production. The
+production for a sine computes the derivative, and then says what the
+mistaken student computes in its place:</p>
+<div class="highlight"><pre><span></span><code><span class="nc">F</span> <span class="o">-&gt;</span> <span class="s2">"sin"</span> <span class="nc">F</span> <span class="k">when</span> <span class="n">cost</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="p">{</span>
+  <span class="n">cost</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
+  <span class="n">f</span> <span class="o">=</span> <span class="nf">formula_sin</span><span class="p">(</span><span class="vm">$2</span><span class="p">.</span><span class="n">f</span><span class="p">)</span>
+  <span class="n">d</span> <span class="o">=</span> <span class="nf">formula_multiply</span><span class="p">(</span><span class="nf">formula_cos</span><span class="p">(</span><span class="vm">$2</span><span class="p">.</span><span class="n">f</span><span class="p">),</span> <span class="vm">$2</span><span class="p">.</span><span class="n">d</span><span class="p">)</span>
+  <span class="k">mistake</span> <span class="n">no_chain</span> <span class="n">d</span> <span class="o">=</span> <span class="nf">formula_cos</span><span class="p">(</span><span class="vm">$2</span><span class="p">.</span><span class="n">f</span><span class="p">)</span>
+  <span class="n">latex</span> <span class="o">=</span> <span class="nf">formula_latex</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A <em>mistake line</em>, <code>mistake NAME ATTRIBUTE = EXPRESSION</code>, is no part of the
+question. When a question is generated it is skipped, and the node carries
+the right <code>d</code>. It is read only afterwards, when the finished tree is worked
+out again as that student would.</p>
+<p>Everything else stays right. A student who leaves out the inside derivative
+still adds and multiplies correctly, so in <code>x \cdot \sin(2x)</code> the mistaken
+<code>d</code> of the sine goes up through the product rule as it stands, and the
+answer comes out as <code>sin(2x) + x \cdot cos(2x)</code>. This is why the grammar
+computes the derivative production by production, as an attribute, and does
+not call <code>differentiate</code> once at the top: a mistake can only travel through
+working that the grammar itself spells out.</p>
+<h2 id="what-the-engine-does-with-it">What the engine does with it<a class="headerlink" href="#what-the-engine-does-with-it" title="Permanent link">&para;</a></h2>
+<p>After a question is built and its answers are known, each mistake that some
+production of the tree has a line for is tried. The tree is evaluated again
+from the leaves up, reading that mistake's lines, and the answers are read
+again. A value is <em>mistaken</em> when a line gave it a value other than the
+right one, or when it was computed from a mistaken value. Then one of four
+things is true:</p>
+<ul>
+<li><strong>No value changes.</strong> Every line gave the value the production had
+  already computed, as in <code>sin(x)</code>. The mistake is not made in this
+  question, and nothing is listed.</li>
+<li><strong>The mistaken values never reach an answer.</strong> The mistake says nothing
+  about this question either. A file that also asked for the function
+  itself, <code>answer F.f</code>, would build the same products and sines and list no
+  mistakes, since no <code>d</code> is read.</li>
+<li><strong>An answer changes.</strong> The mistake shows, and is listed with what it leads
+  to.</li>
+<li><strong>A mistaken value reaches an answer and every answer is still right.</strong>
+  Wrong working would earn full marks, so the question is thrown away and
+  built afresh.</li>
+</ul>
+<p>Answers are compared as a marker compares them. Two formulas are the same
+answer when they are the same function, however they are written.</p>
+<p>So in every question <code>rhema</code> generates, a mistake that changes the working
+changes an answer. The last case is rare in this grammar; it is common in
+others. With <code>mistake smaller_from_larger value = cond(value &lt; 0, -value,
+value)</code> on a difference, <code>2 - 5 - (1 - 9)</code> is such a question: the right
+working gives <code>-3 - (-8) = 5</code>, and the mistaken one <code>3 - 8</code>, taken as
+<code>8 - 3 = 5</code>.</p>
+<p>If a mistake changes the working of every question and the answer of none,
+generation gives up and names it:</p>
+<div class="highlight"><pre><span></span><code>zero.rhm: error: could not generate a question after 200 attempts; the most
+frequent failure (200 of 200) was: the mistake 'one_more' gives the right answer
+</code></pre></div>
+<h2 id="what-a-line-may-say">What a line may say<a class="headerlink" href="#what-a-line-may-say" title="Permanent link">&para;</a></h2>
+<p>A mistake line gives another value to something the production has already
+computed: a synthesized attribute of its symbol, or a local name. It is
+evaluated where it is written and may use everything above it, the right
+value of its own name included:</p>
+<div class="highlight"><pre><span></span><code><span class="n">value</span> <span class="o">=</span> <span class="vm">$1</span><span class="p">.</span><span class="n">value</span> <span class="o">-</span> <span class="vm">$3</span><span class="p">.</span><span class="n">value</span>
+<span class="k">mistake</span> <span class="n">smaller_from_larger</span> <span class="n">value</span> <span class="o">=</span> <span class="nf">cond</span><span class="p">(</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">value</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</code></pre></div>
+<p>The lines below it then see the mistaken value. A requirement is not
+checked again under a mistake; requirements shape the question, and the
+question is already built.</p>
+<p>A mistake may lead to no value at all, such as a division by zero. The
+question is kept, and the listing says <code>no answer</code>.</p>
+<h2 id="in-the-library">In the library<a class="headerlink" href="#in-the-library" title="Permanent link">&para;</a></h2>
+<p>Four of the library's grammars declare mistakes: <code>calculus.rhm</code>,
+<code>complex.rhm</code>, <code>boolean.rhm</code> and the polynomial expansions. The
+<a href="../../reference/library/#mistakes">library page</a> lists them. Run any of
+them to see what they lead to:</p>
+<div class="highlight"><pre><span></span><code>$ rhema run calculus.rhm --question derivative
+</code></pre></div>
+<h2 id="limits">Limits<a class="headerlink" href="#limits" title="Permanent link">&para;</a></h2>
+<ul>
+<li>A mistake belongs to the file that declares it, and to files that
+  <code>include</code> that file. A subtree built from an imported module's symbol is
+  taken as it is: the importer's mistakes are not looked for inside it, and
+  the module's own apply to the module's own questions.</li>
+<li>The mistaken answers are shown by <code>rhema run</code>. The WeBWorK and LaTeX
+  output of a question is the same as without mistakes.</li>
+<li>A listed mistake says the question <em>can</em> tell it apart, not that the
+  paper tests it. A paper of questions like <code>sin(x)</code> lists no <code>no_chain</code>
+  and finds no student who makes it; look at the listing to see what a
+  paper covers.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../webwork/" class="btn btn-neutral float-left" title="8. Into WeBWorK"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../reference/language/" class="btn btn-neutral float-right" title="The language">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Jingming Zhang, Jiaming Lei, Xiaobo Huang, Jiesen Long, Zhiyuan Li. MIT licence.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/Project-RHM/Project-RHM" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../webwork/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../reference/language/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

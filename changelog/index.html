@@ -179,6 +179,22 @@
     </li>
     </ul>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tutorial/mistakes/">9. Mistakes students make</a>
+    <ul>
+    <li class="toctree-l2"><a class="reference internal" href="../tutorial/mistakes/#declaring-a-mistake">Declaring a mistake</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../tutorial/mistakes/#where-the-mistake-is-made">Where the mistake is made</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../tutorial/mistakes/#what-the-engine-does-with-it">What the engine does with it</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../tutorial/mistakes/#what-a-line-may-say">What a line may say</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../tutorial/mistakes/#in-the-library">In the library</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../tutorial/mistakes/#limits">Limits</a>
+    </li>
+    </ul>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Reference</span></p>
               <ul>
@@ -205,6 +221,8 @@
     <li class="toctree-l2"><a class="reference internal" href="../reference/language/#expressions">Expressions</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/language/#question-level-values">Question-level values</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../reference/language/#mistakes">Mistakes</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/language/#precedence-and-rendering">Precedence and rendering</a>
     </li>
@@ -282,6 +300,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/library/#fixed-forms-each-form-is-a-price">Fixed forms: each form is a price</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="../reference/library/#mistakes">Mistakes</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/library/#libraries-and-examples">Libraries and examples</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/library/#named-questions">Named questions</a>
@@ -306,6 +326,8 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Changes</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#unreleased">Unreleased</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#020-2026-11-16">0.2.0 (2026-11-16)</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#011-2026-10-25">0.1.1 (2026-10-25)</a>
@@ -352,6 +374,33 @@
 functions' names and arguments, and the <code>rhema</code> command's options are the
 public interface. A breaking change raises the major version; a deprecation
 is announced one version before the removal.</p>
+<h2 id="unreleased">Unreleased<a class="headerlink" href="#unreleased" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Mistakes.</strong> A grammar can declare a mistake students make,
+  <code>mistake NAME "what the student does"</code>, and say in a production what such
+  a student computes, with a line <code>mistake NAME ATTRIBUTE = EXPRESSION</code>.
+  After a question is built its tree is evaluated again under each mistake.
+  A question in which a mistake changes the working and still gives the
+  right answers is built afresh, so wrong working is never marked right;
+  <code>rhema run</code> lists what each mistake leads to under the answer. Formulas
+  are compared as functions. See chapter 9 of the tutorial and "Mistakes"
+  in the language reference.</li>
+<li><strong>Four library grammars declare mistakes:</strong> <code>calculus.rhm</code> (a product
+  differentiated factor by factor, the chain rule left out, a quotient
+  differentiated top and bottom), <code>complex.rhm</code> (<code>i</code> squared taken to be 1,
+  a minus sign kept from the imaginary part), <code>boolean.rhm</code> (a conditional
+  with a false antecedent taken to be false, "or" read as exclusive) and
+  the polynomial expansions (each term raised to the power on its own).
+  Their papers change where a question hid a mistake: such a question is
+  replaced, and the draws after it move. On a 500-question paper the first
+  different question is number 245 for <code>calculus.rhm</code> derivatives, 67 for
+  <code>complex.rhm</code> and 25 for <code>boolean.rhm</code>; integrals, factorings and
+  expansions are the same questions as in 0.2.0. A derivative answer of
+  <code>calculus.rhm</code> is the same function as before and is sometimes written
+  differently in PG.</li>
+<li><code>mistake</code> is now a reserved word. A grammar that used it as a name must
+  rename it.</li>
+</ul>
 <h2 id="020-2026-11-16">0.2.0 (2026-11-16)<a class="headerlink" href="#020-2026-11-16" title="Permanent link">&para;</a></h2>
 <p>The library grows from 27 grammar files to 46, seven of the new question
 types scale with the budget, and a paper can be written as LaTeX or PDF as
