@@ -222,6 +222,16 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#question-level-values">Question-level values</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#types">Types</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="../../reference/language/#what-the-checker-infers">What the checker infers</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="../../reference/language/#what-is-an-error">What is an error</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="../../reference/language/#what-is-left-to-the-engine">What is left to the engine</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#mistakes">Mistakes</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../../reference/language/#precedence-and-rendering">Precedence and rendering</a>
@@ -500,13 +510,15 @@ attribute, random and let holds one of these:</p>
 </tr>
 </tbody>
 </table>
-<p>The <a href="../../reference/builtins/">builtin functions</a> are listed by value type.
-A function given the wrong kind of value stops generation with a message
+<p>The <a href="../../reference/builtins/">builtin functions</a> are listed by value type,
+with what each takes and gives. A function given a value it cannot take is
+found by <code>rhema check</code>, before any question is generated, with a message
 that names both:</p>
-<div class="highlight"><pre><span></span><code>values.rhm: error: formula_power expected a number but received "Formula(3)"
+<div class="highlight"><pre><span></span><code>values.rhm:8:76: error: formula_power takes a number as its second argument, but formula_constant(...) is a formula
 </code></pre></div>
 <p>(This is what happens if the exponent is written <code>formula_constant(n)</code>:
-<code>formula_power</code> takes its exponent as a plain number.)</p>
+<code>formula_power</code> takes its exponent as a plain number. The reference says
+what the checker can and cannot tell: <a href="../../reference/language/#types">Types</a>.)</p>
 <h2 id="the-answer-is-computed-not-typed">The answer is computed, not typed<a class="headerlink" href="#the-answer-is-computed-not-typed" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="nc">Q</span> <span class="o">-&gt;</span> <span class="s2">"derivative"</span> <span class="p">{</span>
   <span class="n">derivative</span> <span class="o">=</span> <span class="nf">differentiate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s2">"x"</span><span class="p">)</span>

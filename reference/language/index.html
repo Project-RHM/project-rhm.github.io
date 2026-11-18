@@ -222,6 +222,16 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#question-level-values">Question-level values</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#types">Types</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-the-checker-infers">What the checker infers</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-an-error">What is an error</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-left-to-the-engine">What is left to the engine</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#mistakes">Mistakes</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#precedence-and-rendering">Precedence and rendering</a>
@@ -595,17 +605,15 @@ requirements are evaluated in the order written.</p>
 </tr>
 </tbody>
 </table>
-<p>Numbers are exact rationals: <code>1 / 3</code> is one third, not 0.333. Comparisons
-of text compare the strings; <code>=</code> and <code>!=</code> on truth values are the
-biconditional and exclusive or.</p>
+<p>Numbers are exact rationals: <code>1 / 3</code> is one third, not 0.333. <code>=</code> and <code>!=</code>
+on text compare the strings, and on truth values they are the
+biconditional and exclusive or; <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code> and <code>&gt;=</code> order numbers
+only.</p>
 <p>Operators bind, from loosest to tightest: <code>or</code>; <code>and</code>; <code>not</code>; the
 comparisons (which do not chain); <code>++</code> (right-associative); <code>+ -</code>;
 <code>* / %</code>; <code>^</code> (right-associative); unary <code>-</code>. Brackets group.</p>
-<p>Every value has a type: number, text, truth, formula, polynomial,
-equation, Boolean formula, matrix, set, vector, point, complex number, or
-text with answer blanks. Types are
-checked when a value is used; a function given the wrong type stops
-generation with a message naming both.</p>
+<p>Every value has a type, and <code>rhema check</code> finds the uses no type allows
+before anything is generated; see <a href="#types">Types</a>.</p>
 <h2 id="question-level-values">Question-level values<a class="headerlink" href="#question-level-values" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="k">random</span> <span class="nc">NAME</span> <span class="o">=</span> <span class="ow">boolean</span>
 <span class="k">random</span> <span class="nc">NAME</span> <span class="o">=</span> <span class="nc">GENERATOR</span><span class="p">(</span><span class="nc">INTEGER</span><span class="p">,</span> <span class="p">...)</span>
@@ -616,6 +624,194 @@ same value wherever it is used. Its arguments must be integer literals.</p>
 <p>A <code>let</code> is computed once per question, after the randoms, from randoms and
 earlier lets. It may call any builtin function but may not refer to the
 tree.</p>
+<h2 id="types">Types<a class="headerlink" href="#types" title="Permanent link">&para;</a></h2>
+<p>Every value has one of these types. Nothing in a file declares a type: the
+checker works them out.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Made by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>number</td>
+<td>a literal, a generator, a budget, arithmetic; exact rationals</td>
+</tr>
+<tr>
+<td>text</td>
+<td>a string, a quoted word in a production, <code>str</code>, the <code>_latex</code> functions</td>
+</tr>
+<tr>
+<td>truth value</td>
+<td><code>true</code>, <code>false</code>, <code>random NAME = boolean</code>, comparisons, <code>and</code> <code>or</code> <code>not</code></td>
+</tr>
+<tr>
+<td>formula, polynomial, equation</td>
+<td>the <code>formula_</code>, <code>polynomial_</code> and <code>equation</code> functions</td>
+</tr>
+<tr>
+<td>proposition</td>
+<td>the <code>bool_</code> functions</td>
+</tr>
+<tr>
+<td>matrix, set, vector, point, complex number</td>
+<td>their functions</td>
+</tr>
+<tr>
+<td>text with answer blanks</td>
+<td><code>blank</code>, <code>blank_wide</code>, and <code>++</code> with one</td>
+</tr>
+<tr>
+<td>answer wrappers</td>
+<td><code>exactly</code>, <code>plain</code>, <code>vector_norm_answer</code> and its like</td>
+</tr>
+</tbody>
+</table>
+<p>A truth value and a proposition are different things: <code>p and q</code> is true or
+false now, and <code>bool_and(bool_var("p"), bool_var("q"))</code> is a formula that
+can be shown, compared and evaluated.</p>
+<h3 id="what-the-checker-infers">What the checker infers<a class="headerlink" href="#what-the-checker-infers" title="Permanent link">&para;</a></h3>
+<p>For every expression the checker finds the <em>set</em> of types it can have:</p>
+<ul>
+<li>A literal, a random, a budget and a generator leaf have one type. A
+  quoted word read as <code>$n.value</code> is text; a generator read as <code>$n.value</code> is
+  a number.</li>
+<li>A function gives the type its entry in <a href="../builtins/">the builtins</a> says.
+  <code>cond(T, A, B)</code> gives whatever <code>A</code> or <code>B</code> can be.</li>
+<li>An operator or a function has a type only when each operand can have a
+  type it takes. An expression that can never be evaluated has no type, and
+  nothing built on it is an error: the mistake is reported where it is, and
+  not again where its result is used.</li>
+<li>A synthesized attribute has every type that some production of its
+  nonterminal can give it. It is kept by nonterminal: <code>value</code> on <code>E</code> and
+  <code>value</code> on <code>Q</code> are two attributes and may have two types.</li>
+<li>A module's attributes and values keep the types found when the module was
+  checked; <code>$n.NAME</code> on <code>alias.F</code> and <code>alias.NAME</code> read them.</li>
+</ul>
+<p>The sets are found by reading the productions until none grows, so a
+recursive production and the order of the declarations make no difference.</p>
+<h3 id="what-is-an-error">What is an error<a class="headerlink" href="#what-is-an-error" title="Permanent link">&para;</a></h3>
+<p>A use is an error when <strong>no</strong> type its operand can have is allowed:</p>
+<div class="highlight"><pre><span></span><code><span class="k">let</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"n = "</span> <span class="o">++</span> <span class="n">n</span>
+<span class="k">let</span> <span class="n">broken</span> <span class="o">=</span> <span class="n">label</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>quiz.rhm:5:14: error: '+' takes a number on its left, but 'label' is text
+</code></pre></div>
+<p>The rules are the ones the engine applies when it evaluates. For an
+<code>answer</code> and an <code>{answer ...}</code> hole the engine left the rule to the WeBWorK
+writer, which stopped on an equation; the checker now applies it.</p>
+<table>
+<thead>
+<tr>
+<th>Use</th>
+<th>Takes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+ - * / % ^</code>, unary <code>-</code>, <code>&lt; &lt;= &gt; &gt;=</code></td>
+<td>numbers</td>
+</tr>
+<tr>
+<td><code>and</code>, <code>or</code>, <code>not</code>, a <code>when</code> guard, a <code>require</code></td>
+<td>truth values</td>
+</tr>
+<tr>
+<td><code>=</code>, <code>!=</code></td>
+<td>two values of one type: numbers, text, truth values, formulas, polynomials, equations, propositions, matrices, sets, vectors, points or complex numbers</td>
+</tr>
+<tr>
+<td><code>++</code></td>
+<td>text, numbers and text with blanks</td>
+</tr>
+<tr>
+<td>a function argument</td>
+<td>what its entry says; where text is wanted a number is written out, and nothing else is converted</td>
+</tr>
+<tr>
+<td>a budget update, a generator's argument, a module's starting value</td>
+<td>a number</td>
+</tr>
+<tr>
+<td><code>{S.NAME}</code> and <code>{NAME}</code> in a prompt</td>
+<td>text, a number, or text with blanks</td>
+</tr>
+<tr>
+<td><code>answer</code>, <code>{answer ...}</code>, <code>blank</code></td>
+<td>anything but an equation or text that holds a blank</td>
+</tr>
+<tr>
+<td><code>$n</code> on its own</td>
+<td>only <code>infix</code> and <code>prefix</code> take a child; everywhere else write <code>$n.NAME</code></td>
+</tr>
+<tr>
+<td>a child given to <code>infix</code> or <code>prefix</code></td>
+<td>its own copy of the attribute being computed must be text or a number</td>
+</tr>
+<tr>
+<td>a use read under a mistake</td>
+<td>what it takes, with the mistaken values in place: see below</td>
+</tr>
+<tr>
+<td><code>pg_context</code>, <code>pg_variables</code>; <code>pg_width</code></td>
+<td>text, or a number, which is written out; a number</td>
+</tr>
+</tbody>
+</table>
+<p>A use that <em>some</em> type allows is not an error. If <code>value</code> is a number in one
+production and a formula in another, <code>formula_negate($1.value)</code> is accepted,
+and the engine refuses it in the questions where it meets a number.</p>
+<p>An expression is checked wherever it is written, also where it would never
+be evaluated: the unchosen branch of <code>cond</code>, the right side of <code>and</code> and
+<code>or</code>, a production that no question reaches. A file with a wrong type in
+such a place could generate before types were checked, and is refused.</p>
+<p>A mistake line may give a value of any kind: one root where the set of
+roots is the answer, the words "no solution" where a number is. The checker
+reads the file once more for each <a href="#mistakes">mistake</a>, as the engine
+evaluates a finished tree under it: the lines for that mistake give their
+names new values, requirements are not read, and an attribute has, under
+the mistake, every type some production then gives it. A use that can take
+none of those types is an error, because generation would stop there every
+time the mistake was tried:</p>
+<div class="highlight"><pre><span></span><code><span class="n">value</span> <span class="o">=</span> <span class="vm">$1</span><span class="p">.</span><span class="n">value</span>
+<span class="k">mistake</span> <span class="n">as_text</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">"two"</span>
+<span class="n">twice</span> <span class="o">=</span> <span class="n">value</span> <span class="o">*</span> <span class="mi">2</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>quiz.rhm:9:11: error: under the mistake 'as_text', '*' takes a number on its left, but 'value' is text
+</code></pre></div>
+<p>This reading teaches the checker nothing about the right working: an
+attribute's own type comes from its equations alone.</p>
+<p>Types are checked last, on a file that has passed every other check, so
+that a name that does not exist is reported once and not again for the type
+it does not have; type errors therefore appear only when the others are
+gone. <code>rhema check</code> does it, and so does every command that reads a file.</p>
+<p>There is one message for each wrong use: an operator with two wrong sides
+gives two. A message points at the operand when the operand is a name, a
+child or a function call. A literal or an expression in brackets has no
+position of its own, and the message then points at the function call
+around it, or at the start of its equation.</p>
+<h3 id="what-is-left-to-the-engine">What is left to the engine<a class="headerlink" href="#what-is-left-to-the-engine" title="Permanent link">&para;</a></h3>
+<p>Whatever depends on the value and not on its type. A file that passes
+<code>rhema check</code> can still stop while generating on:</p>
+<ul>
+<li>a number that must be whole and is not (<code>factorial(1 / 2)</code>, a budget
+  update, an index);</li>
+<li>a division by zero, in numbers or in formulas;</li>
+<li>matrices and vectors of sizes that do not fit, a singular matrix to
+  invert;</li>
+<li>a function outside its domain: <code>exact_sin(1, 5)</code>, a base above 16, a
+  variable named <code>2</code>;</li>
+<li>an equation with no exact solutions where one is asked for;</li>
+<li>a use that only some of an expression's types allow, as above;</li>
+<li>a requirement that cannot be met, or a budget no production can spend.</li>
+</ul>
+<p>Each of these stops generation with a message. A few still end the command
+with a bare <code>Fatal error</code> line instead: a name that is not a variable name
+given to a polynomial constructor or to an equation's solving functions, a
+zero divisor met inside <code>differentiate</code> or <code>formula_substitute</code>, a negative
+size for <code>matrix_identity</code>.</p>
 <h2 id="mistakes">Mistakes<a class="headerlink" href="#mistakes" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="k">mistake</span> <span class="nc">NAME</span> <span class="nc">STRING</span>
 </code></pre></div>
@@ -882,6 +1078,9 @@ involved, it is reported at once instead of retried.</p>
   attributes those children carry;</li>
 <li>every builtin and generator is called with the right number of arguments,
   and random draws have literal arguments;</li>
+<li>no operator, function, guard, requirement, budget update, prompt, answer
+  or mistake line is given a value that cannot have a type it takes
+  (<a href="#types">Types</a>);</li>
 <li>every nonterminal can finish (some production for it uses only symbols
   that can finish), and every cycle of productions spends an inherited
   attribute, so no derivation can go round for ever without spending;</li>
@@ -894,7 +1093,8 @@ involved, it is reported at once instead of retried.</p>
 </ul>
 <p>What the checker cannot know is left to generation, and reported clearly
 when it happens: a budget no production can spend, a requirement that
-cannot be met, a value of the wrong type for a function, a mistake that
+cannot be met, a value whose type suits in some questions and not in
+others, a number that must be whole, a division by zero, a mistake that
 always changes the working and never an answer.</p>
 <h2 id="grammar">Grammar<a class="headerlink" href="#grammar" title="Permanent link">&para;</a></h2>
 <p>The syntax in EBNF. <code>{ X }</code> means zero or more, <code>[ X ]</code> optional, <code>|</code>

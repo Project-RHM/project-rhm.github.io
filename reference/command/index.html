@@ -222,6 +222,16 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../language/#question-level-values">Question-level values</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="../language/#types">Types</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="../language/#what-the-checker-infers">What the checker infers</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="../language/#what-is-an-error">What is an error</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="../language/#what-is-left-to-the-engine">What is left to the engine</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="../language/#mistakes">Mistakes</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../language/#precedence-and-rendering">Precedence and rendering</a>
@@ -472,7 +482,10 @@ itself is wrong.</p>
 <h2 id="other-commands">Other commands<a class="headerlink" href="#other-commands" title="Permanent link">&para;</a></h2>
 <dl>
 <dt><code>rhema check FILE...</code></dt>
-<dd>Checks each file and prints <code>OK</code> with what it declares, or its problems.</dd>
+<dd>Checks each file and prints <code>OK</code> with what it declares, or its problems,
+each as <code>FILE:LINE:COLUMN: error: ...</code>. The check includes the
+<a href="../language/#types">types</a> of every expression, so a text added to a
+number is found here and not in the middle of generating a paper.</dd>
 <dt><code>rhema run FILE</code></dt>
 <dd>Generates and prints questions with their answers, instead of writing
 PG. With <code>--run SET</code>, prints the set part by part, followed by the mean
@@ -481,7 +494,8 @@ of each budget in each part.</dd>
 <dd>The file's imports, questions (with start symbol and context), budgets
 and sets.</dd>
 <dt><code>rhema doc [NAME]</code></dt>
-<dd>Lists the builtin functions grouped by value type, or describes one.</dd>
+<dd>Lists the builtin functions grouped by value type, each with the types
+it takes and gives (<code>formula, formula -&gt; formula</code>), or describes one.</dd>
 </dl>
               
             </div>

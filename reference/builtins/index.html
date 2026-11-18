@@ -222,6 +222,16 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../language/#question-level-values">Question-level values</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="../language/#types">Types</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="../language/#what-the-checker-infers">What the checker infers</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="../language/#what-is-an-error">What is an error</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="../language/#what-is-left-to-the-engine">What is left to the engine</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="../language/#mistakes">Mistakes</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../language/#precedence-and-rendering">Precedence and rendering</a>
@@ -372,78 +382,92 @@
                 <h1 id="builtin-functions">Builtin functions<a class="headerlink" href="#builtin-functions" title="Permanent link">&para;</a></h1>
 <p>The functions an expression may call, grouped by the kind of value they work
 on. This page is generated from <code>rhema doc</code>, so it lists exactly what the
-compiler accepts; calling one with the wrong number of arguments is an
-error the checker reports. A function given the wrong kind of value stops
-generation with a message naming both.</p>
+compiler accepts, with the types each function takes and gives. Calling one
+with the wrong number of arguments, or with a value that cannot have a type
+it takes, is an error the checker reports (<a href="../language/#types">Types</a>).
+Where text is taken, a number is written out.</p>
 <h2 id="numbers-text-and-rendering">Numbers, text and rendering<a class="headerlink" href="#numbers-text-and-rendering" title="Permanent link">&para;</a></h2>
 <p>Functions on numbers and text, and the two that write operators with the right brackets.</p>
 <table>
 <thead>
 <tr>
 <th>Function</th>
-<th>Arguments</th>
+<th>Takes</th>
+<th>Gives</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>str</code></td>
-<td>1</td>
-<td>The text of a number or other value.</td>
+<td>text</td>
+<td>text</td>
+<td>A number written out as text; text is left as it is.</td>
 </tr>
 <tr>
 <td><code>paren</code></td>
-<td>1</td>
+<td>text</td>
+<td>text</td>
 <td>Its argument with brackets around it.</td>
 </tr>
 <tr>
 <td><code>infix</code></td>
-<td>3</td>
+<td>a child $n, text, a child $n</td>
+<td>text</td>
 <td><code>infix($1, "+", $3)</code>: the two children joined by the operator text, bracketed as the precedence table requires.</td>
 </tr>
 <tr>
 <td><code>prefix</code></td>
-<td>2</td>
+<td>text, a child $n</td>
+<td>text</td>
 <td><code>prefix("\neg", $2)</code>: the operator text before the child, bracketed as the precedence table requires.</td>
 </tr>
 <tr>
 <td><code>cond</code></td>
-<td>3</td>
+<td>truth value, any value, any value</td>
+<td>its second or third argument</td>
 <td><code>cond(c, a, b)</code>: <code>a</code> when <code>c</code> is true, <code>b</code> otherwise.</td>
 </tr>
 <tr>
 <td><code>abs</code></td>
-<td>1</td>
+<td>number</td>
+<td>number</td>
 <td>The absolute value of a number.</td>
 </tr>
 <tr>
 <td><code>min</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>number</td>
 <td>The smaller of two numbers.</td>
 </tr>
 <tr>
 <td><code>max</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>number</td>
 <td>The larger of two numbers.</td>
 </tr>
 <tr>
 <td><code>bit_and</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>number</td>
 <td>Bitwise and of two whole numbers; with <code>bit_or</code>, a way to track which of several items a subtree has used.</td>
 </tr>
 <tr>
 <td><code>bit_or</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>number</td>
 <td>Bitwise or of two whole numbers.</td>
 </tr>
 <tr>
 <td><code>bit_xor</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>number</td>
 <td>Bitwise exclusive or of two whole numbers.</td>
 </tr>
 <tr>
 <td><code>number_latex</code></td>
-<td>1</td>
+<td>number</td>
+<td>text</td>
 <td>A number in LaTeX: a whole number as it is, a fraction as <code>\frac{p}{q}</code> with its sign in front.</td>
 </tr>
 </tbody>
@@ -454,29 +478,34 @@ generation with a message naming both.</p>
 <thead>
 <tr>
 <th>Function</th>
-<th>Arguments</th>
+<th>Takes</th>
+<th>Gives</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>integer</code></td>
-<td>1</td>
+<td>number</td>
+<td>number</td>
 <td><code>integer(n)</code>: a whole number with exactly <code>n</code> digits.</td>
 </tr>
 <tr>
 <td><code>nonzero_integer</code></td>
-<td>1</td>
+<td>number</td>
+<td>number</td>
 <td><code>nonzero_integer(n)</code>: as <code>integer</code>, never 0.</td>
 </tr>
 <tr>
 <td><code>integer_between</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>number</td>
 <td><code>integer_between(a, b)</code>: a whole number from <code>a</code> to <code>b</code> inclusive.</td>
 </tr>
 <tr>
 <td><code>nonzero_integer_between</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>number</td>
 <td><code>nonzero_integer_between(a, b)</code>: as <code>integer_between</code>, never 0.</td>
 </tr>
 </tbody>
@@ -487,54 +516,64 @@ generation with a message naming both.</p>
 <thead>
 <tr>
 <th>Function</th>
-<th>Arguments</th>
+<th>Takes</th>
+<th>Gives</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>base_digits</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>text</td>
 <td><code>base_digits(n, b)</code>: the whole number <code>n</code> written in base <code>b</code> (2 to 16) as text, with the digits 0-9 and A-F.</td>
 </tr>
 <tr>
 <td><code>base_number</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>number</td>
 <td><code>base_number(n, b)</code>: the number whose decimal digits are the digits of <code>n</code> in base <code>b</code> (2 to 10), so that eleven in binary is an answer typed as <code>1011</code>.</td>
 </tr>
 <tr>
 <td><code>factorial</code></td>
-<td>1</td>
+<td>number</td>
+<td>number</td>
 <td><code>factorial(n)</code>: n!, for n from 0 to 20.</td>
 </tr>
 <tr>
 <td><code>choose</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>number</td>
 <td><code>choose(n, k)</code>: the number of ways to choose k of n; 0 when k is out of range.</td>
 </tr>
 <tr>
 <td><code>permutations</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>number</td>
 <td><code>permutations(n, k)</code>: the number of ordered choices of k of n.</td>
 </tr>
 <tr>
 <td><code>gcd</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>number</td>
 <td>The greatest common divisor of two whole numbers.</td>
 </tr>
 <tr>
 <td><code>lcm</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>number</td>
 <td>The least common multiple of two whole numbers.</td>
 </tr>
 <tr>
 <td><code>pow_mod</code></td>
-<td>3</td>
+<td>number, number, number</td>
+<td>number</td>
 <td><code>pow_mod(a, k, n)</code>: the remainder of a^k on division by n, for k &gt;= 0 and n &gt; 0.</td>
 </tr>
 <tr>
 <td><code>mod_inverse</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>number</td>
 <td><code>mod_inverse(a, n)</code>: the x in 0..n-1 with a x = 1 (mod n); an error unless a and n are coprime.</td>
 </tr>
 </tbody>
@@ -545,129 +584,154 @@ generation with a message naming both.</p>
 <thead>
 <tr>
 <th>Function</th>
-<th>Arguments</th>
+<th>Takes</th>
+<th>Gives</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>formula_constant</code></td>
-<td>1</td>
+<td>number</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>formula_variable</code></td>
-<td>1</td>
+<td>text</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>formula_add</code></td>
-<td>2</td>
+<td>formula, formula</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>formula_subtract</code></td>
-<td>2</td>
+<td>formula, formula</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>formula_multiply</code></td>
-<td>2</td>
+<td>formula, formula</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>formula_divide</code></td>
-<td>2</td>
+<td>formula, formula</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>formula_power</code></td>
-<td>2</td>
+<td>formula, number</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>formula_negate</code></td>
-<td>1</td>
+<td>formula</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>formula_sin</code></td>
-<td>1</td>
+<td>formula</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>formula_cos</code></td>
-<td>1</td>
+<td>formula</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>formula_tan</code></td>
-<td>1</td>
+<td>formula</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>formula_exp</code></td>
-<td>1</td>
+<td>formula</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>formula_ln</code></td>
-<td>1</td>
+<td>formula</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>formula_sqrt</code></td>
-<td>1</td>
+<td>formula</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>formula_substitute</code></td>
-<td>3</td>
+<td>formula, text, formula</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>differentiate</code></td>
-<td>2</td>
+<td>formula, text</td>
+<td>formula</td>
 <td><code>differentiate(f, "x")</code>: the derivative of formula <code>f</code> with respect to <code>x</code>.</td>
 </tr>
 <tr>
 <td><code>formula_latex</code></td>
-<td>1</td>
+<td>formula</td>
+<td>text</td>
 <td></td>
 </tr>
 <tr>
 <td><code>formula_is_zero</code></td>
-<td>1</td>
+<td>formula</td>
+<td>truth value</td>
 <td></td>
 </tr>
 <tr>
 <td><code>formula_pi</code></td>
-<td>0</td>
+<td>nothing</td>
+<td>formula</td>
 <td>The constant pi, kept as a symbol: <code>formula_multiply(formula_constant(5 / 6), formula_pi())</code> is written <code>\frac{5\pi}{6}</code> and graded as <code>5pi/6</code>.</td>
 </tr>
 <tr>
 <td><code>formula_value</code></td>
-<td>1</td>
+<td>formula</td>
+<td>number</td>
 <td>The number a formula without variables comes to, exactly; an error when it holds a variable, pi or a value of a function that is not rational.</td>
 </tr>
 <tr>
 <td><code>exact_sin</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>formula</td>
 <td><code>exact_sin(p, q)</code>: the value of sin(p pi / q) as a formula, such as <code>sqrt(3)/2</code>, for multiples of pi/6 and pi/4; an error for other angles.</td>
 </tr>
 <tr>
 <td><code>exact_cos</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>formula</td>
 <td><code>exact_cos(p, q)</code>: the value of cos(p pi / q), as <code>exact_sin</code>.</td>
 </tr>
 <tr>
 <td><code>exact_tan</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>formula</td>
 <td><code>exact_tan(p, q)</code>: the value of tan(p pi / q), as <code>exact_sin</code>; an error where the tangent is not defined.</td>
 </tr>
 <tr>
 <td><code>formula_to_polynomial</code></td>
-<td>2</td>
+<td>formula, text</td>
+<td>polynomial</td>
 <td></td>
 </tr>
 </tbody>
@@ -678,29 +742,34 @@ generation with a message naming both.</p>
 <thead>
 <tr>
 <th>Function</th>
-<th>Arguments</th>
+<th>Takes</th>
+<th>Gives</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>blank</code></td>
-<td>1</td>
+<td>any answer</td>
+<td>text with answer blanks</td>
 <td><code>blank(v)</code>: an answer blank graded against <code>v</code>, to be joined to a production's text with <code>++</code>.</td>
 </tr>
 <tr>
 <td><code>blank_wide</code></td>
-<td>2</td>
+<td>any answer, number</td>
+<td>text with answer blanks</td>
 <td><code>blank_wide(v, columns)</code>: as <code>blank</code>, with a width of its own, from 1 to 200.</td>
 </tr>
 <tr>
 <td><code>plain</code></td>
-<td>1</td>
+<td>number or formula or polynomial</td>
+<td>plain() answer</td>
 <td><code>plain(v)</code>: the number or formula <code>v</code> as an answer that must be worked out: graded with the trigonometric, hyperbolic, logarithm and exponential functions switched off; <code>sqrt</code> and <code>abs</code> stay.</td>
 </tr>
 <tr>
 <td><code>exactly</code></td>
-<td>1</td>
+<td>number</td>
+<td>exactly() answer</td>
 <td><code>exactly(n)</code>: the whole number <code>n</code> as an answer graded without WeBWorK's relative tolerance, so that no other whole number is accepted. A whole-number answer of 1000 or more is graded this way without being asked.</td>
 </tr>
 </tbody>
@@ -711,104 +780,124 @@ generation with a message naming both.</p>
 <thead>
 <tr>
 <th>Function</th>
-<th>Arguments</th>
+<th>Takes</th>
+<th>Gives</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>polynomial_constant</code></td>
-<td>2</td>
+<td>number, text</td>
+<td>polynomial</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_variable</code></td>
-<td>1</td>
+<td>text</td>
+<td>polynomial</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_monomial</code></td>
-<td>3</td>
+<td>number, number, text</td>
+<td>polynomial</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_linear</code></td>
-<td>3</td>
+<td>number, number, text</td>
+<td>polynomial</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_quadratic</code></td>
-<td>4</td>
+<td>number, number, number, text</td>
+<td>polynomial</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_add</code></td>
-<td>2</td>
+<td>polynomial, polynomial</td>
+<td>polynomial</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_subtract</code></td>
-<td>2</td>
+<td>polynomial, polynomial</td>
+<td>polynomial</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_multiply</code></td>
-<td>2</td>
+<td>polynomial, polynomial</td>
+<td>polynomial</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_scale</code></td>
-<td>2</td>
+<td>number, polynomial</td>
+<td>polynomial</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_power</code></td>
-<td>2</td>
+<td>polynomial, number</td>
+<td>polynomial</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_derivative</code></td>
-<td>1</td>
+<td>polynomial</td>
+<td>polynomial</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_evaluate</code></td>
-<td>2</td>
+<td>polynomial, number</td>
+<td>number</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_coefficient</code></td>
-<td>2</td>
+<td>polynomial, number</td>
+<td>number</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_degree</code></td>
-<td>1</td>
+<td>polynomial</td>
+<td>number</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_truncate</code></td>
-<td>2</td>
+<td>polynomial, number</td>
+<td>polynomial</td>
 <td><code>polynomial_truncate(p, n)</code>: the terms of <code>p</code> of degree at most <code>n</code>, which is what is left of a series written out to a higher degree.</td>
 </tr>
 <tr>
 <td><code>polynomial_is_zero</code></td>
-<td>1</td>
+<td>polynomial</td>
+<td>truth value</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_formula</code></td>
-<td>1</td>
+<td>polynomial</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_latex</code></td>
-<td>1</td>
+<td>polynomial</td>
+<td>text</td>
 <td></td>
 </tr>
 <tr>
 <td><code>polynomial_equation</code></td>
-<td>2</td>
+<td>polynomial, polynomial</td>
+<td>equation</td>
 <td></td>
 </tr>
 </tbody>
@@ -819,49 +908,58 @@ generation with a message naming both.</p>
 <thead>
 <tr>
 <th>Function</th>
-<th>Arguments</th>
+<th>Takes</th>
+<th>Gives</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>equation</code></td>
-<td>2</td>
+<td>formula, formula</td>
+<td>equation</td>
 <td></td>
 </tr>
 <tr>
 <td><code>equation_normal_form</code></td>
-<td>1</td>
+<td>equation</td>
+<td>formula</td>
 <td></td>
 </tr>
 <tr>
 <td><code>equation_latex</code></td>
-<td>1</td>
+<td>equation</td>
+<td>text</td>
 <td></td>
 </tr>
 <tr>
 <td><code>equation_is_satisfied</code></td>
-<td>3</td>
+<td>equation, text, number</td>
+<td>truth value</td>
 <td></td>
 </tr>
 <tr>
 <td><code>equation_has_exact_solutions</code></td>
-<td>2</td>
+<td>equation, text</td>
+<td>truth value</td>
 <td></td>
 </tr>
 <tr>
 <td><code>equation_solution_count</code></td>
-<td>2</td>
+<td>equation, text</td>
+<td>number</td>
 <td></td>
 </tr>
 <tr>
 <td><code>equation_solution_set</code></td>
-<td>2</td>
+<td>equation, text</td>
+<td>set</td>
 <td></td>
 </tr>
 <tr>
 <td><code>equation_unique_solution</code></td>
-<td>2</td>
+<td>equation, text</td>
+<td>number</td>
 <td></td>
 </tr>
 </tbody>
@@ -872,134 +970,160 @@ generation with a message naming both.</p>
 <thead>
 <tr>
 <th>Function</th>
-<th>Arguments</th>
+<th>Takes</th>
+<th>Gives</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>bool_var</code></td>
-<td>1</td>
+<td>text</td>
+<td>proposition</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_true</code></td>
-<td>0</td>
+<td>nothing</td>
+<td>proposition</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_false</code></td>
-<td>0</td>
+<td>nothing</td>
+<td>proposition</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_not</code></td>
-<td>1</td>
+<td>proposition</td>
+<td>proposition</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_and</code></td>
-<td>2</td>
+<td>proposition, proposition</td>
+<td>proposition</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_or</code></td>
-<td>2</td>
+<td>proposition, proposition</td>
+<td>proposition</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_xor</code></td>
-<td>2</td>
+<td>proposition, proposition</td>
+<td>proposition</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_imp</code></td>
-<td>2</td>
+<td>proposition, proposition</td>
+<td>proposition</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_iff</code></td>
-<td>2</td>
+<td>proposition, proposition</td>
+<td>proposition</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_latex</code></td>
-<td>1</td>
+<td>proposition</td>
+<td>text</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_equivalent</code></td>
-<td>2</td>
+<td>proposition, proposition</td>
+<td>truth value</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_evaluate</code></td>
-<td>3</td>
+<td>proposition, text, number</td>
+<td>truth value</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_sensitivity</code></td>
-<td>3</td>
+<td>proposition, text, number</td>
+<td>number</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_is_tautology</code></td>
-<td>1</td>
+<td>proposition</td>
+<td>truth value</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_is_contradiction</code></td>
-<td>1</td>
+<td>proposition</td>
+<td>truth value</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_is_tidy</code></td>
-<td>1</td>
+<td>proposition</td>
+<td>truth value</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_is_atom</code></td>
-<td>1</td>
+<td>proposition</td>
+<td>truth value</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_top</code></td>
-<td>1</td>
+<td>proposition</td>
+<td>text</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_size</code></td>
-<td>1</td>
+<td>proposition</td>
+<td>number</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_negations</code></td>
-<td>1</td>
+<td>proposition</td>
+<td>number</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_depth</code></td>
-<td>1</td>
+<td>proposition</td>
+<td>number</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_count</code></td>
-<td>2</td>
+<td>proposition, text</td>
+<td>number</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_variable_count</code></td>
-<td>1</td>
+<td>proposition</td>
+<td>number</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_model_count</code></td>
-<td>1</td>
+<td>proposition</td>
+<td>number</td>
 <td></td>
 </tr>
 <tr>
 <td><code>bool_without_conditionals</code></td>
-<td>1</td>
+<td>proposition</td>
+<td>proposition</td>
 <td></td>
 </tr>
 </tbody>
@@ -1010,129 +1134,154 @@ generation with a message naming both.</p>
 <thead>
 <tr>
 <th>Function</th>
-<th>Arguments</th>
+<th>Takes</th>
+<th>Gives</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>matrix2</code></td>
-<td>4</td>
+<td>number, number, number, number</td>
+<td>matrix</td>
 <td></td>
 </tr>
 <tr>
 <td><code>matrix3</code></td>
-<td>9</td>
+<td>number, number, number, number, number, number, number, number, number</td>
+<td>matrix</td>
 <td></td>
 </tr>
 <tr>
 <td><code>matrix_identity</code></td>
-<td>1</td>
+<td>number</td>
+<td>matrix</td>
 <td></td>
 </tr>
 <tr>
 <td><code>matrix_add</code></td>
-<td>2</td>
+<td>matrix, matrix</td>
+<td>matrix</td>
 <td></td>
 </tr>
 <tr>
 <td><code>matrix_subtract</code></td>
-<td>2</td>
+<td>matrix, matrix</td>
+<td>matrix</td>
 <td></td>
 </tr>
 <tr>
 <td><code>matrix_multiply</code></td>
-<td>2</td>
+<td>matrix, matrix</td>
+<td>matrix</td>
 <td></td>
 </tr>
 <tr>
 <td><code>matrix_scale</code></td>
-<td>2</td>
+<td>number, matrix</td>
+<td>matrix</td>
 <td></td>
 </tr>
 <tr>
 <td><code>matrix_transpose</code></td>
-<td>1</td>
+<td>matrix</td>
+<td>matrix</td>
 <td></td>
 </tr>
 <tr>
 <td><code>matrix_determinant</code></td>
-<td>1</td>
+<td>matrix</td>
+<td>number</td>
 <td></td>
 </tr>
 <tr>
 <td><code>matrix_inverse</code></td>
-<td>1</td>
+<td>matrix</td>
+<td>matrix</td>
 <td></td>
 </tr>
 <tr>
 <td><code>matrix_is_invertible</code></td>
-<td>1</td>
+<td>matrix</td>
+<td>truth value</td>
 <td></td>
 </tr>
 <tr>
 <td><code>matrix_entry</code></td>
-<td>3</td>
+<td>matrix, number, number</td>
+<td>number</td>
 <td></td>
 </tr>
 <tr>
 <td><code>matrix_vector</code></td>
-<td>2</td>
+<td>matrix, vector</td>
+<td>vector</td>
 <td></td>
 </tr>
 <tr>
 <td><code>matrix_latex</code></td>
-<td>1</td>
+<td>matrix</td>
+<td>text</td>
 <td></td>
 </tr>
 <tr>
 <td><code>matrix_row_latex</code></td>
-<td>2</td>
+<td>matrix, number</td>
+<td>text</td>
 <td></td>
 </tr>
 <tr>
 <td><code>matrix_row</code></td>
-<td>1</td>
+<td>vector</td>
+<td>matrix</td>
 <td><code>matrix_row(v)</code>: the vector <code>v</code> as a matrix of one row.</td>
 </tr>
 <tr>
 <td><code>matrix_column</code></td>
-<td>1</td>
+<td>vector</td>
+<td>matrix</td>
 <td><code>matrix_column(v)</code>: the vector <code>v</code> as a matrix of one column.</td>
 </tr>
 <tr>
 <td><code>matrix_stack</code></td>
-<td>2</td>
+<td>matrix, matrix</td>
+<td>matrix</td>
 <td><code>matrix_stack(A, B)</code>: <code>A</code> above <code>B</code>; they must have the same number of columns.</td>
 </tr>
 <tr>
 <td><code>matrix_augment</code></td>
-<td>2</td>
+<td>matrix, matrix</td>
+<td>matrix</td>
 <td><code>matrix_augment(A, B)</code>: <code>A</code> with <code>B</code> to its right, the augmented matrix <code>[A | B]</code>; they must have the same number of rows.</td>
 </tr>
 <tr>
 <td><code>matrix_rows</code></td>
-<td>1</td>
+<td>matrix</td>
+<td>number</td>
 <td>The number of rows of a matrix.</td>
 </tr>
 <tr>
 <td><code>matrix_columns</code></td>
-<td>1</td>
+<td>matrix</td>
+<td>number</td>
 <td>The number of columns of a matrix.</td>
 </tr>
 <tr>
 <td><code>matrix_rank</code></td>
-<td>1</td>
+<td>matrix</td>
+<td>number</td>
 <td>The rank of a matrix of any shape: the number of pivots of its reduced row echelon form.</td>
 </tr>
 <tr>
 <td><code>matrix_rref</code></td>
-<td>1</td>
+<td>matrix</td>
+<td>matrix</td>
 <td>The reduced row echelon form of a matrix of any shape, with exact entries.</td>
 </tr>
 <tr>
 <td><code>matrix_null_space</code></td>
-<td>1</td>
+<td>matrix</td>
+<td>matrix</td>
 <td><code>matrix_null_space(A)</code>: the basis of the null space read off the reduced form, as the columns of a matrix: for each free variable in turn, the solution of <code>A x = 0</code> in which it is 1 and the other free variables are 0. An error when no variable is free.</td>
 </tr>
 </tbody>
@@ -1143,54 +1292,64 @@ generation with a message naming both.</p>
 <thead>
 <tr>
 <th>Function</th>
-<th>Arguments</th>
+<th>Takes</th>
+<th>Gives</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>set_empty</code></td>
-<td>0</td>
+<td>nothing</td>
+<td>set</td>
 <td></td>
 </tr>
 <tr>
 <td><code>set_insert</code></td>
-<td>2</td>
+<td>set, number</td>
+<td>set</td>
 <td></td>
 </tr>
 <tr>
 <td><code>set_interval</code></td>
-<td>4</td>
+<td>number, number, truth value, truth value</td>
+<td>set</td>
 <td></td>
 </tr>
 <tr>
 <td><code>set_above</code></td>
-<td>2</td>
+<td>number, truth value</td>
+<td>set</td>
 <td><code>set_above(a, closed)</code>: the numbers above a, <code>(a, \infty)</code>, or from a, <code>[a, \infty)</code>, when <code>closed</code> is true.</td>
 </tr>
 <tr>
 <td><code>set_below</code></td>
-<td>2</td>
+<td>number, truth value</td>
+<td>set</td>
 <td><code>set_below(a, closed)</code>: the numbers below a, <code>(-\infty, a)</code>, or up to a, <code>(-\infty, a]</code>.</td>
 </tr>
 <tr>
 <td><code>set_union</code></td>
-<td>2</td>
+<td>set, set</td>
+<td>set</td>
 <td></td>
 </tr>
 <tr>
 <td><code>set_intersection</code></td>
-<td>2</td>
+<td>set, set</td>
+<td>set</td>
 <td></td>
 </tr>
 <tr>
 <td><code>set_difference</code></td>
-<td>2</td>
+<td>set, set</td>
+<td>set</td>
 <td></td>
 </tr>
 <tr>
 <td><code>set_latex</code></td>
-<td>1</td>
+<td>set</td>
+<td>text</td>
 <td></td>
 </tr>
 </tbody>
@@ -1201,84 +1360,100 @@ generation with a message naming both.</p>
 <thead>
 <tr>
 <th>Function</th>
-<th>Arguments</th>
+<th>Takes</th>
+<th>Gives</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>vector_entry</code></td>
-<td>2</td>
+<td>vector, number</td>
+<td>number</td>
 <td></td>
 </tr>
 <tr>
 <td><code>vector2</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>vector</td>
 <td></td>
 </tr>
 <tr>
 <td><code>vector3</code></td>
-<td>3</td>
+<td>number, number, number</td>
+<td>vector</td>
 <td></td>
 </tr>
 <tr>
 <td><code>vector4</code></td>
-<td>4</td>
+<td>number, number, number, number</td>
+<td>vector</td>
 <td></td>
 </tr>
 <tr>
 <td><code>vector_add</code></td>
-<td>2</td>
+<td>vector, vector</td>
+<td>vector</td>
 <td></td>
 </tr>
 <tr>
 <td><code>vector_subtract</code></td>
-<td>2</td>
+<td>vector, vector</td>
+<td>vector</td>
 <td></td>
 </tr>
 <tr>
 <td><code>vector_scale</code></td>
-<td>2</td>
+<td>number, vector</td>
+<td>vector</td>
 <td></td>
 </tr>
 <tr>
 <td><code>vector_dot</code></td>
-<td>2</td>
+<td>vector, vector</td>
+<td>number</td>
 <td></td>
 </tr>
 <tr>
 <td><code>vector_cross</code></td>
-<td>2</td>
+<td>vector, vector</td>
+<td>vector</td>
 <td></td>
 </tr>
 <tr>
 <td><code>vector_latex</code></td>
-<td>1</td>
+<td>vector</td>
+<td>text</td>
 <td></td>
 </tr>
 <tr>
 <td><code>vector_is_zero</code></td>
-<td>1</td>
+<td>vector</td>
+<td>truth value</td>
 <td></td>
 </tr>
 <tr>
 <td><code>vector_norm_answer</code></td>
-<td>1</td>
+<td>vector</td>
+<td>norm answer</td>
 <td></td>
 </tr>
 <tr>
 <td><code>vector_unit_answer</code></td>
-<td>1</td>
+<td>vector</td>
+<td>unit-vector answer</td>
 <td></td>
 </tr>
 <tr>
 <td><code>vector_parallel_answer</code></td>
-<td>1</td>
+<td>vector</td>
+<td>direction answer</td>
 <td></td>
 </tr>
 <tr>
 <td><code>vector_same_direction_answer</code></td>
-<td>1</td>
+<td>vector</td>
+<td>direction answer</td>
 <td></td>
 </tr>
 </tbody>
@@ -1289,24 +1464,28 @@ generation with a message naming both.</p>
 <thead>
 <tr>
 <th>Function</th>
-<th>Arguments</th>
+<th>Takes</th>
+<th>Gives</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>point2</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>point</td>
 <td><code>point2(x, y)</code>: a point of the plane.</td>
 </tr>
 <tr>
 <td><code>point3</code></td>
-<td>3</td>
+<td>number, number, number</td>
+<td>point</td>
 <td><code>point3(x, y, z)</code>: a point of space.</td>
 </tr>
 <tr>
 <td><code>point_latex</code></td>
-<td>1</td>
+<td>point</td>
+<td>text</td>
 <td>A point in LaTeX, <code>\left(3, -\frac{1}{2}\right)</code>.</td>
 </tr>
 </tbody>
@@ -1317,24 +1496,27 @@ generation with a message naming both.</p>
 <thead>
 <tr>
 <th>Function</th>
-<th>Arguments</th>
+<th>Takes</th>
+<th>Gives</th>
 <th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>complex</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>complex number</td>
 <td></td>
 </tr>
 <tr>
 <td><code>complex_latex</code></td>
-<td>2</td>
+<td>number, number</td>
+<td>text</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<p>158 functions in all.</p>
+<p>154 functions and 4 generators in all.</p>
               
             </div>
           </div><footer>
