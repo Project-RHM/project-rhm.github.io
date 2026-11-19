@@ -805,13 +805,13 @@ around it, or at the start of its equation.</p>
   variable named <code>2</code>;</li>
 <li>an equation with no exact solutions where one is asked for;</li>
 <li>a use that only some of an expression's types allow, as above;</li>
+<li>a number too large to be kept exact: numbers are fractions of 63-bit
+  integers, and a sum or product that does not fit stops the question, as a
+  division by zero does, where it would otherwise be a wrong number;</li>
 <li>a requirement that cannot be met, or a budget no production can spend.</li>
 </ul>
-<p>Each of these stops generation with a message. A few still end the command
-with a bare <code>Fatal error</code> line instead: a name that is not a variable name
-given to a polynomial constructor or to an equation's solving functions, a
-zero divisor met inside <code>differentiate</code> or <code>formula_substitute</code>, a negative
-size for <code>matrix_identity</code>.</p>
+<p>Each of these stops generation with a message of one line, and the command
+ends with status 1.</p>
 <h2 id="mistakes">Mistakes<a class="headerlink" href="#mistakes" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="k">mistake</span> <span class="nc">NAME</span> <span class="nc">STRING</span>
 </code></pre></div>
