@@ -266,6 +266,16 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#options">Options</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#in-a-terminal">In a terminal</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#being-asked">Being asked</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hints">Hints</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#trying-a-file-out">Trying a file out</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#finding-imported-files">Finding imported files</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#messages-and-exit-status">Messages and exit status</a>
@@ -385,6 +395,7 @@
 rhema FILE.rhm -o OUT.tex | OUT.pdf     the same questions as a paper
 rhema check FILE...                     check only
 rhema run FILE [options]                show the questions and answers
+rhema try FILE [options]                try the file out, a question at a time
 rhema list FILE                         the questions and sets FILE declares
 rhema doc [NAME]                        the builtin functions (or one of them)
 rhema --version | --help
@@ -461,6 +472,161 @@ difficulty budget: <code>--set cost=6</code>.</dd>
 <dt><code>--ast-out FILE</code>, <code>--visualization-out FILE</code></dt>
 <dd>Save the derivation trees as text, or as an interactive HTML page.</dd>
 </dl>
+<h2 id="in-a-terminal">In a terminal<a class="headerlink" href="#in-a-terminal" title="Permanent link">&para;</a></h2>
+<p>When <code>rhema</code> writes to a terminal, compiling and running show more than the
+result: the file, the assignment and the seed, the four steps as they are
+reached, the progress of the generation, and at the end how many questions
+were made and which files were written. A problem is shown with its line of
+the file and a mark under the column.</p>
+<p>All of this goes to standard error and none of it is part of the result.
+It is off whenever the output or the errors are redirected or piped, when
+the environment variable <code>CI</code> is set, and when PG is written to standard
+output; what an editor, a script or another program reads is the same as
+without it.</p>
+<dl>
+<dt><code>--plain</code></dt>
+<dd>No presentation at a terminal either.</dd>
+<dt><code>--no-color</code></dt>
+<dd>No colors. The environment variable <code>NO_COLOR</code> does the same.</dd>
+<dt><code>--no-emoji</code></dt>
+<dd>Marks and the progress bar in ASCII.</dd>
+<dt><code>-v</code>, <code>--verbose</code></dt>
+<dd>Also print, on standard error, the derivation of each question: the
+rules that were accepted and the attribute values at each node.</dd>
+</dl>
+<h3 id="being-asked">Being asked<a class="headerlink" href="#being-asked" title="Permanent link">&para;</a></h3>
+<p>A command that cannot go on for want of a name asks for it, when there is
+somebody to ask: the presentation is on and the input is a terminal too.
+This happens in three cases: a file that holds only sets and no <code>--run</code>, a
+<code>--run</code> that names no set of the file, and a <code>--question</code> that names no
+question of it.</p>
+<div class="highlight"><pre><span></span><code>$ rhema run homework_set.rhm
+   homework_set.rhm: this file has no question of its own; it holds the sets homework, quick, run one with --run NAME
+   [1] homework
+   [2] quick
+   Which set? A number or a name; Enter alone stops: 2
+   The same as giving --run quick.
+</code></pre></div>
+<p>The answer is a number of the list or a name on it, and nothing else is
+taken for one: a name that is nearly right is asked for again. What follows
+is the run the same command gives with that name on it, the same paper and
+the same default output file. Enter alone, the end of the input, or three
+answers that are not on the list end the command with the error it gives
+everywhere else, and status 1.</p>
+<h3 id="hints">Hints<a class="headerlink" href="#hints" title="Permanent link">&para;</a></h3>
+<p>An option or a command that is not known is reported with the one it is
+nearest to, when one is near:</p>
+<div class="highlight"><pre><span></span><code>$ rhema run quiz.rhm --studnt 20261234
+rhema: unknown option --studnt (did you mean --student?)
+$ rhema chek quiz.rhm
+rhema: 'chek' is neither a command nor a file (did you mean check?)
+</code></pre></div>
+<p>A hint is only said. The command still stops with status 2.</p>
+<h2 id="trying-a-file-out">Trying a file out<a class="headerlink" href="#trying-a-file-out" title="Permanent link">&para;</a></h2>
+<p><code>rhema try FILE</code> shows the questions of a file one at a time and takes a
+command a line: look at the answer, compare a number with it, change a
+budget and see what the questions become.</p>
+<div class="highlight"><pre><span></span><code>$ rhema try arithmetic.rhm
+-- main, cost = 12, digit = 4, seed 1851610664
+ 1. What is the value of [`5 \div 6 - (8 - 65 + (3 - 7))`]?
+try&gt; a
+    answer: 371/6
+try&gt; cost = 3
+-- main, cost = 3, digit = 4, seed 1851610664
+ 1. What is the value of [`8033`]?
+try&gt;
+ 2. What is the value of [`4595`]?
+try&gt; how
+rhema run arithmetic.rhm --set cost=3 --seed 1851610664 --count 2
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enter alone, <code>n</code></td>
+<td>The next question.</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>The answer, and what each <a href="../language/#mistakes">mistake</a> that can be made in the question leads to: the lines <code>rhema run</code> prints.</td>
+</tr>
+<tr>
+<td><code>= NUMBER</code></td>
+<td>Compares a number with the answer. Several answers are separated by <code>;</code>.</td>
+</tr>
+<tr>
+<td><code>t</code></td>
+<td>The derivation: the rules accepted and the attribute values.</td>
+</tr>
+<tr>
+<td><code>pg</code></td>
+<td>The question as WeBWorK PG.</td>
+</tr>
+<tr>
+<td><code>how</code></td>
+<td>The command that prints the questions shown so far.</td>
+</tr>
+<tr>
+<td><code>question NAME</code></td>
+<td>Another question of the file.</td>
+</tr>
+<tr>
+<td><code>BUDGET = N</code></td>
+<td>Starts a budget at <code>N</code>, as <code>--set BUDGET=N</code> does.</td>
+</tr>
+<tr>
+<td><code>reset</code></td>
+<td>The budgets as the file sets them.</td>
+</tr>
+<tr>
+<td><code>seed N</code>, <code>seed</code></td>
+<td>Starts from seed <code>N</code>; alone, from the seed <code>rhema run</code> derives.</td>
+</tr>
+<tr>
+<td><code>list</code></td>
+<td>The questions and budgets of the file.</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>These commands.</td>
+</tr>
+<tr>
+<td><code>quit</code></td>
+<td>Ends the session. So does the end of the input.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>A session shows what a command would.</strong> The questions of a session are
+the questions of <code>rhema run</code>: the first one is the first question of
+<code>rhema run FILE</code> with the same options, and the Nth one since the last
+change is the Nth of the command <code>how</code> prints. To keep that true, changing
+the question, a budget or the seed starts again at question 1, and the line
+beginning with <code>--</code> says where the session stands. A command that is
+refused, such as a budget the file does not have, changes nothing.</p>
+<p><strong><code>=</code> compares numbers, exactly.</strong> A whole number, a fraction (<code>3/4</code>) or a
+decimal (<code>0.75</code>) is compared with the answer as an exact number: <code>0.33</code> is
+not <code>1/3</code>. This is stricter than WeBWorK, which accepts a number within one
+part in a thousand. The reply is <code>right</code>, or <code>not right</code>, or, when the
+number is what one of the grammar's mistakes gives, the mistake:</p>
+<div class="highlight"><pre><span></span><code>try&gt; = 12
+    not right: this is the answer of the mistake forgot_sign (forgets the minus sign)
+</code></pre></div>
+<p>The answer itself is not given away. An answer that is not a number (a
+formula, a set, a matrix) is not compared: when two of those are the same
+is for WeBWorK to say, and <code>a</code> shows the answer.</p>
+<p>A session takes <code>--question</code>, <code>--set</code>, <code>--assignment</code>, <code>--student</code> and <code>-I</code>
+as <code>rhema run</code> does, and works on one question of a file, not on a set. It
+writes no file. It reads its commands from standard input, a terminal or
+not, so a file of commands gives a transcript:</p>
+<div class="highlight"><pre><span></span><code>$ printf 'a\n\na\n' | rhema try quiz.rhm
+</code></pre></div>
+<p>Questions and replies go to standard output; the prompt and the errors go
+to standard error. An error does not end the session.</p>
 <h2 id="finding-imported-files">Finding imported files<a class="headerlink" href="#finding-imported-files" title="Permanent link">&para;</a></h2>
 <p>A file named in <code>import</code> or <code>include</code> is looked for, in order:</p>
 <ol>
@@ -490,6 +656,9 @@ number is found here and not in the middle of generating a paper.</dd>
 <dd>Generates and prints questions with their answers, instead of writing
 PG. With <code>--run SET</code>, prints the set part by part, followed by the mean
 of each budget in each part.</dd>
+<dt><code>rhema try FILE</code></dt>
+<dd>The same questions one at a time, in a session:
+see <a href="#trying-a-file-out">Trying a file out</a>.</dd>
 <dt><code>rhema list FILE</code></dt>
 <dd>The file's imports, questions (with start symbol and context), budgets
 and sets.</dd>

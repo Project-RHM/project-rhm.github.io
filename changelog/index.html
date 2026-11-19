@@ -266,6 +266,16 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/command/#options">Options</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="../reference/command/#in-a-terminal">In a terminal</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="../reference/command/#being-asked">Being asked</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="../reference/command/#hints">Hints</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="../reference/command/#trying-a-file-out">Trying a file out</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/command/#finding-imported-files">Finding imported files</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="../reference/command/#messages-and-exit-status">Messages and exit status</a>
@@ -457,6 +467,40 @@ is announced one version before the removal.</p>
   page of the site, generated from it, shows the same.</li>
 <li><code>mistake</code> is now a reserved word. A grammar that used it as a name must
   rename it.</li>
+<li><strong>A presentation at a terminal.</strong> When <code>rhema</code> writes to a terminal,
+  compiling and running show the file, the assignment and the seed, the
+  steps as they are reached, the progress of the generation and a summary
+  of what was written; a problem is shown with its line of the file and a
+  mark under the column. It all goes to standard error, and it is off when
+  anything is redirected or piped, when <code>CI</code> is set and when PG goes to
+  standard output, so what a program reads from <code>rhema</code> has not changed.
+  <code>--plain</code> turns it off, <code>--no-color</code> (or <code>NO_COLOR</code>) and <code>--no-emoji</code>
+  tone it down, and <code>-v</code> / <code>--verbose</code> adds each question's derivation.
+  It has a few jokes in it, and three hidden options (<code>--hello</code>,
+  <code>--nailong</code>, <code>--coffee</code>).</li>
+<li><strong><code>rhema try FILE</code>.</strong> A session that shows the questions of a file one
+  at a time and takes a command a line: <code>a</code> for the answer and what each
+  mistake gives, <code>= NUMBER</code> to compare a number with the answer exactly
+  (a number that is the answer of a declared mistake is told so),
+  <code>BUDGET = N</code>, <code>question NAME</code> and <code>seed N</code> to change what is generated,
+  <code>t</code> and <code>pg</code> to look at the derivation and the PG, and <code>how</code> for the
+  <code>rhema run</code> command that prints the questions shown so far. A session
+  shows exactly the questions that command does. It reads standard input,
+  from a terminal or not.</li>
+<li><strong>A missing name is asked for, at a terminal.</strong> A file of sets run
+  without <code>--run</code>, a <code>--run</code> that names no set and a <code>--question</code> that
+  names no question list the file's own names and ask which is meant. The
+  answer is a number or a name of the list, never a guess, and the run is
+  the one the same command gives with that name on it. Without somebody to
+  ask (a pipe, a redirection, <code>--plain</code>) these are the errors they were.</li>
+<li><strong>Hints.</strong> An unknown option or command is reported with the one it is
+  nearest to: <code>unknown option --studnt (did you mean --student?)</code>.</li>
+<li><strong>Changed.</strong> <code>--count</code> with a negative number is an error of the command
+  line (status 2); it was <code>rhema: error: List.init</code>. The "not run through
+  WeBWorK" line of the summary is said only where PG was written. In the
+  OCaml library, the record <code>Rhema_load.failure</code> has a third field,
+  <code>kind</code>, which says whether a failure is of the syntax, of the meaning or
+  of something else; code that builds such a record must give it.</li>
 </ul>
 <h2 id="020-2026-11-16">0.2.0 (2026-11-16)<a class="headerlink" href="#020-2026-11-16" title="Permanent link">&para;</a></h2>
 <p>The library grows from 27 grammar files to 46, seven of the new question
