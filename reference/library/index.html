@@ -702,10 +702,46 @@ make <code>x + 2x \cdot \sin x</code> cost at least 4.</p>
 <td>2</td>
 <td>Numeric (answers in <code>x</code> and <code>y</code>)</td>
 </tr>
+<tr>
+<td><code>probability.rhm</code></td>
+<td>1 <code>P(A or B)</code> from <code>P(A)</code>, <code>P(B)</code> and <code>P(A and B)</code>, two independent events both happening; 2 a conditional probability from a table of counts, <code>P(A given B)</code> from <code>P(A)</code>, <code>P(B)</code> and <code>P(A or B)</code>, at least one of two independent events; 3 a ball drawn from one of two bags chosen by a die: the probability of its colour, the probability of the bag given the colour</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>modular_arithmetic.rhm</code></td>
+<td>1 Euler's function of <code>p q</code> or of a prime power, the number of divisors of <code>p^a q^b</code>; 2 two simultaneous congruences, the sum of the divisors of <code>p^a q^b</code>; 3 three simultaneous congruences, an RSA key: its private exponent and a message deciphered (two blanks)</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>graph_theory.rhm</code></td>
+<td>1 the edges of a graph from its degrees, of <code>K_n</code>, of <code>K_{m,n}</code>, of a forest; 2 a degree missing from a list, the leaves of a tree, the walks of length 2 between two vertices; 3 the faces of a regular planar graph, the walks of length 3 between two vertices</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>binomial_theorem.rhm</code></td>
+<td>1 a coefficient of <code>(1 + x)^n</code>, of <code>(x + b)^n</code>; 2 a coefficient of <code>(ax + b)^n</code>, of <code>(ax + by)^n</code>, the sum of the coefficients of <code>(ax + b)^n</code>; 3 the term independent of <code>x</code> in <code>(a x^p + b/x^q)^n</code>, a coefficient of <code>(c + dx)(1 + ax)^n</code></td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>numerical_methods.rhm</code></td>
+<td>1 one step of Newton's method for <code>x^2 - a = 0</code>, the trapezoidal rule with two strips; 2 two steps of Newton's method, the third midpoint of a bisection, the trapezoidal rule with four strips, two steps of Euler's method for <code>y' = ax + by</code>; 3 Simpson's rule with four strips, two steps of Euler's method for <code>y' = ax + y^2</code> or <code>ax - y^2</code></td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>lines_planes.rhm</code></td>
+<td>1 the constant of a plane through a point with a given normal, the point of a line at a value of its parameter; 2 the distance from a point to a plane, the point where a line meets a plane, the cosine of the angle between two planes; 3 the foot of the perpendicular from a point to a plane, the reflection of a point in a plane</td>
+<td>2</td>
+<td>Numeric (a point answer carries the Point context)</td>
+</tr>
 </tbody>
 </table>
 <h2 id="mistakes">Mistakes<a class="headerlink" href="#mistakes" title="Permanent link">&para;</a></h2>
-<p>Four grammars say what common mistakes lead to (chapter 9 of the tutorial).
+<p>Six grammars say what common mistakes lead to (chapter 9 of the tutorial).
 <code>rhema run</code> lists them under each answer, and none of these grammars asks a
 question in which a mistake changes the working and still gives the right
 answer.</p>
@@ -758,13 +794,36 @@ answer.</p>
 <td><code>power_term_by_term</code></td>
 <td>raises each term of a bracket to the power on its own</td>
 </tr>
+<tr>
+<td><code>probability.rhm</code></td>
+<td><code>overlap_counted_twice</code></td>
+<td>adds two probabilities and does not take off what both share</td>
+</tr>
+<tr>
+<td></td>
+<td><code>wrong_way_round</code></td>
+<td>takes a conditional probability the wrong way round: of B given A where A given B was asked</td>
+</tr>
+<tr>
+<td><code>binomial_theorem.rhm</code></td>
+<td><code>bare_coefficient</code></td>
+<td>gives the binomial coefficient alone, without the powers of the numbers in the bracket</td>
+</tr>
+<tr>
+<td></td>
+<td><code>powers_swapped</code></td>
+<td>puts each power on the other number of the bracket</td>
+</tr>
 </tbody>
 </table>
 <p>The mistakes of <code>calculus.rhm</code> concern its derivative questions; an
 integral question lists none. <code>power_term_by_term</code> is declared in
 <code>polynomial_core.rhm</code> and concerns a question that asks for the expansion;
 <code>factoring.rhm</code> is built on the same productions and lists none. A modulus
-question of <code>complex.rhm</code> lists none.</p>
+question of <code>complex.rhm</code> lists none. In <code>probability.rhm</code> and
+<code>binomial_theorem.rhm</code> a mistake is listed with the forms it can be made
+in: a product of two independent probabilities, for one, has nothing to
+count twice.</p>
 <h2 id="libraries-and-examples">Libraries and examples<a class="headerlink" href="#libraries-and-examples" title="Permanent link">&para;</a></h2>
 <dl>
 <dt><code>polynomial_core.rhm</code></dt>
