@@ -738,10 +738,46 @@ make <code>x + 2x \cdot \sin x</code> cost at least 4.</p>
 <td>2</td>
 <td>Numeric (a point answer carries the Point context)</td>
 </tr>
+<tr>
+<td><code>double_integral.rhm</code></td>
+<td>1 a monomial <code>c x^m y^n</code> or <code>p x + q y</code> over a rectangle; 2 an inner limit that is <code>x</code> or <code>k x</code>, the average value of a function over a rectangle; 3 a region given in words: the triangle cut off by the axes and a line, the region between <code>y = x^2</code> and <code>y = k x</code></td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>implicit_differentiation.rhm</code></td>
+<td>1 the slope of a circle or of <code>p x^2 + q y^2 = c</code> at a point; 2 the slope of <code>x^2 + k x y + y^2 = c</code> or of <code>x^3 + y^3 = k x y + c</code> at a point, <code>dy/dt</code> from <code>dx/dt</code> for a point moving on a circle; 3 where the tangent at a point meets the <code>y</code>-axis, the second derivative at a point</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>markov_chain.rhm</code></td>
+<td>1 the probability of the next two days in order, tomorrow from a forecast for today; 2 the weather two days ahead, the long-run share of sunny days, the expected length of a run of days of one kind; 3 the weather three days ahead, two steps of a chain with three states from its matrix, the chance that a walk on a line reaches the top before the bottom</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>regression.rhm</code></td>
+<td>1 the slope from <code>S_xx</code>, <code>S_yy</code> and <code>S_xy</code>, the intercept from the slope and the two means, a residual; 2 the slope from five data points, and from the sums of <code>x</code>, <code>y</code>, <code>x^2</code> and <code>x y</code>; 3 a prediction from five data points, the coefficient of determination <code>r^2</code></td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>complex_polar.rhm</code></td>
+<td>1 the modulus and argument of a product or a quotient of two numbers in polar form, a number in polar form written as <code>a + bi</code>; 2 the modulus and principal argument of <code>a + bi</code>, and of a power of a number in polar form; 3 a power of <code>a + bi</code> by De Moivre's theorem, the modulus and the two smallest arguments of the roots of <code>z^n = w</code></td>
+<td>2</td>
+<td>Numeric (plain answers)</td>
+</tr>
+<tr>
+<td><code>relations.rhm</code></td>
+<td>1 the number of relations, of functions and of one-to-one functions from one set to another; 2 the number of reflexive and of symmetric relations on a set, the functions onto a set of two or three, the pairs missing from a symmetric relation, the pairs of an equivalence relation from the sizes of its classes; 3 the pairs of a composite and of a transitive closure, the equivalence relations with exactly two classes</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
 </tbody>
 </table>
 <h2 id="mistakes">Mistakes<a class="headerlink" href="#mistakes" title="Permanent link">&para;</a></h2>
-<p>Six grammars say what common mistakes lead to (chapter 9 of the tutorial).
+<p>Ten grammars say what common mistakes lead to (chapter 9 of the tutorial).
 <code>rhema run</code> lists them under each answer, and none of these grammars asks a
 question in which a mistake changes the working and still gives the right
 answer.</p>
@@ -814,6 +850,41 @@ answer.</p>
 <td><code>powers_swapped</code></td>
 <td>puts each power on the other number of the bracket</td>
 </tr>
+<tr>
+<td><code>implicit_differentiation.rhm</code></td>
+<td><code>sign_dropped</code></td>
+<td>takes <code>dy/dx</code> to be <code>F_x / F_y</code> and leaves out the minus sign</td>
+</tr>
+<tr>
+<td></td>
+<td><code>product_rule_missed</code></td>
+<td>differentiates <code>x y</code> as if <code>x</code> were a constant factor, so the term <code>x dy/dx</code> is lost</td>
+</tr>
+<tr>
+<td><code>markov_chain.rhm</code></td>
+<td><code>transposed</code></td>
+<td>reads the transition matrix the wrong way round: a column for where the chain goes from a state</td>
+</tr>
+<tr>
+<td><code>regression.rhm</code></td>
+<td><code>x_on_y</code></td>
+<td>divides by the spread of <code>y</code> in place of that of <code>x</code>: <code>S_xy / S_yy</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>through_origin</code></td>
+<td>fits a line through the origin: the sum of <code>x y</code> over the sum of <code>x^2</code></td>
+</tr>
+<tr>
+<td><code>relations.rhm</code></td>
+<td><code>sets_swapped</code></td>
+<td>takes the two sets the wrong way round: <code>m^n</code> functions where there are <code>n^m</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>diagonal_forgotten</code></td>
+<td>counts the pairs of two different elements only, and forgets that each pair <code>(a, a)</code> is free as well</td>
+</tr>
 </tbody>
 </table>
 <p>The mistakes of <code>calculus.rhm</code> concern its derivative questions; an
@@ -823,7 +894,10 @@ integral question lists none. <code>power_term_by_term</code> is declared in
 question of <code>complex.rhm</code> lists none. In <code>probability.rhm</code> and
 <code>binomial_theorem.rhm</code> a mistake is listed with the forms it can be made
 in: a product of two independent probabilities, for one, has nothing to
-count twice.</p>
+count twice. The same holds for <code>implicit_differentiation.rhm</code>,
+<code>markov_chain.rhm</code>, <code>regression.rhm</code> and <code>relations.rhm</code>: a curve with no
+product term has no product rule to miss, and only the question that shows
+a transition matrix can have it read the wrong way round.</p>
 <h2 id="libraries-and-examples">Libraries and examples<a class="headerlink" href="#libraries-and-examples" title="Permanent link">&para;</a></h2>
 <dl>
 <dt><code>polynomial_core.rhm</code></dt>
