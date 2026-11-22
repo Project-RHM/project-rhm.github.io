@@ -774,10 +774,46 @@ make <code>x + 2x \cdot \sin x</code> cost at least 4.</p>
 <td>2</td>
 <td>Numeric</td>
 </tr>
+<tr>
+<td><code>vector_calculus.rhm</code></td>
+<td>1 the gradient of a function at a point, the divergence of a field at a point; 2 the curl of a field at a point, a directional derivative, the Laplacian at a point; 3 the work of a field along a straight segment, a circulation round a rectangle by Green's theorem</td>
+<td>2</td>
+<td>Numeric / Vector</td>
+</tr>
+<tr>
+<td><code>improper_integral.rhm</code></td>
+<td>1 <code>k / x^p</code> from <code>a</code> to infinity, an exponential tail; 2 <code>k / (x + a)^p</code> and <code>k x e^(-ax)</code> from 0 to infinity, <code>k / sqrt(x)</code> from 0 to <code>b</code>; 3 <code>k x^2 e^(-ax)</code> and <code>k x e^(-a x^2)</code> from 0 to infinity, <code>k / (x^2 + a^2)</code> over a half line or the whole line (a multiple of pi)</td>
+<td>2</td>
+<td>Numeric (the multiple of pi is a plain answer)</td>
+</tr>
+<tr>
+<td><code>linear_programming.rhm</code></td>
+<td>1 the greatest value of <code>p x + q y</code> over a region given by its corners; 2 the greatest value under <code>x + y &lt;= s</code>, <code>x &lt;= a</code>, <code>y &lt;= b</code>, and under <code>x + 2y &lt;= c</code>, <code>2x + y &lt;= d</code>; 3 the greatest value under two constraints with other slopes, the corner at which it is taken, the least value over the region above two lines</td>
+<td>2</td>
+<td>Numeric (a point answer carries the Point context)</td>
+</tr>
+<tr>
+<td><code>graph_algorithms.rhm</code></td>
+<td>1 a minimum spanning tree of a weighted cycle, the edges an Euler circuit still needs from a list of degrees; 2 a shortest path and a minimum spanning tree in a weighted graph on four vertices with every edge; 3 a shortest path in a weighted graph on five vertices with seven edges, the number of spanning trees of a graph on four vertices</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>orthogonality.rhm</code></td>
+<td>1 the component of one vector along another, the entry that makes two vectors orthogonal; 2 the projection of one vector onto another, the part of a vector orthogonal to another; 3 the second vector of a Gram-Schmidt process, the projection of a vector onto a plane, the matrix of the projection onto a line</td>
+<td>2</td>
+<td>Numeric / Vector / Matrix</td>
+</tr>
+<tr>
+<td><code>counting_principles.rhm</code></td>
+<td>1 the size of a union of two sets, the pigeonhole principle; 2 the numbers up to <code>N</code> divisible by one of two numbers, the size of a union of three sets, the solutions of <code>x_1 + ... + x_k = n</code> in non-negative whole numbers; 3 the numbers up to <code>N</code> divisible by none of three primes, the solutions of <code>x_1 + x_2 + x_3 = n</code> with an upper limit on each, letters in envelopes with none, exactly one or at least one in its own</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
 </tbody>
 </table>
 <h2 id="mistakes">Mistakes<a class="headerlink" href="#mistakes" title="Permanent link">&para;</a></h2>
-<p>Ten grammars say what common mistakes lead to (chapter 9 of the tutorial).
+<p>Fifteen grammars say what common mistakes lead to (chapter 9 of the tutorial).
 <code>rhema run</code> lists them under each answer, and none of these grammars asks a
 question in which a mistake changes the working and still gives the right
 answer.</p>
@@ -884,6 +920,46 @@ answer.</p>
 <td></td>
 <td><code>diagonal_forgotten</code></td>
 <td>counts the pairs of two different elements only, and forgets that each pair <code>(a, a)</code> is free as well</td>
+</tr>
+<tr>
+<td><code>vector_calculus.rhm</code></td>
+<td><code>not_normalised</code></td>
+<td>takes the direction of a directional derivative as it is given and does not divide by its length</td>
+</tr>
+<tr>
+<td><code>linear_programming.rhm</code></td>
+<td><code>intercepts_outside</code></td>
+<td>tries every point where a line meets an axis, also those that lie outside the region</td>
+</tr>
+<tr>
+<td><code>graph_algorithms.rhm</code></td>
+<td><code>direct_edge</code></td>
+<td>takes the edge that joins the two ends, though a path through another vertex is shorter</td>
+</tr>
+<tr>
+<td></td>
+<td><code>cheapest_three</code></td>
+<td>takes the three cheapest edges for a spanning tree, though they close a triangle</td>
+</tr>
+<tr>
+<td><code>orthogonality.rhm</code></td>
+<td><code>not_divided</code></td>
+<td>gives the dot product for a component and does not divide by the length</td>
+</tr>
+<tr>
+<td></td>
+<td><code>length_not_squared</code></td>
+<td>divides a projection by the length where the square of the length belongs</td>
+</tr>
+<tr>
+<td><code>counting_principles.rhm</code></td>
+<td><code>overlap_counted_twice</code></td>
+<td>adds the sizes of sets and does not take off what they share</td>
+</tr>
+<tr>
+<td></td>
+<td><code>triple_left_out</code></td>
+<td>corrects for what each two of three sets share and leaves out what all three share</td>
 </tr>
 </tbody>
 </table>
