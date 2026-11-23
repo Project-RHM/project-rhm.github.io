@@ -810,10 +810,46 @@ make <code>x + 2x \cdot \sin x</code> cost at least 4.</p>
 <td>2</td>
 <td>Numeric</td>
 </tr>
+<tr>
+<td><code>random_variables.rhm</code></td>
+<td>1 <code>E(aX + b)</code> from <code>E(X)</code>, the mean of a binomial variable, a probability of a uniform variable, the expected number of attempts up to the first success; 2 <code>Var(aX + b)</code> from <code>Var(X)</code>, a variance from <code>E(X)</code> and <code>E(X^2)</code>, the variance of a binomial variable, the variance of <code>aX + bY</code> or <code>aX - bY</code> for independent <code>X</code> and <code>Y</code>, the probability that the first success comes at a given attempt; 3 a density <code>c x^n</code> on <code>[0, b]</code>: its constant, a probability, its mean and its variance; the covariance of two variables that take the values 0 and 1</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>laplace_transform.rhm</code></td>
+<td>1 the transform of <code>k t^n</code>, of <code>k e^(at)</code>; 2 the transform of <code>k sin(bt)</code> or <code>k cos(bt)</code>, of <code>p + q t + k e^(at)</code>, the inverse of <code>c / s^n</code> and of <code>k / (s - a)</code>; 3 the transform of <code>k t^n e^(at)</code>, of <code>e^(at) sin(bt)</code> or <code>e^(at) cos(bt)</code>, the inverse of <code>(p s + q) / ((s - a)(s - b))</code>, shown multiplied out, and of <code>(p s + q) / (s^2 + b^2)</code></td>
+<td>2</td>
+<td>Numeric (answers in <code>s</code> and <code>t</code>)</td>
+</tr>
+<tr>
+<td><code>automata.rhm</code></td>
+<td>1 the state a three-state automaton reaches on a word of four letters, the number of words of a length (or up to a length) over an alphabet; 2 the number of words of length 3 an automaton accepts, the words with no two <code>a</code>s next to each other, the least number of states for counting <code>a</code>s and <code>b</code>s modulo two numbers, and for the words that contain a given word; 3 the number of words of length 4 or 5 an automaton accepts, the words with two <code>a</code>s next to each other somewhere, the least number of states for the words with a given letter in a given place from the end</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>power_series.rhm</code></td>
+<td>1 the radius of convergence of a geometric series in <code>p (x - c) / q</code>, the interval of convergence of a geometric series; 2 the radius of a series in <code>(p x + q)^n / r^n</code> with a power of <code>n</code> in front, the radius of a series in even powers, the interval of convergence of the series of <code>(x - c)^n / (n r^n)</code>; 3 an interval of convergence with <code>(-1)^n</code>, with <code>n^2</code> or <code>sqrt(n)</code> below the line or <code>n</code> above it, the radius of a series with <code>(2n)!</code> and <code>(n!)^2</code>, the sum of <code>n p^n / q^n</code></td>
+<td>2</td>
+<td>Numeric / Interval</td>
+</tr>
+<tr>
+<td><code>optimization.rhm</code></td>
+<td>1 <code>D = f_xx f_yy - f_xy^2</code> of a quadratic, the least or greatest value of a quadratic with no term in <code>x y</code>; 2 the least or greatest value of a quadratic with a term in <code>x y</code>, the greatest value of <code>x y</code> under <code>p x + q y = c</code>, the least value of <code>x^2 + y^2</code> on a line; 3 the greatest or least value of <code>a x + b y</code> on a circle, the local extreme value of <code>x^3 + y^3 - 3k x y + c</code>, the greatest value of <code>x y z</code> under <code>p x + q y + r z = c</code></td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>linear_transformations.rhm</code></td>
+<td>1 the image of a vector, the matrix from the images of <code>(1, 0)</code> and <code>(0, 1)</code>; 2 the matrix of one transformation after another, the area of the image of a region, the dimension of the kernel or of the image of a transformation of space, the vector sent to a given one; 3 the matrix from the images of two other vectors, the matrix in another basis, the matrix of a reflection in a line</td>
+<td>2</td>
+<td>Numeric / Vector / Matrix</td>
+</tr>
 </tbody>
 </table>
 <h2 id="mistakes">Mistakes<a class="headerlink" href="#mistakes" title="Permanent link">&para;</a></h2>
-<p>Fifteen grammars say what common mistakes lead to (chapter 9 of the tutorial).
+<p>Twenty-one grammars say what common mistakes lead to (chapter 9 of the tutorial).
 <code>rhema run</code> lists them under each answer, and none of these grammars asks a
 question in which a mistake changes the working and still gives the right
 answer.</p>
@@ -960,6 +996,91 @@ answer.</p>
 <td></td>
 <td><code>triple_left_out</code></td>
 <td>corrects for what each two of three sets share and leaves out what all three share</td>
+</tr>
+<tr>
+<td><code>random_variables.rhm</code></td>
+<td><code>not_squared</code></td>
+<td>multiplies a variance by the factor in front of the variable where the square of the factor belongs</td>
+</tr>
+<tr>
+<td></td>
+<td><code>variances_subtracted</code></td>
+<td>subtracts the variances of a difference of independent variables where they are added</td>
+</tr>
+<tr>
+<td></td>
+<td><code>mean_not_squared</code></td>
+<td>takes the mean off <code>E(X^2)</code> where the square of the mean belongs</td>
+</tr>
+<tr>
+<td><code>laplace_transform.rhm</code></td>
+<td><code>factorial_forgotten</code></td>
+<td>writes <code>1 / s^(n+1)</code> for the transform of <code>t^n</code> and leaves out the factorial</td>
+</tr>
+<tr>
+<td></td>
+<td><code>shift_sign</code></td>
+<td>shifts the wrong way: <code>s + a</code> where <code>s - a</code> belongs, or <code>e^(-at)</code> where <code>e^(at)</code> belongs</td>
+</tr>
+<tr>
+<td></td>
+<td><code>sine_cosine_swapped</code></td>
+<td>gives the transform of the cosine for the sine, or the other way round</td>
+</tr>
+<tr>
+<td><code>automata.rhm</code></td>
+<td><code>read_backwards</code></td>
+<td>reads the word from its last letter to its first</td>
+</tr>
+<tr>
+<td></td>
+<td><code>one_state_per_letter</code></td>
+<td>counts one state for each letter to remember, where every combination of those letters needs its own</td>
+</tr>
+<tr>
+<td><code>power_series.rhm</code></td>
+<td><code>reciprocal_taken</code></td>
+<td>gives the limit found by the ratio test, which is the reciprocal of the radius</td>
+</tr>
+<tr>
+<td></td>
+<td><code>inner_factor_ignored</code></td>
+<td>ignores the number in front of <code>x</code> inside the bracket</td>
+</tr>
+<tr>
+<td></td>
+<td><code>root_not_taken</code></td>
+<td>leaves the radius squared: with only even powers the ratio test gives the square of the radius</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ends_not_tested</code></td>
+<td>gives the open interval and does not test its two ends</td>
+</tr>
+<tr>
+<td><code>optimization.rhm</code></td>
+<td><code>coefficients_for_derivatives</code></td>
+<td>takes the coefficients of <code>x^2</code> and <code>y^2</code> for the second derivatives, which are twice as large</td>
+</tr>
+<tr>
+<td></td>
+<td><code>saddle_taken</code></td>
+<td>takes the value at the saddle point for the local extreme value</td>
+</tr>
+<tr>
+<td><code>linear_transformations.rhm</code></td>
+<td><code>images_as_rows</code></td>
+<td>writes the images of the basis vectors as the rows of the matrix, where they are its columns</td>
+</tr>
+<tr>
+<td></td>
+<td><code>order_swapped</code></td>
+<td>multiplies the two matrices in the order the transformations are applied, the first on the left</td>
+</tr>
+<tr>
+<td></td>
+<td><code>basis_wrong_way</code></td>
+<td>changes basis the wrong way round: <code>P A P^(-1)</code> where <code>P^(-1) A P</code> belongs</td>
 </tr>
 </tbody>
 </table>
