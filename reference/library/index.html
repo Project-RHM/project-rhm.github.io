@@ -882,10 +882,46 @@ make <code>x + 2x \cdot \sin x</code> cost at least 4.</p>
 <td>2</td>
 <td>Numeric (a focus or a centre carries the Point context)</td>
 </tr>
+<tr>
+<td><code>normal_distribution.rhm</code></td>
+<td>1 the <code>z</code> score of a value, the probability above a value; 2 the probability within <code>z</code> standard deviations of the mean, between two values on one side of the mean, the value with a given share of the distribution below it; 3 the probability between two values on opposite sides of the mean, that the mean of a sample is above a value, that one normal variable is below another</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>graph_coloring.rhm</code></td>
+<td>1 the colourings of a tree and of a complete graph with <code>k</code> colours; 2 the colourings of a cycle and of a complete bipartite graph <code>K_{2,n}</code>, the chromatic number of a cycle, a wheel, a complete graph with some disjoint edges removed, or two cycles that share a vertex; 3 the colourings of a wheel, of two cycles that share a vertex, of two cycles that share an edge</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>vector_spaces.rhm</code></td>
+<td>1 the coordinates of a vector of the plane relative to a basis, the dimension of a standard space, the dimension of a sum of subspaces; 2 the entry that makes three vectors dependent, the coordinates of a polynomial relative to <code>1</code>, <code>x - r</code>, <code>(x - r)^2</code>; 3 the coordinates of a vector of space relative to a basis, the matrix that changes coordinates from one basis to another, the dimension of the intersection of two subspaces of <code>R^4</code></td>
+<td>2</td>
+<td>Numeric / Vector / Matrix</td>
+</tr>
+<tr>
+<td><code>integral_coordinates.rhm</code></td>
+<td>1 a triple integral of a monomial over a box, the integral of a power of the distance from the origin over a disc; 2 the same over a ring, the integral of <code>x</code>, <code>y</code>, <code>x y</code> or <code>x^2</code> over a quarter of a disc, the volume under a paraboloid or a cone; 3 the integral of a power of the distance from the origin over a ball or between two spheres, of <code>z</code> over half a ball, and of <code>x^2 + y^2</code>, <code>z</code> or their product over a cylinder</td>
+<td>2</td>
+<td>Numeric (plain answers)</td>
+</tr>
+<tr>
+<td><code>integration_techniques.rhm</code></td>
+<td>1 <code>k sin^2(mx)</code> or <code>k cos^2(mx)</code> over a multiple of a quarter period, <code>k / (x^2 + a^2)</code> from 0 to <code>a</code>, <code>k / sqrt(a^2 - x^2)</code> from 0 to <code>a / 2</code>; 2 by parts: <code>k x e^(ax)</code>, <code>k x^n ln x</code>, <code>k x sin(mx)</code> or <code>k x cos(mx)</code>, and <code>k sin^a(x) cos^b(x)</code> with an odd power; 3 <code>k sin^n(x)</code> or <code>k cos^n(x)</code> by the reduction formula, a trigonometric substitution, <code>k x^2 e^(ax)</code> by parts twice, <code>k / ((x + a)(x + b))</code> by partial fractions</td>
+<td>2</td>
+<td>Numeric (fractions and multiples of pi are plain answers)</td>
+</tr>
+<tr>
+<td><code>nonhomogeneous_ode.rhm</code></td>
+<td>1 a particular solution of <code>y'' + p y' + q y = c e^(kx)</code>, of <code>y'' + q y = c sin(kx)</code> or <code>c cos(kx)</code>; 2 of <code>y'' + p y' + q y = m x + n</code>, of the same with <code>c e^(rx)</code> in resonance, and <code>y' + a y = c e^(kx)</code> with an initial value; 3 of <code>y'' + p y' + q y = alpha cos(kx) + beta sin(kx)</code>, and initial value problems of the second order with a constant or an exponential on the right</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
 </tbody>
 </table>
 <h2 id="mistakes">Mistakes<a class="headerlink" href="#mistakes" title="Permanent link">&para;</a></h2>
-<p>Twenty-seven grammars say what common mistakes lead to (chapter 9 of the tutorial).
+<p>Thirty-three grammars say what common mistakes lead to (chapter 9 of the tutorial).
 <code>rhema run</code> lists them under each answer, and none of these grammars asks a
 question in which a mistake changes the working and still gives the right
 answer.</p>
@@ -1262,6 +1298,116 @@ answer.</p>
 <td></td>
 <td><code>not_doubled</code></td>
 <td>gives half the latus rectum, <code>b^2 / a</code>, where <code>2 b^2 / a</code> belongs</td>
+</tr>
+<tr>
+<td><code>normal_distribution.rhm</code></td>
+<td><code>complement_forgotten</code></td>
+<td>gives the probability below a value, where the probability above it is asked for</td>
+</tr>
+<tr>
+<td></td>
+<td><code>one_side_only</code></td>
+<td>gives the area between the mean and one of the two values, where the area between both is asked for</td>
+</tr>
+<tr>
+<td></td>
+<td><code>sign_lost</code></td>
+<td>places a value that lies below the mean as far above it</td>
+</tr>
+<tr>
+<td></td>
+<td><code>not_scaled</code></td>
+<td>uses the standard deviation of one value for the mean of a sample, where it is divided by <code>sqrt(n)</code></td>
+</tr>
+<tr>
+<td><code>graph_coloring.rhm</code></td>
+<td><code>only_previous_vertex</code></td>
+<td>makes each vertex differ from the one before it only, so an edge that closes a cycle is forgotten</td>
+</tr>
+<tr>
+<td></td>
+<td><code>sides_always_differ</code></td>
+<td>takes the two vertices on the small side of a bipartite graph to have different colours always</td>
+</tr>
+<tr>
+<td></td>
+<td><code>shared_part_counted_twice</code></td>
+<td>multiplies the counts of two joined cycles and does not divide by the ways to colour what they share</td>
+</tr>
+<tr>
+<td><code>vector_spaces.rhm</code></td>
+<td><code>basis_applied</code></td>
+<td>uses the entries of a vector as the coefficients of the basis vectors, where its coordinates are asked for</td>
+</tr>
+<tr>
+<td></td>
+<td><code>degree_for_dimension</code></td>
+<td>takes the degree <code>n</code> for the dimension of the polynomials of degree at most <code>n</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>intersection_not_removed</code></td>
+<td>adds the dimensions of two subspaces and does not take off what they share</td>
+</tr>
+<tr>
+<td></td>
+<td><code>standard_coordinates</code></td>
+<td>gives the coefficients of a polynomial as they stand, where another basis is asked about</td>
+</tr>
+<tr>
+<td></td>
+<td><code>direction_reversed</code></td>
+<td>changes basis the wrong way: the matrix from the second basis to the first</td>
+</tr>
+<tr>
+<td><code>integral_coordinates.rhm</code></td>
+<td><code>jacobian_forgotten</code></td>
+<td>leaves out the factor <code>r</code> of the area element <code>r dr d(theta)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>sine_forgotten</code></td>
+<td>leaves out the <code>sin(phi)</code> of the volume element in spherical coordinates</td>
+</tr>
+<tr>
+<td><code>integration_techniques.rhm</code></td>
+<td><code>half_forgotten</code></td>
+<td>takes the integral of <code>sin^2</code> or <code>cos^2</code> to be the length of the interval, where it is half of it</td>
+</tr>
+<tr>
+<td></td>
+<td><code>scale_forgotten</code></td>
+<td>leaves out the <code>1 / a</code> in front of the inverse tangent of <code>x / a</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>plus_for_minus</code></td>
+<td>adds the second integral of an integration by parts, where it is subtracted</td>
+</tr>
+<tr>
+<td></td>
+<td><code>logs_added</code></td>
+<td>adds the logarithms of two partial fractions, where one is subtracted from the other</td>
+</tr>
+<tr>
+<td><code>nonhomogeneous_ode.rhm</code></td>
+<td><code>chain_factor_forgotten</code></td>
+<td>differentiates <code>e^(kx)</code> without the factor <code>k</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>second_derivative_sign</code></td>
+<td>takes the second derivative of <code>sin(kx)</code> or <code>cos(kx)</code> with a plus sign</td>
+</tr>
+<tr>
+<td></td>
+<td><code>first_derivative_forgotten</code></td>
+<td>leaves the <code>y'</code> term out when the constant of the trial solution <code>A x + B</code> is found</td>
+</tr>
+<tr>
+<td></td>
+<td><code>constants_before_particular</code></td>
+<td>fits the constants of the homogeneous solution to the initial values before the particular solution is added</td>
 </tr>
 </tbody>
 </table>
