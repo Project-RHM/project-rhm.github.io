@@ -918,10 +918,46 @@ make <code>x + 2x \cdot \sin x</code> cost at least 4.</p>
 <td>2</td>
 <td>Numeric</td>
 </tr>
+<tr>
+<td><code>indeterminate_limits.rhm</code></td>
+<td>1 <code>(x^m - 1) / (x^n - 1)</code> at 1, <code>ln(1 + a x) / (b x)</code> at 0; 2 <code>(a^x - b^x) / x</code> at 0, a quotient over <code>x^2</code> at 0 from <code>e^(ax)</code>, <code>cos(ax)</code> or <code>ln(1 + ax)</code>, <code>x f(a / x)</code> at infinity; 3 <code>(1 + a / x)^(b x)</code> at infinity and <code>(1 + a x)^(b / x)</code> at 0, a difference of square roots at infinity, a quotient over <code>x^3</code> at 0 from <code>sin(ax)</code> and <code>tan(ax)</code></td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>financial_maths.rhm</code></td>
+<td>1 simple interest, the amount under compound interest; 2 the present value of a later amount, the effective rate of a nominal rate compounded twice a year, the value after depreciation; 3 the future value of yearly deposits, the present value of yearly payments, the yearly payment that repays a loan</td>
+<td>2</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td><code>diophantine.rhm</code></td>
+<td>1 how many <code>c</code> up to <code>N</code> make <code>a x + b y = c</code> solvable, the value of a continued fraction; 2 the next solution after a given one, the <code>x</code> between 0 and <code>b</code> of a solution, the largest amount two stamps cannot make and the number of such amounts, a partial quotient of a fraction; 3 the number of ways to make an amount from two stamps, the smallest and the second smallest solution of a Pell equation</td>
+<td>2</td>
+<td>Numeric (a solution carries the Point context)</td>
+</tr>
+<tr>
+<td><code>related_rates.rhm</code></td>
+<td>1 the rate of an area or a volume from the rate of a radius or a side, the tangent-line estimate of a square root or a cube root; 2 a ladder sliding down a wall, the radius of a balloon filled at a given rate, the distance between two travellers; 3 the depth of water poured into a cone, the shadow of a walker under a lamp: its length and its tip</td>
+<td>2</td>
+<td>Numeric (plain answers)</td>
+</tr>
+<tr>
+<td><code>matrix_powers.rhm</code></td>
+<td>1 the eigenvalues of a power, an inverse or a shift of a matrix, the determinant or the trace of a matrix or of its square from its eigenvalues; 2 a power of a matrix that can be diagonalised, the trace of a power; 3 a power or the inverse as a combination of the matrix and the identity, a power of a matrix with one eigenvalue, a power applied to a combination of eigenvectors</td>
+<td>2</td>
+<td>Interval / Numeric / Matrix / Vector</td>
+</tr>
+<tr>
+<td><code>triangles.rhm</code></td>
+<td>1 the area from two sides and the angle between them, the cosine of an angle from the three sides; 2 a third side by the law of cosines, a side by the law of sines, the area by Heron's formula; 3 the circumradius, the inradius or an altitude of a triangle with whole sides, the number of triangles with two given sides and an angle of 30 degrees</td>
+<td>2</td>
+<td>Numeric (plain answers)</td>
+</tr>
 </tbody>
 </table>
 <h2 id="mistakes">Mistakes<a class="headerlink" href="#mistakes" title="Permanent link">&para;</a></h2>
-<p>Thirty-three grammars say what common mistakes lead to (chapter 9 of the tutorial).
+<p>Thirty-nine grammars say what common mistakes lead to (chapter 9 of the tutorial).
 <code>rhema run</code> lists them under each answer, and none of these grammars asks a
 question in which a mistake changes the working and still gives the right
 answer.</p>
@@ -1408,6 +1444,136 @@ answer.</p>
 <td></td>
 <td><code>constants_before_particular</code></td>
 <td>fits the constants of the homogeneous solution to the initial values before the particular solution is added</td>
+</tr>
+<tr>
+<td><code>indeterminate_limits.rhm</code></td>
+<td><code>power_not_brought_down</code></td>
+<td>differentiates <code>x^n</code> below the line as <code>x^(n-1)</code>, without the factor <code>n</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>zero_times_infinity</code></td>
+<td>takes a factor that tends to 0 times one that tends to infinity to be 0</td>
+</tr>
+<tr>
+<td></td>
+<td><code>one_to_infinity</code></td>
+<td>takes a base that tends to 1 raised to a power that tends to infinity to be 1</td>
+</tr>
+<tr>
+<td></td>
+<td><code>infinities_cancelled</code></td>
+<td>takes the difference of two terms that both tend to infinity to be 0</td>
+</tr>
+<tr>
+<td><code>financial_maths.rhm</code></td>
+<td><code>simple_for_compound</code></td>
+<td>uses simple interest, the rate times the number of years, where the interest is compounded</td>
+</tr>
+<tr>
+<td></td>
+<td><code>nominal_taken</code></td>
+<td>gives the nominal rate itself for the effective rate</td>
+</tr>
+<tr>
+<td></td>
+<td><code>interest_ignored</code></td>
+<td>leaves interest out and only adds up, or shares out, the payments</td>
+</tr>
+<tr>
+<td><code>diophantine.rhm</code></td>
+<td><code>gcd_condition_missed</code></td>
+<td>takes <code>a x + b y = c</code> to have a solution for every <code>c</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>step_not_reduced</code></td>
+<td>steps from one solution to the next by <code>b</code> in <code>x</code>, where <code>b / gcd(a, b)</code> belongs</td>
+</tr>
+<tr>
+<td></td>
+<td><code>added_straight</code></td>
+<td>adds the reciprocals of the partial quotients one after the other</td>
+</tr>
+<tr>
+<td></td>
+<td><code>product_taken</code></td>
+<td>takes the product <code>a b</code> for the largest amount two stamps cannot make</td>
+</tr>
+<tr>
+<td><code>related_rates.rhm</code></td>
+<td><code>chain_rule_forgotten</code></td>
+<td>differentiates with respect to the radius or the side and does not multiply by its rate of change</td>
+</tr>
+<tr>
+<td></td>
+<td><code>derivative_factor_lost</code></td>
+<td>loses the <code>1/2</code> in the derivative of a square root, or the <code>1/3</code> in that of a cube root</td>
+</tr>
+<tr>
+<td></td>
+<td><code>sides_swapped</code></td>
+<td>exchanges the two sides of the right triangle a ladder makes</td>
+</tr>
+<tr>
+<td></td>
+<td><code>full_radius_used</code></td>
+<td>treats the water in a cone as a cylinder of the cone's full radius</td>
+</tr>
+<tr>
+<td></td>
+<td><code>tip_for_length</code></td>
+<td>gives the speed of the tip of a shadow for the rate at which it lengthens, or the other way round</td>
+</tr>
+<tr>
+<td><code>matrix_powers.rhm</code></td>
+<td><code>multiplied_by_power</code></td>
+<td>multiplies each eigenvalue by the power, where it is raised to the power</td>
+</tr>
+<tr>
+<td></td>
+<td><code>negative_for_inverse</code></td>
+<td>changes the sign of each eigenvalue for the inverse, where its reciprocal belongs</td>
+</tr>
+<tr>
+<td></td>
+<td><code>power_outside</code></td>
+<td>raises the trace to the power, where the trace of the power is asked for</td>
+</tr>
+<tr>
+<td></td>
+<td><code>entries_raised</code></td>
+<td>raises each entry of the matrix to the power</td>
+</tr>
+<tr>
+<td></td>
+<td><code>power_dropped</code></td>
+<td>applies the matrix once, where a power of it is asked for</td>
+</tr>
+<tr>
+<td><code>triangles.rhm</code></td>
+<td><code>half_forgotten</code></td>
+<td>gives the product of two sides and the sine, without the <code>1/2</code> of the area</td>
+</tr>
+<tr>
+<td></td>
+<td><code>cosine_term_sign</code></td>
+<td>gives the cosine term of the law of cosines the wrong sign</td>
+</tr>
+<tr>
+<td></td>
+<td><code>pythagoras_used</code></td>
+<td>uses Pythagoras' theorem in a triangle with no right angle</td>
+</tr>
+<tr>
+<td></td>
+<td><code>sines_inverted</code></td>
+<td>turns the ratio of the two sines over</td>
+</tr>
+<tr>
+<td></td>
+<td><code>perimeter_for_semiperimeter</code></td>
+<td>uses the whole perimeter where half the perimeter belongs</td>
 </tr>
 </tbody>
 </table>
